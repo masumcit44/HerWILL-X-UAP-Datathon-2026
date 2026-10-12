@@ -1,0 +1,158 @@
+{
+  "experiment_id": "v3_3_frozen_e5_small",
+  "timestamp": "2026-09-28 02:49:29",
+  "description": "Frozen intfloat/multilingual-e5-small (CPU, no fine-tune) + LR; standalone and honest 3-way blend",
+  "model": "intfloat/multilingual-e5-small",
+  "mode": "FROZEN_INFERENCE_ONLY_NO_FINETUNING",
+  "embedding_dim": 384,
+  "device": "cpu",
+  "validation": {
+    "method": "StratifiedGroupKFold",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "group_key": "clean_text(text).lower().strip()",
+    "metric": "pooled OOF Macro F1"
+  },
+  "fold_sha256": "925065f4d4a0c6a533fad774f4875b039ea526eb915bee8c8c8b819c88760f56",
+  "standalone": {
+    "oof_macro_f1": 0.496241,
+    "per_class_f1": [
+      0.627904,
+      0.444316,
+      0.416502
+    ],
+    "fold_scores": [
+      0.50058,
+      0.489827,
+      0.498099,
+      0.500451,
+      0.49214
+    ],
+    "fold_std": 0.004426
+  },
+  "blend_3way": {
+    "same_oof_diagnostic_top10": [
+      {
+        "macro_f1": 0.656555,
+        "w_text": 0.2,
+        "w_id": 0.4,
+        "w_emb": 0.4
+      },
+      {
+        "macro_f1": 0.655854,
+        "w_text": 0.2,
+        "w_id": 0.5,
+        "w_emb": 0.3
+      },
+      {
+        "macro_f1": 0.655034,
+        "w_text": 0.1,
+        "w_id": 0.5,
+        "w_emb": 0.4
+      },
+      {
+        "macro_f1": 0.652389,
+        "w_text": 0.3,
+        "w_id": 0.5,
+        "w_emb": 0.2
+      },
+      {
+        "macro_f1": 0.652328,
+        "w_text": 0.1,
+        "w_id": 0.4,
+        "w_emb": 0.5
+      },
+      {
+        "macro_f1": 0.651374,
+        "w_text": 0.3,
+        "w_id": 0.4,
+        "w_emb": 0.3
+      },
+      {
+        "macro_f1": 0.650342,
+        "w_text": 0.0,
+        "w_id": 0.5,
+        "w_emb": 0.5
+      },
+      {
+        "macro_f1": 0.649451,
+        "w_text": 0.2,
+        "w_id": 0.6,
+        "w_emb": 0.2
+      },
+      {
+        "macro_f1": 0.648417,
+        "w_text": 0.1,
+        "w_id": 0.6,
+        "w_emb": 0.3
+      },
+      {
+        "macro_f1": 0.647381,
+        "w_text": 0.3,
+        "w_id": 0.6,
+        "w_emb": 0.1
+      }
+    ],
+    "honest_cross_fitted_macro_f1": 0.655701,
+    "honest_delta_vs_baseline": 0.016122,
+    "honest_per_class_f1": [
+      0.766374,
+      0.623632,
+      0.577095
+    ],
+    "honest_fold_scores": [
+      0.660383,
+      0.644237,
+      0.661451,
+      0.658427,
+      0.653935
+    ],
+    "honest_fold_std": 0.006276,
+    "per_fold_chosen_weights": {
+      "0": {
+        "w_text": 0.2,
+        "w_id": 0.4,
+        "w_emb": 0.4,
+        "train_f1": 0.655596
+      },
+      "1": {
+        "w_text": 0.2,
+        "w_id": 0.4,
+        "w_emb": 0.4,
+        "train_f1": 0.659623
+      },
+      "2": {
+        "w_text": 0.2,
+        "w_id": 0.4,
+        "w_emb": 0.4,
+        "train_f1": 0.655336
+      },
+      "3": {
+        "w_text": 0.2,
+        "w_id": 0.4,
+        "w_emb": 0.4,
+        "train_f1": 0.65609
+      },
+      "4": {
+        "w_text": 0.2,
+        "w_id": 0.5,
+        "w_emb": 0.30000000000000004,
+        "train_f1": 0.656344
+      }
+    }
+  },
+  "complementarity": {
+    "disagreement_rate_vs_locked_blend": 0.465504,
+    "emb_corrected_rows": 19273,
+    "emb_damaged_rows": 9232
+  },
+  "artifacts": {
+    "train_embeddings": "cache/v3\\emb_e5_small_train.npy",
+    "test_embeddings": "cache/v3\\emb_e5_small_test.npy",
+    "oof_probs": "predictions/v3_candidates/CANDIDATE_NOT_FOR_SUBMISSION_v3_3way_oof_probs.npy",
+    "test_probs": "predictions/v3_candidates/CANDIDATE_NOT_FOR_SUBMISSION_v3_frozen_emb_test_probs.npy"
+  },
+  "submission_written": false,
+  "runtime_seconds": 64.1
+}

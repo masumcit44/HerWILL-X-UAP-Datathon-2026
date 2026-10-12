@@ -1,0 +1,164 @@
+{
+  "header": "PERFORMANCE TRACK - uses ID-locality; not for judge-facing track",
+  "label": "reference_repro",
+  "fold_int64_sha256": "cc4fdd169110aeee6d3d5566095234461041b1a9290e2e916ce850c31d27a7ca",
+  "fold_sizes": [
+    9543,
+    9546,
+    9571,
+    9581,
+    9576
+  ],
+  "order": [
+    "e5",
+    "sid",
+    "text",
+    "xlmr_idhead"
+  ],
+  "grouped_idhead": false,
+  "sources": {
+    "e5": {
+      "family": "semantic",
+      "path": "final_sources/emb_e5-base_final.npz",
+      "sha256": "bca3e9ec8fa9b28804ff1323ac6de9d53ff257d9fe13a5ebde73465e1adde1ce",
+      "oof_rowsum_dev": 2.220446049250313e-16,
+      "test_rowsum_dev": 2.220446049250313e-16
+    },
+    "sid": {
+      "family": "id",
+      "path": "cache/v6/step123.npz",
+      "sha256": "8f289f4cb1163e24521373619339d8f510bc2b96bd820de20b71d91fdc05621f",
+      "oof_rowsum_dev": 3.3306690738754696e-16,
+      "test_rowsum_dev": 3.3306690738754696e-16
+    },
+    "text": {
+      "family": "lexical",
+      "path": "cache/v6/step123.npz",
+      "sha256": "8f289f4cb1163e24521373619339d8f510bc2b96bd820de20b71d91fdc05621f",
+      "oof_rowsum_dev": 1.380685716867447e-07,
+      "test_rowsum_dev": 1.2759119272232056e-07
+    },
+    "xlmr_idhead": {
+      "family": "id",
+      "path": "final_sources/xlmr_base_idhead_final.npz",
+      "sha256": "8cc027296059e14849ec862b192f54293ed6551c5b487dbb7e532c9fdb1ff177",
+      "oof_rowsum_dev": 1.4132820069789886e-07,
+      "test_rowsum_dev": 1.4243414625525475e-07
+    }
+  },
+  "pooled_oof": 0.682311,
+  "delta_vs_submission3": 0.0,
+  "per_class_f1": [
+    0.782202,
+    0.640594,
+    0.624137
+  ],
+  "accuracy": 0.71073,
+  "fold_scores": [
+    0.682243,
+    0.685245,
+    0.680023,
+    0.680668,
+    0.683172
+  ],
+  "fold_std": 0.001859,
+  "worst_fold": 0.680023,
+  "paired_delta": {
+    "mean": 0.0,
+    "se": 0.0,
+    "t": 0.0,
+    "per_fold": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "note": "self-comparison: reference vs itself, all per-fold deltas are 0; t is degenerate and reported as 0, not a significance test"
+  },
+  "same_oof_OPTIMISTIC": 0.684918,
+  "same_oof_weights": [
+    0.2,
+    0.45,
+    0.1,
+    0.25
+  ],
+  "fold_weights": {
+    "0": [
+      0.2,
+      0.4,
+      0.1,
+      0.3
+    ],
+    "1": [
+      0.2,
+      0.4,
+      0.15,
+      0.25
+    ],
+    "2": [
+      0.25,
+      0.45,
+      0.05,
+      0.25
+    ],
+    "3": [
+      0.25,
+      0.45,
+      0.05,
+      0.25
+    ],
+    "4": [
+      0.2,
+      0.4,
+      0.15,
+      0.25
+    ]
+  },
+  "median_weights": {
+    "e5": 0.21052631578947367,
+    "sid": 0.42105263157894735,
+    "text": 0.10526315789473684,
+    "xlmr_idhead": 0.2631578947368421
+  },
+  "reference": {
+    "pooled_oof": 0.682311,
+    "fold_scores": [
+      0.682243,
+      0.685245,
+      0.680023,
+      0.680668,
+      0.683172
+    ],
+    "fold_std": 0.001859,
+    "worst_fold": 0.680023,
+    "per_class": [
+      0.782202,
+      0.640594,
+      0.624137
+    ]
+  },
+  "test_class_share": [
+    0.5265,
+    0.3524,
+    0.1211
+  ],
+  "test_share_drift_pp": [
+    2.966,
+    2.744,
+    0.222
+  ],
+  "gates": {
+    "G1_delta_ge_0_0015": false,
+    "G2_4folds_not_worse": true,
+    "G3_no_class_drop_gt_0_005": true,
+    "G4_std_le_1_5x": true,
+    "G5_worst_fold": true,
+    "G6_test_integrity": true,
+    "G7_test_share_within_6pp": true
+  },
+  "all_gates_pass": false,
+  "submission_generated": false,
+  "elapsed_seconds": 108.8,
+  "_correction": "paired_delta.t/se corrected to 0 after a degenerate-ratio guard was added to paired_delta(); the stored run predates that guard. pooled_oof and all other fields are from the verified run."
+}

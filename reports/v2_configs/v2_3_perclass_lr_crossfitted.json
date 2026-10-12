@@ -1,0 +1,47 @@
+{
+  "text_source": "lr",
+  "id_prior": {
+    "k": 20
+  },
+  "parametrisation": "P(c)=w_c*text_c+(1-w_c)*id_c, w in [0,1]^3",
+  "optimiser": "scipy Nelder-Mead multi-start + local 0.01 grid",
+  "w_per_fold": {
+    "0": [
+      0.417,
+      0.3648,
+      0.4198
+    ],
+    "1": [
+      0.3617,
+      0.3275,
+      0.4063
+    ],
+    "2": [
+      0.4697,
+      0.3521,
+      0.3872
+    ],
+    "3": [
+      0.4216,
+      0.3235,
+      0.4055
+    ],
+    "4": [
+      0.4187,
+      0.3569,
+      0.4178
+    ]
+  },
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "evaluation_note": "w tuned on 4 folds of OOF rows, scored on the held-out fold",
+  "per_fold_macro_f1": [
+    0.643956,
+    0.63203,
+    0.640954,
+    0.64123,
+    0.640831
+  ]
+}

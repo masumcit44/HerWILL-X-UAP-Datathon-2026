@@ -1,0 +1,29 @@
+seed 42    pooled-no-offset 0.693895  folds [0.6974, 0.6985, 0.6867, 0.6905, 0.6962]
+seed 7     pooled-no-offset 0.694031  folds [0.6983, 0.6968, 0.6896, 0.6877, 0.6977]
+seed 2026  pooled-no-offset 0.692881  folds [0.6933, 0.7007, 0.685, 0.6896, 0.6958]
+
+== reported offsets ==
+pooled 0.703904 (target 0.704001, d=-0.000097)
+folds   [0.709531, 0.705706, 0.699544, 0.700173, 0.704385]
+target  [0.706641, 0.707883, 0.703267, 0.699451, 0.702509]
+percls  [0.782266, 0.67259, 0.656856] target [0.781755, 0.672529, 0.657717]
+confusion
+ [[18271  4982   503]
+ [ 4239 12567  1357]
+ [  447  1657  3794]]
+
+== independent offset re-search (selected on the other 4 folds) ==
+fold 0  reported [0.0, -0.05, -0.6]   searched [0.0, -0.15, -0.8]   score(other4) 0.703979
+fold 1  reported [0.0, -0.0, -0.55]   searched [0.0, -0.0, -0.55]   score(other4) 0.704097
+fold 2  reported [0.0, -0.0, -0.55]   searched [0.0, -0.1, -0.6]    score(other4) 0.705731
+fold 3  reported [0.0, -0.0, -0.5]    searched [0.0, -0.1, -0.6]    score(other4) 0.706021
+fold 4  reported [0.0, -0.1, -0.65]   searched [0.0, -0.15, -0.9]   score(other4) 0.705434
+median of searched = [0.0, -0.1, -0.6]  report final_offset = [0.0, -0.0, -0.55]
+pooled with searched offsets 0.702624 (vs reported 0.703904)
+
+test share before override [0.4811, 0.4046, 0.1143] target [0.4801, 0.4052, 0.1148]
+override: 272 rows matched, 37 labels changed, 53 conflicting groups skipped
+test share after override  [0.4796, 0.4059, 0.1144]
+wrote submissions/submission_4_repro.csv  (validation OK)
+NOTE: submission_4_stacker.csv not supplied -> agreement not computed
+wrote repro_s4/repro_s4_results.json

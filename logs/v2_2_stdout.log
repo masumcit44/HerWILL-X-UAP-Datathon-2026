@@ -1,0 +1,43 @@
+
+==============================================================================
+EXP 2 -- hand-crafted dense features hstacked onto TF-IDF
+==============================================================================
+train (47817, 4) | test (11955, 3) | sample (11955, 2)
+class counts: {0: 23756, 1: 18163, 2: 5898}
+EXP 0 anchor: blend@0.40 = 0.639579
+hand-crafted block: (47817, 9) names=['bangla_char_ratio', 'latin_char_ratio', 'digit_ratio', 'punctuation_density', 'repeated_char_run_max', 'emoji_count', 'has_url', 'has_mention', 'text_length']
+  column means (train): [0.3434, 0.4653, 0.0015, 0.025, 0.4564, 0.2321, 0.0003, 0.003, 66.045]
+  column stds  (train): [0.4053, 0.3939, 0.0118, 0.0421, 1.5686, 1.2178, 0.0183, 0.0544, 204.819]
+fold0: s=1.0: text=0.511313 blend=0.642458 | s=0.3: text=0.510541 blend=0.641959 | s=0.1: text=0.511333 blend=0.642678 | s=0.03: text=0.511324 blend=0.642623 | dense_only=0.310678
+fold1: s=1.0: text=0.502792 blend=0.631927 | s=0.3: text=0.502933 blend=0.630903 | s=0.1: text=0.503946 blend=0.632004 | s=0.03: text=0.504042 blend=0.631120 | dense_only=0.257034
+fold2: s=1.0: text=0.517893 blend=0.640146 | s=0.3: text=0.518928 blend=0.640072 | s=0.1: text=0.519710 blend=0.640407 | s=0.03: text=0.518879 blend=0.639843 | dense_only=0.307925
+fold3: s=1.0: text=0.515972 blend=0.637717 | s=0.3: text=0.515079 blend=0.638818 | s=0.1: text=0.515227 blend=0.638411 | s=0.03: text=0.516027 blend=0.639178 | dense_only=0.309404
+fold4: s=1.0: text=0.514304 blend=0.640438 | s=0.3: text=0.513539 blend=0.640203 | s=0.1: text=0.513679 blend=0.640204 | s=0.03: text=0.512385 blend=0.640321 | dense_only=0.314050
+ fold  n_val  f1_text_scale1.0  f1_blend_scale1.0_0.40  sec_scale1.0  f1_text_scale0.3  f1_blend_scale0.3_0.40  sec_scale0.3  f1_text_scale0.1  f1_blend_scale0.1_0.40  sec_scale0.1  f1_text_scale0.03  f1_blend_scale0.03_0.40  sec_scale0.03  f1_dense_only
+    0   9564          0.511313                0.642458          46.2          0.510541                0.641959          25.5          0.511333                0.642678          19.2           0.511324                 0.642623           19.4       0.310678
+    1   9564          0.502792                0.631927          59.4          0.502933                0.630903          27.3          0.503946                0.632004          23.1           0.504042                 0.631120           18.1       0.257034
+    2   9563          0.517893                0.640146          52.2          0.518928                0.640072          22.8          0.519710                0.640407          21.3           0.518879                 0.639843           15.7       0.307925
+    3   9563          0.515972                0.637717          42.8          0.515079                0.638818          23.2          0.515227                0.638411          17.6           0.516027                 0.639178           15.7       0.309404
+    4   9563          0.514304                0.640438          51.7          0.513539                0.640203          24.0          0.513679                0.640204          21.7           0.512385                 0.640321           17.7       0.314050
+
+pooled OOF Macro F1 (grouped, leak-free):
+  dense_only_lr              0.301871
+  text_scale1.0              0.512470
+  blend_scale1.0_0.40        0.638547
+  text_scale0.3              0.512222
+  blend_scale0.3_0.40        0.638399
+  text_scale0.1              0.512788
+  blend_scale0.1_0.40        0.638747
+  text_scale0.03             0.512545
+  blend_scale0.03_0.40       0.638624
+  id_prior_only              0.614135
+  baseline_text_lr           0.512943
+  baseline_blend_0.40        0.639579
+  scale 1.0: argmax alpha = 0.40 -> 0.638547
+  scale 0.3: argmax alpha = 0.35 -> 0.638456
+  scale 0.1: argmax alpha = 0.35 -> 0.638968
+  scale 0.03: argmax alpha = 0.35 -> 0.638626
+
+vs baseline 0.639579: literal spec (scale=1.0, alpha=0.40) -> -0.001032 | best scale 0.1 (tuned on OOF, optimistic) -> -0.000832
+
+beats baseline (literal spec): False (delta -0.001032) | runtime 641.2s

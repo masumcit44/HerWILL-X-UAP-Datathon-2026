@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 938, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 829, in main
+    proba_va, proba_te, meta = train_fold(
+                               ~~~~~~~~~~^
+        k, X_train[tr_idx], y[tr_idx], X_train[va_idx], train_ids[va_idx],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        X_test, test_ids)
+        ^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 452, in train_fold
+    clf.fit(X_tr, y_tr)
+    ~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\DREAMER\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "C:\Users\DREAMER\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\linear_model\_logistic.py", line 1488, in fit
+    raise ValueError(
+    ...<4 lines>...
+    )
+ValueError: The 'liblinear' solver does not support multiclass classification (n_classes >= 3). Either use another solver or wrap the estimator in a OneVsRestClassifier to keep applying a one-versus-rest scheme.

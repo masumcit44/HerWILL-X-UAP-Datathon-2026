@@ -1,0 +1,19 @@
+{
+  "sklearn": "1.6.1",
+  "torch": "2.11.0+cu128",
+  "transformers": "5.16.1",
+  "seed": 42,
+  "fold_sizes": [
+    9543,
+    9546,
+    9571,
+    9581,
+    9576
+  ],
+  "train_sha1": "66c6b109c8fd187f4c2c474a09159905d25978cd",
+  "test_sha1": "9caf35ded5a6fe4b2765cdc3340f192d0994d072",
+  "sources": {
+    "emb_e5-base": 0.521535,
+    "xlmr_base_idhead": 0.648743
+  }
+}

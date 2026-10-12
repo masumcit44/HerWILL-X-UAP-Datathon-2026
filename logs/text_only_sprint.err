@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "D:\Desktop\UAP\scripts\text_only_sprint.py", line 333, in <module>
+    "confusion": confusion_matrix(y, final_oof.argmax(1), labels=CLASSES).tolist(),
+                 ^^^^^^^^^^^^^^^^
+NameError: name 'confusion_matrix' is not defined

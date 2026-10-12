@@ -1,0 +1,95 @@
+{
+  "package": "colab_v7_package",
+  "purpose": "Stage 1 GPU text-only training on a Colab T4. Produces probability artifacts for local evaluation only.",
+  "tracks": {
+    "A_leaderboard": {
+      "status": "Submission 3 preserved and protected; NOT retrained, NOT modified",
+      "honest_oof": 0.682311,
+      "future_ensemble": "Submission 3 sources + new text XLM-R + BanglaBERT + optional MuRIL",
+      "run_now": false,
+      "note": "Do not run the hybrid ensemble until new GPU artifacts exist."
+    },
+    "B_judge_friendly_text_only": {
+      "status": "initial baseline built on fold set B",
+      "sources_allowed": ["lexical TF-IDF", "text-kNN", "frozen semantic embeddings", "fine-tuned text transformers"],
+      "sources_forbidden": ["raw ID", "plain ID prior", "SID", "XLM-R ID-head", "row order", "any ID-derived metadata"],
+      "current_honest_oof": 0.566293,
+      "current_honest_oof_with_nested_offsets": 0.568028
+    }
+  },
+  "recommended_run_order": [
+    {
+      "run_name": "xlmr_text",
+      "role": "first GPU run",
+      "model": "FacebookAI/xlm-roberta-base",
+      "pinned": "load pinned to the recorded Hub commit",
+      "rows": "all rows",
+      "fold_set": "B (Colab)",
+      "recipe_fixed_in_advance": {
+        "pooling": "mean",
+        "llrd": 0.9,
+        "head_lr": 1e-4,
+        "loss": "balanced CE with label smoothing 0.05",
+        "dropout": 0.5,
+        "epochs": 4,
+        "warmup": "6 percent",
+        "precision": "fp16",
+        "grad_clip": 1.0,
+        "epoch_selection": "mean of last 2 epochs, no best-epoch picking"
+      },
+      "uses_id": false,
+      "approx_t4_minutes": 95
+    },
+    {
+      "run_name": "banglabert_bn",
+      "role": "second GPU run, conditional",
+      "model": "csebuetnlp/banglabert",
+      "rows": "Bangla-script rows only (20,178 train / 5,026 test)",
+      "routing": "script-routed honest blend; each route weight chosen on the other folds",
+      "uses_id": false,
+      "approx_t4_minutes": 45,
+      "precondition": "run xlmr_text first and pass its adoption gate"
+    },
+    {
+      "run_name": "muril_text",
+      "role": "optional third, deferred",
+      "model": "google/muril-base-cased",
+      "run_only_if": "runs 1 and 2 leave Latin-script class 1 as the main error",
+      "uses_id": false
+    }
+  ],
+  "models_skipped": [
+    "XLM-R large (3x time per fold, fp16 instability on T4)",
+    "mDeBERTa-v3 (known fp16 overflow; T4 has no bf16)",
+    "loss-function sweeps and second seeds (selection bias)",
+    "LLM zero-shot / API labelling (external model, judging risk)",
+    "FastText (never run, weaker than E5)",
+    "any new ID or SID variant",
+    "test pseudo-labelling",
+    "near-duplicate label override"
+  ],
+  "adoption_gates": {
+    "new_source": "contribution >= +0.0015, OR class-2 F1 >= +0.010 without pooled regression, OR better worst fold with fold_std rise <= 25 percent",
+    "nested_offsets": "strictly nested, gain >= +0.001, >= 4 folds not regressed, no class drop > 0.02, std <= 1.5x baseline",
+    "package": "test class share within 6 pp of train share",
+    "always": "one fold set only; no same-OOF and no leaderboard tuning"
+  },
+  "expected_gpu_artifacts": {
+    "per_fold": ["runs/{name}_fold{0-4}.npz with keys va, vp, tp, te_rows, vp_last, tp_last, hist, config, config_hash"],
+    "final": ["runs/{name}_final.npz with keys oof, test, fold_ids, coverage_train, coverage_test, meta"],
+    "meta_json": ["runs/{name}_meta.json"],
+    "logs": ["progress.log"],
+    "export": ["export_manifest.json"],
+    "archive": ["uap_text_export_*.zip"]
+  },
+  "fold_set": {
+    "name": "B (recovered Colab)",
+    "int64_bytes_sha256": "cc4fdd169110aeee6d3d5566095234461041b1a9290e2e916ce850c31d27a7ca",
+    "file_sha256": "5ab5cfe96a72b04c8bd30adc45c1eeeee477707b0c382a19d179d8635295fbbd",
+    "sizes": [9543, 9546, 9571, 9581, 9576],
+    "regenerate": false
+  },
+  "drive_save_path": "MyDrive/uap_text/",
+  "seed": 42,
+  "creates_submission": false
+}

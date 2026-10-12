@@ -1,0 +1,21 @@
+
+=== sid_e5 beta12.0_k90 in place of sid (142s) ===
+  honest OOF   = 0.683437  (config A = 0.682311, diff +0.001126)
+  per-class    = [0.782683, 0.641484, 0.626145]
+  folds        = [0.681989, 0.689569, 0.681444, 0.678005, 0.685972]
+  config A     = [0.682243, 0.685245, 0.680023, 0.680668, 0.683172]
+  folds improved = 3/5
+  OPTIMISTIC   = 0.684405
+  ADOPT? NO (needs >= +0.002 AND >= 4 folds)
+
+=== sid_e5 beta12.0_k180 in place of sid (124s) ===
+  honest OOF   = 0.684811  (config A = 0.682311, diff +0.002500)
+  per-class    = [0.783668, 0.642736, 0.628029]
+  folds        = [0.687264, 0.690604, 0.683387, 0.67575, 0.686805]
+  config A     = [0.682243, 0.685245, 0.680023, 0.680668, 0.683172]
+  folds improved = 4/5
+  OPTIMISTIC   = 0.685434
+  ADOPT? YES (needs >= +0.002 AND >= 4 folds)
+
+OVERALL ADOPTION: YES
+-> reports/v6/sid_e5_adoption.json

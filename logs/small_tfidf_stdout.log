@@ -1,0 +1,47 @@
+[2026-09-27 19:53:48] ========================================================================
+[2026-09-27 19:53:48] EXPERIMENT small_tfidf_lr -- compact TF-IDF + LogisticRegression -- start
+[2026-09-27 19:53:48] resources: cpus=8 ram_total=14.98GB ram_free=3.06GB n_jobs=4 gpu_used=False
+[2026-09-27 19:53:48] loaded train=(47817, 3) test=(11955, 2) sample=(11955, 2)
+[2026-09-27 19:53:48] train/test id overlap=0 sample.order==test.order:True
+[2026-09-27 19:53:59] groups: n=47147 dup_groups=486 rows_in_dup_groups=1156 (2.42%) max_group_size=18
+[2026-09-27 19:53:59] fold[0]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:53:59] fold[1]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:53:59] fold[2]: n_val=15939 class_counts=(7918,6055,1966)
+[2026-09-27 19:54:00] wrote data_checks\fold_assignments_3fold.csv rows=47817
+[2026-09-27 19:54:11] vectorizers fitted on 59772 documents: word_features=60,000 (2.6s (0.04 min)), char_features=60,000 (9.0s (0.15 min))
+[2026-09-27 19:54:21] matrix[train_word]: shape=(47817, 60000) nnz=629,869 dtype=float32 est~0.005GB
+[2026-09-27 19:54:21] matrix[train_char]: shape=(47817, 60000) nnz=5,082,197 dtype=float32 est~0.041GB
+[2026-09-27 19:54:21] matrix[train_word+char]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:54:21] built train matrix in 7.1s (0.12 min)
+[2026-09-27 19:54:22] matrix[test_word]: shape=(11955, 60000) nnz=154,936 dtype=float32 est~0.001GB
+[2026-09-27 19:54:22] matrix[test_char]: shape=(11955, 60000) nnz=1,256,809 dtype=float32 est~0.01GB
+[2026-09-27 19:54:22] matrix[test_word+char]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:54:22] built test matrix in 1.7s (0.03 min)
+[2026-09-27 19:54:22] matrix[train_combined]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:54:22] matrix[test_combined]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:54:22] feature stage done in 22.8s (0.38 min); X_train=(47817, 120000) X_test=(11955, 120000)
+[2026-09-27 19:54:22] fold[0]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.61GB)
+[2026-09-27 19:54:22] EXPERIMENT FAILED -- traceback follows
+[2026-09-27 19:54:22] Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 938, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 829, in main
+    proba_va, proba_te, meta = train_fold(
+                               ~~~~~~~~~~^
+        k, X_train[tr_idx], y[tr_idx], X_train[va_idx], train_ids[va_idx],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        X_test, test_ids)
+        ^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 452, in train_fold
+    clf.fit(X_tr, y_tr)
+    ~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\DREAMER\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "C:\Users\DREAMER\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\linear_model\_logistic.py", line 1488, in fit
+    raise ValueError(
+    ...<4 lines>...
+    )
+ValueError: The 'liblinear' solver does not support multiclass classification (n_classes >= 3). Either use another solver or wrap the estimator in a OneVsRestClassifier to keep applying a one-versus-rest scheme.
+
+[2026-09-27 19:54:22] Completed fold artifacts on disk will be reused on the next run (resume).

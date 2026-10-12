@@ -1,0 +1,74 @@
+{
+  "audit": {
+    "text_base": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "text_base",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "OOF_ONLY"
+    },
+    "text_all3": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "text_all3",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "OOF_ONLY"
+    },
+    "text": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "text",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "FOUND_AND_ALIGNED",
+      "test_path": "predictions/v4_candidates/CANDIDATE_NOT_FOR_SUBMISSION_source_text_test_probs.npy",
+      "test_sha256": "88eed39318d251eb14033415e7243ef781ef4a1499facb05157a4cf800d0dbed"
+    },
+    "e5_small": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "e5_small",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "FOUND_AND_ALIGNED",
+      "test_path": "predictions/v4_candidates/CANDIDATE_NOT_FOR_SUBMISSION_source_e5_small_test_probs.npy",
+      "test_sha256": "9662fa8d979f24f613fc46f6134367c220dca9202b400cef168a545a14b401a6"
+    },
+    "e5_base": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "e5_base",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "FOUND_AND_ALIGNED",
+      "test_path": "predictions/v4_candidates/CANDIDATE_NOT_FOR_SUBMISSION_source_e5_base_test_probs.npy",
+      "test_sha256": "83b96db4b29f9f60d33f3a1283b3ea3e49145223e31eb931beef0946162030f8"
+    }
+  },
+  "other_sources_considered": {
+    "xlmr_idhead": {
+      "fold_set": "B (Colab)",
+      "status": "EXCLUDED",
+      "reason": "ID-head forbidden by task"
+    },
+    "plain_xlmr_base": {
+      "status": "MISSING",
+      "note": "xlmr_base_final.npz lost; 0.544479 historical only"
+    },
+    "fold_set_B_text_and_e5": {
+      "status": "NOT_MIXED",
+      "reason": "different fold set; never combined"
+    }
+  },
+  "fold_file_sha256": "2bd8cfdedb32342931d17cc27ca0a1be99d8a567bb8128e32955ec18cd91880d",
+  "fold_int64_sha256": "925065f4d4a0c6a533fad774f4875b039ea526eb915bee8c8c8b819c88760f56",
+  "fold_sizes": [
+    9564,
+    9564,
+    9563,
+    9563,
+    9563
+  ]
+}

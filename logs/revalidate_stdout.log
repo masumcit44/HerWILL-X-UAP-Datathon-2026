@@ -1,0 +1,91 @@
+[2026-09-27 21:08:04] ==============================================================================
+[2026-09-27 21:08:04] PART 1 INDEPENDENT RE-VALIDATION -- fresh process, everything recomputed
+[2026-09-27 21:08:04] python=3.14.3 numpy=2.4.4 pid=9352
+[2026-09-27 21:08:04] STEP1 train.csv: sha1_match=True size_match=True (66c6b109c8fd187f4c2c474a09159905d25978cd)
+[2026-09-27 21:08:04] STEP1 test.csv: sha1_match=True size_match=True (9caf35ded5a6fe4b2765cdc3340f192d0994d072)
+[2026-09-27 21:08:04] STEP1 sample_submission.csv: sha1_match=True size_match=True (73345c6143ad4e155bac35de1bf8d5d81ed1d039)
+[2026-09-27 21:08:04] STEP1 overall: PASS
+[2026-09-27 21:08:04] loaded train=(47817, 4) test=(11955, 3) sample=(11955, 2)
+[2026-09-27 21:08:04] id structure: overlap=0 union=59772 span=59772 contiguous_0..N=True dup_ids=0
+[2026-09-27 21:08:04] clean_text sanity: train chars raw=3,158,072 clean=3,154,355; URL tags=5 USER tags=263
+[2026-09-27 21:08:05] groups: n=47157 duplicate_groups=480 rows_in_duplicate_groups=1140 (2.38%) max_group_size=18
+[2026-09-27 21:08:23] STEP2 group purity: groups spanning >1 fold = 0 (PASS)
+[2026-09-27 21:08:23] STEP3 fold 0: val ids ? prior pool = 0 (pool=38253, val=9564) -> PASS
+[2026-09-27 21:08:34] matrix[rv_fold0_train_matrix]: shape=(38253, 109285) nnz=4,570,225 dtype=float32 est~0.037GB
+[2026-09-27 21:08:54] rv_fold0: text model fitted in 30.8s (0.51 min) (word=49,285 char=60,000 nnz=4,570,225 lbfgs_iter=[204])
+[2026-09-27 21:08:55] id_prior[rv_fold0]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.822 pool_disjoint_from_queries=True
+[2026-09-27 21:09:00] STEP3 fold 0: production vs independent k-20 prior max_abs_diff=0 (PASS, tol=1e-10); mean_neighbours=20.0
+[2026-09-27 21:09:00] override lookup: distinct_texts=37755 unanimous_groups=37711 conflicting_groups_skipped=44 (rows in conflicting groups=112)
+[2026-09-27 21:09:00] STEP4 fold 0: lookup ? fold train texts (37,711 keys, all present in the 38,253 train rows) -> PASS; conflicting groups skipped=44
+[2026-09-27 21:09:00] STEP4 fold 0: override lookup built from 38,253 train rows only -> 0 val rows overridden; macro F1 0.642898 -> 0.642898 (+0.000000)
+[2026-09-27 21:09:00] STEP2 fold 0: text=0.510089 id=0.617552 blend@0.40=0.642898 | acc text=0.550397 blend=0.686115 | free_ram=6.39GB
+[2026-09-27 21:09:00] STEP3 fold 1: val ids ? prior pool = 0 (pool=38253, val=9564) -> PASS
+[2026-09-27 21:09:13] matrix[rv_fold1_train_matrix]: shape=(38253, 109278) nnz=4,576,880 dtype=float32 est~0.037GB
+[2026-09-27 21:09:30] rv_fold1: text model fitted in 29.6s (0.49 min) (word=49,278 char=60,000 nnz=4,576,880 lbfgs_iter=[186])
+[2026-09-27 21:09:31] id_prior[rv_fold1]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.867 pool_disjoint_from_queries=True
+[2026-09-27 21:09:36] STEP3 fold 1: production vs independent k-20 prior max_abs_diff=0 (PASS, tol=1e-10); mean_neighbours=20.0
+[2026-09-27 21:09:37] override lookup: distinct_texts=37755 unanimous_groups=37711 conflicting_groups_skipped=44 (rows in conflicting groups=109)
+[2026-09-27 21:09:37] STEP4 fold 1: lookup ? fold train texts (37,711 keys, all present in the 38,253 train rows) -> PASS; conflicting groups skipped=44
+[2026-09-27 21:09:37] STEP4 fold 1: override lookup built from 38,253 train rows only -> 0 val rows overridden; macro F1 0.632324 -> 0.632324 (+0.000000)
+[2026-09-27 21:09:37] STEP2 fold 1: text=0.503986 id=0.605212 blend@0.40=0.632324 | acc text=0.546633 blend=0.678900 | free_ram=6.05GB
+[2026-09-27 21:09:37] STEP3 fold 2: val ids ? prior pool = 0 (pool=38254, val=9563) -> PASS
+[2026-09-27 21:09:48] matrix[rv_fold2_train_matrix]: shape=(38254, 109341) nnz=4,579,231 dtype=float32 est~0.037GB
+[2026-09-27 21:10:05] rv_fold2: text model fitted in 27.9s (0.46 min) (word=49,341 char=60,000 nnz=4,579,231 lbfgs_iter=[170])
+[2026-09-27 21:10:06] id_prior[rv_fold2]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.894 pool_disjoint_from_queries=True
+[2026-09-27 21:10:13] STEP3 fold 2: production vs independent k-20 prior max_abs_diff=0 (PASS, tol=1e-10); mean_neighbours=20.0
+[2026-09-27 21:10:13] override lookup: distinct_texts=37751 unanimous_groups=37709 conflicting_groups_skipped=42 (rows in conflicting groups=102)
+[2026-09-27 21:10:13] STEP4 fold 2: lookup ? fold train texts (37,709 keys, all present in the 38,254 train rows) -> PASS; conflicting groups skipped=42
+[2026-09-27 21:10:13] STEP4 fold 2: override lookup built from 38,254 train rows only -> 0 val rows overridden; macro F1 0.641935 -> 0.641935 (+0.000000)
+[2026-09-27 21:10:13] STEP2 fold 2: text=0.520463 id=0.618944 blend@0.40=0.641935 | acc text=0.558193 blend=0.686291 | free_ram=5.93GB
+[2026-09-27 21:10:13] STEP3 fold 3: val ids ? prior pool = 0 (pool=38254, val=9563) -> PASS
+[2026-09-27 21:10:27] matrix[rv_fold3_train_matrix]: shape=(38254, 109061) nnz=4,555,279 dtype=float32 est~0.036GB
+[2026-09-27 21:10:46] rv_fold3: text model fitted in 32.9s (0.55 min) (word=49,061 char=60,000 nnz=4,555,279 lbfgs_iter=[184])
+[2026-09-27 21:10:48] id_prior[rv_fold3]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.879 pool_disjoint_from_queries=True
+[2026-09-27 21:10:55] STEP3 fold 3: production vs independent k-20 prior max_abs_diff=0 (PASS, tol=1e-10); mean_neighbours=20.0
+[2026-09-27 21:10:55] override lookup: distinct_texts=37750 unanimous_groups=37710 conflicting_groups_skipped=40 (rows in conflicting groups=97)
+[2026-09-27 21:10:55] STEP4 fold 3: lookup ? fold train texts (37,710 keys, all present in the 38,254 train rows) -> PASS; conflicting groups skipped=40
+[2026-09-27 21:10:55] STEP4 fold 3: override lookup built from 38,254 train rows only -> 0 val rows overridden; macro F1 0.639295 -> 0.639295 (+0.000000)
+[2026-09-27 21:10:55] STEP2 fold 3: text=0.516183 id=0.614778 blend@0.40=0.639295 | acc text=0.555161 blend=0.681794 | free_ram=6.0GB
+[2026-09-27 21:10:55] STEP3 fold 4: val ids ? prior pool = 0 (pool=38254, val=9563) -> PASS
+[2026-09-27 21:11:07] matrix[rv_fold4_train_matrix]: shape=(38254, 108970) nnz=4,581,024 dtype=float32 est~0.037GB
+[2026-09-27 21:11:24] rv_fold4: text model fitted in 29.3s (0.49 min) (word=48,970 char=60,000 nnz=4,581,024 lbfgs_iter=[177])
+[2026-09-27 21:11:26] id_prior[rv_fold4]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.915 pool_disjoint_from_queries=True
+[2026-09-27 21:11:32] STEP3 fold 4: production vs independent k-20 prior max_abs_diff=0 (PASS, tol=1e-10); mean_neighbours=20.0
+[2026-09-27 21:11:32] override lookup: distinct_texts=37769 unanimous_groups=37727 conflicting_groups_skipped=42 (rows in conflicting groups=108)
+[2026-09-27 21:11:32] STEP4 fold 4: lookup ? fold train texts (37,727 keys, all present in the 38,254 train rows) -> PASS; conflicting groups skipped=42
+[2026-09-27 21:11:32] STEP4 fold 4: override lookup built from 38,254 train rows only -> 0 val rows overridden; macro F1 0.641384 -> 0.641384 (+0.000000)
+[2026-09-27 21:11:32] STEP2 fold 4: text=0.513963 id=0.614136 blend@0.40=0.641384 | acc text=0.558611 blend=0.685663 | free_ram=5.69GB
+[2026-09-27 21:11:33] STEP2 pooled OOF (grouped): text=0.512943 id=0.614135 blend@0.40=0.639579 blend@0.40+override=0.639579
+[2026-09-27 21:11:33] STEP2 alpha grid argmax = 0.40 (macro F1 0.639579); alpha 0.40 -> 0.639579; 0.40 still argmax = True
+[2026-09-27 21:11:33] STEP4 pooled OOF override: 0 of 47,817 OOF rows overridden; macro F1 0.639579 -> 0.639579 (+0.000000)
+[2026-09-27 21:11:33] STEP5: full refit on ALL training rows, then test predictions for the bias check
+[2026-09-27 21:11:48] matrix[rv_full_train_matrix]: shape=(47817, 119971) nnz=5,722,940 dtype=float32 est~0.046GB
+[2026-09-27 21:12:11] rv_full: text model fitted in 38.9s (0.65 min) (word=59,971 char=60,000 nnz=5,722,940 lbfgs_iter=[187])
+[2026-09-27 21:12:13] id_prior[rv_full_test]: queries=11955 pool=47817 k=20 mean_neighbours=20.0 mean_kth_dist=12.752 pool_disjoint_from_queries=True
+[2026-09-27 21:12:13] STEP5 id-prior: test ids ? prior pool = 0 (pool=47817, test=11955) -> PASS
+[2026-09-27 21:12:13] override lookup: distinct_texts=47195 unanimous_groups=47142 conflicting_groups_skipped=53 (rows in conflicting groups=132)
+[2026-09-27 21:12:13] STEP5 bias (pre-override):  pred%={0: 54.97, 1: 36.35, 2: 8.67} train%={0: 49.68, 1: 37.98, 2: 12.33} drift_pp={0: 5.29, 1: -1.63, 2: -3.66} flagged=[]
+[2026-09-27 21:12:13] STEP5 bias (post-override): pred%={0: 54.82, 1: 36.48, 2: 8.7} train%={0: 49.68, 1: 37.98, 2: 12.33} drift_pp={0: 5.14, 1: -1.5, 2: -3.63} flagged=[] -> PASS (threshold 10pp)
+[2026-09-27 21:12:13] STEP5 test override: 272/11,955 rows matched a unanimous training text (2.275%); 39 labels changed
+[2026-09-27 21:12:13] wrote reports\revalidation_grouped_fold_scores.csv rows=5
+[2026-09-27 21:12:14] wrote predictions\oof\oof_revalidation_grouped.csv rows=47817
+[2026-09-27 21:12:14] wrote reports\revalidation_grouped_metrics.json
+[2026-09-27 21:12:14] wrote data_checks\part1_revalidation_status.json all_pass=True exit_code=0
+[2026-09-27 21:12:14] 
+[2026-09-27 21:12:14] ============================================================================
+[2026-09-27 21:12:14] PART 1 -- FINAL PASS/FAIL SUMMARY (all values recomputed this run)
+[2026-09-27 21:12:14] ============================================================================
+[2026-09-27 21:12:14]   1_checksums: PASS
+[2026-09-27 21:12:14]   2_grouped_cv: PASS
+[2026-09-27 21:12:14]   3_id_prior_leak_free: PASS
+[2026-09-27 21:12:14]   4_override_leak_free: PASS
+[2026-09-27 21:12:14]   5_bias: PASS
+[2026-09-27 21:12:14]   1 checksums   : train.csv=OK; test.csv=OK; sample_submission.csv=OK
+[2026-09-27 21:12:14]   2 grouped CV  : folds=5 groups=47157 dup_groups=480 crossing=0 | pooled OOF text=0.512943 id=0.614135 blend@0.40=0.639579 blend+override=0.639579
+[2026-09-27 21:12:14]       alpha grid argmax=0.40 (macro F1 0.639579); 0.40 confirmed as argmax=True
+[2026-09-27 21:12:14]   3 id-prior    : val?pool=[0, 0, 0, 0, 0] max_diffs=[0.0, 0.0, 0.0, 0.0, 0.0] (tol=1e-10)
+[2026-09-27 21:12:14]   4 override    : OOF rows overridden=0 macro F1 0.639579 -> 0.639579 (delta +0.000000); lookup=train-split-only
+[2026-09-27 21:12:14]   5 bias        : train%={0: 49.68, 1: 37.98, 2: 12.33} test%={0: 54.82, 1: 36.48, 2: 8.7} drift_pp={0: 5.14, 1: -1.5, 2: -3.63} flagged=[] (>10pp)
+[2026-09-27 21:12:14]   RESULT: ALL PASS -> Part 2 may proceed
+[2026-09-27 21:12:14]   chosen_alpha=0.40 | grouped-OOF macro F1=0.639579 | runtime=249.83s
+[2026-09-27 21:12:14] ============================================================================

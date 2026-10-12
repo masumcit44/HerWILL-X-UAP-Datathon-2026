@@ -1,0 +1,23 @@
+
+==============================================================================
+EXP 4 -- OOF meta-stacker (nested grouped CV)
+==============================================================================
+train (47817, 4) | test (11955, 3) | sample (11955, 2)
+class counts: {0: 23756, 1: 18163, 2: 5898}
+meta-learner's own grouped CV split == outer grouped split (asserted)
+text source: lr | text-only OOF F1 = 0.512943 | id-only = 0.614135 | reference blend@0.40 = 0.639579
+[spec] text+id+hand (spec)         pooled OOF = 0.625762 | delta vs 0.639579 = -0.013817 | fold std 0.004605 
+[spec] text+id (no hand)           pooled OOF = 0.625048 | delta vs 0.639579 = -0.014531 | fold std 0.005100 
+[spec] text+hand (no id)           pooled OOF = 0.503458 | delta vs 0.639579 = -0.136121 | fold std 0.004012 
+[spec] id+hand (no text)           pooled OOF = 0.597552 | delta vs 0.639579 = -0.042027 | fold std 0.004850 
+
+-- strict double-nested base features (20 extra text fits) --
+  strict fold0 done (95s elapsed)
+  strict fold1 done (187s elapsed)
+  strict fold2 done (276s elapsed)
+  strict fold3 done (367s elapsed)
+  strict fold4 done (454s elapsed)
+[strict] text+id+hand              pooled OOF = 0.618560 | delta vs 0.639579 = -0.021019 | fold std 0.003194 
+  [strict] reference blend@0.40    = 0.630522
+
+headline (spec, text+id+hand): 0.625762 | delta -0.013817 | beats baseline: False | runtime 480.7s

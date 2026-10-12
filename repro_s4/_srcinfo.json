@@ -1,0 +1,100 @@
+{
+  "sources": {
+    "text_tfidf_final.npz": {
+      "purpose": "TF-IDF word(1,2)+char_wb(3,5) -> LogisticRegression, CPU",
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "standalone_oof_macro_f1": 0.516093,
+      "expected_standalone": 0.516093,
+      "derivation": "text-derived",
+      "uses_id": false,
+      "fold_set": "B"
+    },
+    "text_knn_final.npz": {
+      "purpose": "TF-IDF cosine kNN text neighbour, CPU",
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "standalone_oof_macro_f1": 0.487078,
+      "expected_standalone": 0.487078,
+      "derivation": "text-derived",
+      "uses_id": false,
+      "fold_set": "B"
+    },
+    "emb_e5-base_final.npz": {
+      "purpose": "intfloat/multilingual-e5-small zero-shot logits (verified export)",
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "standalone_oof_macro_f1": 0.521535,
+      "expected_standalone": 0.521535,
+      "derivation": "text-derived",
+      "uses_id": false,
+      "fold_set": "B"
+    },
+    "sid.npz": {
+      "purpose": "similarity-weighted ID prior, config A (KW=120 k=180 beta=10 gamma=1)",
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "standalone_oof_macro_f1": 0.627895,
+      "expected_standalone": 0.627895,
+      "derivation": "ID-derived",
+      "uses_id": true,
+      "fold_set": "B"
+    },
+    "plain_id.npz": {
+      "purpose": "plain ID prior, k=20 inverse distance eps=1e-6",
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "standalone_oof_macro_f1": 0.613631,
+      "expected_standalone": 0.613631,
+      "derivation": "ID-derived",
+      "uses_id": true,
+      "fold_set": "B"
+    },
+    "xlmr_base_idhead_final.npz": {
+      "purpose": "xlm-roberta-base + ID-head classifier (verified export)",
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "standalone_oof_macro_f1": 0.648743,
+      "expected_standalone": 0.648743,
+      "derivation": "ID-derived",
+      "uses_id": true,
+      "fold_set": "B"
+    }
+  }
+}

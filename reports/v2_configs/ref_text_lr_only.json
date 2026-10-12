@@ -1,0 +1,20 @@
+{
+  "model": "LogisticRegression",
+  "solver": "lbfgs",
+  "C": 4.0,
+  "class_weight": "balanced",
+  "max_iter": 2000,
+  "random_state": 42,
+  "features": "word(1-2) + char_wb(3-5) TF-IDF, 60k each, min_df=2",
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "per_fold_macro_f1": [
+    0.510089,
+    0.503986,
+    0.520463,
+    0.516183,
+    0.513963
+  ]
+}

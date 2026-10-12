@@ -1,0 +1,80 @@
+{
+  "name": "EXP3 survivor: per-class w on LR text + id prior",
+  "oof_macro_f1": 0.639812,
+  "delta_vs_baseline": 0.000233,
+  "per_class_f1": {
+    "f1_class0": 0.756979,
+    "f1_class1": 0.620588,
+    "f1_class2": 0.541869
+  },
+  "per_fold_std": 0.004052,
+  "text_model": {
+    "type": "LogisticRegression",
+    "solver": "lbfgs",
+    "C": 4.0,
+    "class_weight": "balanced",
+    "max_iter": 2000,
+    "random_state": 42,
+    "features": "word TfidfVectorizer(analyzer=word, ngram_range=(1,2), min_df=2, max_features=60000, sublinear_tf=True) + char TfidfVectorizer(analyzer=char_wb, ngram_range=(3,5), min_df=2, max_features=60000, sublinear_tf=True), hstacked",
+    "cleaning": "URL -> ' URL ', @mention -> ' USER ', whitespace collapsed; no lowercasing, no stemming",
+    "source": "see name"
+  },
+  "id_prior": {
+    "k": 20,
+    "weights": "1/(distance+1e-6)",
+    "pool": "training-fold ids/labels only (leak-free, asserted per fold)",
+    "note": "self-matches excluded; queries disjoint from the pool"
+  },
+  "blend": {
+    "form": "P(c) = a * text_probs_c + (1 - a) * id_probs_c",
+    "alpha": null,
+    "cross_fitted_w_per_fold": {
+      "0": [
+        0.417,
+        0.3648,
+        0.4198
+      ],
+      "1": [
+        0.3617,
+        0.3275,
+        0.4063
+      ],
+      "2": [
+        0.4697,
+        0.3521,
+        0.3872
+      ],
+      "3": [
+        0.4216,
+        0.3235,
+        0.4055
+      ],
+      "4": [
+        0.4187,
+        0.3569,
+        0.4178
+      ]
+    },
+    "tuned_parameters": "one 3-vector per fold"
+  },
+  "duplicate_override": "unanimous cleaned-text lookup, conflicting groups skipped",
+  "protocol": {
+    "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+    "group_key": "clean_text.lower().strip()",
+    "metric": "pooled leak-free OOF Macro F1",
+    "seed": 42
+  },
+  "per_fold_macro_f1": [
+    0.643956,
+    0.63203,
+    0.640954,
+    0.64123,
+    0.640831
+  ],
+  "status": "best validated config found by experiment_v2_*; NOT submitted (submission_2 requires an explicit request)",
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "evaluation_note": "survivors exceeding both tests: none; gate NOT passed -> the combination below is reported for completeness only and does not qualify as beating the baseline"
+}

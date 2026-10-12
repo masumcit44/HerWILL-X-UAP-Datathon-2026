@@ -1,0 +1,1 @@
+Write-Output '===== noid_raw ====='; python stack.py noid_raw 400 42 2>&1 | Where-Object { $_.ToString() -match 'HONEST' }; Write-Output '===== nonb ====='; python stack.py nonb 400 42 2>&1 | Where-Object { $_.ToString() -match 'HONEST' }; 

@@ -1,0 +1,38 @@
+{
+  "dense_block_scale": 0.03,
+  "alpha": 0.4,
+  "features": [
+    "bangla_char_ratio",
+    "latin_char_ratio",
+    "digit_ratio",
+    "punctuation_density",
+    "repeated_char_run_max",
+    "emoji_count",
+    "has_url",
+    "has_mention",
+    "text_length"
+  ],
+  "scaler": "StandardScaler fitted on each fold's TRAIN rows only",
+  "computed_on": "raw text",
+  "model": "LogisticRegression",
+  "solver": "lbfgs",
+  "C": 4.0,
+  "class_weight": "balanced",
+  "max_iter": 2000,
+  "random_state": 42,
+  "id_prior": {
+    "k": 20
+  },
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "evaluation_note": "scale sweep",
+  "per_fold_macro_f1": [
+    0.642623,
+    0.63112,
+    0.639843,
+    0.639178,
+    0.640321
+  ]
+}

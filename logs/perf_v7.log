@@ -1,0 +1,28 @@
+SOURCES OK: {'text': 0.516093, 'sid': 0.627895, 'e5': 0.521535, 'xlmr': 0.648743}
+SUB3 REPRODUCED = 0.682311 (target 0.682311, diff 1.78e-07)
+  per-class [0.782202, 0.640594, 0.624137] folds [0.682243, 0.685245, 0.680023, 0.680668, 0.683172] std 0.001859
+
+PHASE 3 - FIXED E5-SID beta12/k180 [t=122.8s]
+  standalone OOF 0.628273 (expected ~0.628273) | ok=True []
+  test reconstructed ok=True [] rowsum 3.3e-16 [t=129.1s]
+  SID ALIGNED/CONSISTENT = True
+Phase 3 done [t=129.1s]
+
+PHASE 4 - HONEST CHALLENGER BLEND [t=129.1s]
+  CHALLENGER HONEST OOF = 0.684811  (expected ~0.684811)
+  per-class [0.783668, 0.642736, 0.628029] acc 0.713554
+  folds [0.687264, 0.690604, 0.683387, 0.67575, 0.686805] std 0.005053 worst 0.675750
+
+PHASE 5 - ADOPTION GATES [t=251.2s]
+  G1 +0.002500 >= +0.0015 -> True
+  G2 folds not worse: 4/5 -> True
+  G3 class deltas [0.001466, 0.002142, 0.003892] -> True
+  G4 std 0.005053 vs 1.5x 0.002789 -> False
+  G5 worst 0.675750 vs ref 0.680023 -> False
+  G6 test integrity True [] -> True
+  G7 share [0.5358, 0.3506, 0.1136] drift [3.9, 2.93, 0.98] -> True
+  FINAL WEIGHTS {'text': 0.1, 'sid': 0.45, 'e5': 0.25, 'xlmr': 0.2}
+  ALL GATES PASS = False
+Phase 5 done [t=251.2s]
+
+PHASE 6 - PACKAGES [t=251.2s]

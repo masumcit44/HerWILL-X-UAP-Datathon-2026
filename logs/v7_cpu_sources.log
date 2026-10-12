@@ -1,0 +1,12 @@
+  tfidf fold 0 done
+  tfidf fold 1 done
+  tfidf fold 2 done
+  tfidf fold 3 done
+  tfidf fold 4 done
+text_tfidf: OOF macro-F1 0.516093 -> cache\v7_text\text_tfidf_final.npz
+  knn fold 0 done
+  knn fold 1 done
+  knn fold 2 done
+  knn fold 3 done
+  knn fold 4 done
+text_knn: OOF macro-F1 0.487078 -> cache\v7_text\text_knn_final.npz

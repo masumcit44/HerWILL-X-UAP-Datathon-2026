@@ -1,0 +1,26 @@
+sources:
+  loaded lexical   text_tfidf         covered  47817/47817  uses_id=False
+  loaded lexical   text_knn           covered  47817/47817  uses_id=False
+  loaded semantic  emb_e5_base        covered  47817/47817  uses_id=False
+honest blend over all text-only sources ...
+leave-one-out contributions ...
+ablation rows ...
+
+================ TEXT-ONLY RESULT (fold set B, honest cross-fitted) ================
+  standalone text_tfidf         0.516093 [0.6404, 0.4962, 0.4117] (covered 47817)
+  standalone text_knn           0.487078 [0.6792, 0.4535, 0.3286] (covered 47817)
+  standalone emb_e5_base        0.521535 [0.6512, 0.4698, 0.4436] (covered 47817)
+  T1 honest            0.566293 per-class [0.69913, 0.505359, 0.494388] folds [0.568427, 0.570123, 0.560307, 0.569441, 0.563029] std 0.003889
+  T1 + nested offsets  0.568028 gain +0.001735 adopted=True {'gain_ge_0_001': True, 'folds_not_regressed': 5, 'no_class_collapse': True, 'std_stable': True}
+  T2 stable            0.566293 sources ['text_tfidf', 'text_knn', 'emb_e5_base']
+  T3 equal hedge       0.560537
+  OPTIMISTIC same-OOF  0.566293  (not a result)
+  leave-one-out: {'text_tfidf': 0.003794, 'text_knn': 0.013434, 'emb_e5_base': 0.037617}
+  ablation:
+    lexical text only                                            0.528675  [0.670939, 0.496008, 0.419078]
+    frozen semantic only                                         0.521535  [0.651164, 0.469808, 0.443632]
+    lexical + semantic                                           0.566293  [0.69913, 0.505359, 0.494388]
+    all text-only (T1, no offsets)                               0.566293  [0.69913, 0.505359, 0.494388]
+    Submission 3 full model [ID-DERIVED, recorded, not recomputed] 0.682311  [0.782202, 0.640594, 0.624137]
+  BEATS 0.682311 HONESTLY: False   band: weak
+  report: reports\v7_initial\text_v7_report.json   packages: predictions\text_v7_initial   SUBMISSION GENERATED: NO

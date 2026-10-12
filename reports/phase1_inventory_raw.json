@@ -1,0 +1,377 @@
+[
+  {
+    "path": "d:\\Desktop\\UAP\\uap_gpu.ipynb",
+    "size": 287106,
+    "mtime": "2026-09-28 08:58:49"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_all3.npz",
+    "size": 4156750,
+    "mtime": "2026-09-28 01:52:28"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_base.npz",
+    "size": 4143935,
+    "mtime": "2026-09-28 01:32:04"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_emoji.npz",
+    "size": 4172198,
+    "mtime": "2026-09-28 01:40:47"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_nfkc.npz",
+    "size": 4140368,
+    "mtime": "2026-09-28 01:34:55"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_nfkc_emoji.npz",
+    "size": 4168200,
+    "mtime": "2026-09-28 01:46:33"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_nfkc_repeat.npz",
+    "size": 4132448,
+    "mtime": "2026-09-28 01:43:32"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_repeat.npz",
+    "size": 4137929,
+    "mtime": "2026-09-28 01:37:43"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_repeat_emoji.npz",
+    "size": 4162669,
+    "mtime": "2026-09-28 01:49:23"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v2\\fold_ids.npy",
+    "size": 382664,
+    "mtime": "2026-09-28 01:56:02"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v3\\emb_e5_small_test.npy",
+    "size": 18363008,
+    "mtime": "2026-09-28 02:45:23"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v3\\emb_e5_small_train.npy",
+    "size": 73447040,
+    "mtime": "2026-09-28 02:45:23"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v3\\_verify_text_oof.npz",
+    "size": 3061290,
+    "mtime": "2026-09-28 05:40:47"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\data_checks\\fold_assignments_3fold.csv",
+    "size": 1425773,
+    "mtime": "2026-09-27 19:58:34"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\data_checks\\text_id_blend_fold_assignments.csv",
+    "size": 517096,
+    "mtime": "2026-09-27 20:35:56"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\models\\v3\\v3_3_frozen_e5_small\\refined_oof_probs.npy",
+    "size": 1147736,
+    "mtime": "2026-09-28 02:58:04"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_id_prior_only.csv",
+    "size": 3555948,
+    "mtime": "2026-09-27 20:36:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_revalidation_grouped.csv",
+    "size": 4857416,
+    "mtime": "2026-09-27 21:12:14"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_small_tfidf_lr.csv",
+    "size": 4131191,
+    "mtime": "2026-09-27 19:59:05"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_text_id_blend.csv",
+    "size": 4379129,
+    "mtime": "2026-09-27 20:36:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_text_only_lbfgs.csv",
+    "size": 4134608,
+    "mtime": "2026-09-27 20:36:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\test\\_fold0_test_probs_small_tfidf_lr.csv",
+    "size": 781914,
+    "mtime": "2026-09-27 19:58:50"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\test\\_fold1_test_probs_small_tfidf_lr.csv",
+    "size": 781710,
+    "mtime": "2026-09-27 19:58:57"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\test\\_fold2_test_probs_small_tfidf_lr.csv",
+    "size": 781783,
+    "mtime": "2026-09-27 19:59:04"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_0_baseline_anchor_oof.npz",
+    "size": 1541035,
+    "mtime": "2026-09-28 01:57:59"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_1_text_ensemble_oof.npz",
+    "size": 5795209,
+    "mtime": "2026-09-27 23:15:29"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_2_hand_features_oof.npz",
+    "size": 3435425,
+    "mtime": "2026-09-27 23:27:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_5_combined_oof.npz",
+    "size": 1109217,
+    "mtime": "2026-09-28 01:03:31"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v3_candidates\\CANDIDATE_NOT_FOR_SUBMISSION_v3_3way_oof_probs.npy",
+    "size": 1147736,
+    "mtime": "2026-09-28 02:57:44"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v3_candidates\\CANDIDATE_NOT_FOR_SUBMISSION_v3_ens_pc_test_probs.npy",
+    "size": 287048,
+    "mtime": "2026-09-28 02:18:37"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v3_candidates\\CANDIDATE_NOT_FOR_SUBMISSION_v3_frozen_emb_test_probs.npy",
+    "size": 143588,
+    "mtime": "2026-09-28 02:49:25"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\reports\\v2_configs\\v2_3_perclass_ens_tuned_on_oof.json",
+    "size": 646,
+    "mtime": "2026-09-28 01:06:07"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\reports\\v2_configs\\v2_3_perclass_lr_tuned_on_oof.json",
+    "size": 645,
+    "mtime": "2026-09-28 01:06:07"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\reports\\v3_id_structure\\id_leakage_proof.json",
+    "size": 457,
+    "mtime": "2026-09-28 02:04:13"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\uap_submission\\reproducible\\models\\multilingual-e5-small_SHA256.json",
+    "size": 833,
+    "mtime": "2026-09-28 05:29:25"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\_fresh_exec_test\\models\\multilingual-e5-small_SHA256.json",
+    "size": 833,
+    "mtime": "2026-09-28 05:29:25"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\_preflight\\models\\multilingual-e5-small_SHA256.json",
+    "size": 833,
+    "mtime": "2026-09-28 05:29:25"
+  },
+  {
+    "path": "d:\\Desktop\\all datasets\\test_Y3wMUE5_7gLdaTN.csv",
+    "size": 21957,
+    "mtime": "2019-10-19 23:24:40"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\uap_gpu.ipynb",
+    "size": 287106,
+    "mtime": "2026-09-28 08:58:49"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_all3.npz",
+    "size": 4156750,
+    "mtime": "2026-09-28 01:52:28"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_base.npz",
+    "size": 4143935,
+    "mtime": "2026-09-28 01:32:04"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_emoji.npz",
+    "size": 4172198,
+    "mtime": "2026-09-28 01:40:47"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_nfkc.npz",
+    "size": 4140368,
+    "mtime": "2026-09-28 01:34:55"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_nfkc_emoji.npz",
+    "size": 4168200,
+    "mtime": "2026-09-28 01:46:33"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_nfkc_repeat.npz",
+    "size": 4132448,
+    "mtime": "2026-09-28 01:43:32"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_repeat.npz",
+    "size": 4137929,
+    "mtime": "2026-09-28 01:37:43"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\t0\\oof_repeat_emoji.npz",
+    "size": 4162669,
+    "mtime": "2026-09-28 01:49:23"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v2\\fold_ids.npy",
+    "size": 382664,
+    "mtime": "2026-09-28 01:56:02"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v3\\emb_e5_small_test.npy",
+    "size": 18363008,
+    "mtime": "2026-09-28 02:45:23"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v3\\emb_e5_small_train.npy",
+    "size": 73447040,
+    "mtime": "2026-09-28 02:45:23"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\cache\\v3\\_verify_text_oof.npz",
+    "size": 3061290,
+    "mtime": "2026-09-28 05:40:47"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\data_checks\\fold_assignments_3fold.csv",
+    "size": 1425773,
+    "mtime": "2026-09-27 19:58:34"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\data_checks\\text_id_blend_fold_assignments.csv",
+    "size": 517096,
+    "mtime": "2026-09-27 20:35:56"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\models\\v3\\v3_3_frozen_e5_small\\refined_oof_probs.npy",
+    "size": 1147736,
+    "mtime": "2026-09-28 02:58:04"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_id_prior_only.csv",
+    "size": 3555948,
+    "mtime": "2026-09-27 20:36:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_revalidation_grouped.csv",
+    "size": 4857416,
+    "mtime": "2026-09-27 21:12:14"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_small_tfidf_lr.csv",
+    "size": 4131191,
+    "mtime": "2026-09-27 19:59:05"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_text_id_blend.csv",
+    "size": 4379129,
+    "mtime": "2026-09-27 20:36:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\oof\\oof_text_only_lbfgs.csv",
+    "size": 4134608,
+    "mtime": "2026-09-27 20:36:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\test\\_fold0_test_probs_small_tfidf_lr.csv",
+    "size": 781914,
+    "mtime": "2026-09-27 19:58:50"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\test\\_fold1_test_probs_small_tfidf_lr.csv",
+    "size": 781710,
+    "mtime": "2026-09-27 19:58:57"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\test\\_fold2_test_probs_small_tfidf_lr.csv",
+    "size": 781783,
+    "mtime": "2026-09-27 19:59:04"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_0_baseline_anchor_oof.npz",
+    "size": 1541035,
+    "mtime": "2026-09-28 01:57:59"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_1_text_ensemble_oof.npz",
+    "size": 5795209,
+    "mtime": "2026-09-27 23:15:29"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_2_hand_features_oof.npz",
+    "size": 3435425,
+    "mtime": "2026-09-27 23:27:03"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v2\\v2_5_combined_oof.npz",
+    "size": 1109217,
+    "mtime": "2026-09-28 01:03:31"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v3_candidates\\CANDIDATE_NOT_FOR_SUBMISSION_v3_3way_oof_probs.npy",
+    "size": 1147736,
+    "mtime": "2026-09-28 02:57:44"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v3_candidates\\CANDIDATE_NOT_FOR_SUBMISSION_v3_ens_pc_test_probs.npy",
+    "size": 287048,
+    "mtime": "2026-09-28 02:18:37"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\predictions\\v3_candidates\\CANDIDATE_NOT_FOR_SUBMISSION_v3_frozen_emb_test_probs.npy",
+    "size": 143588,
+    "mtime": "2026-09-28 02:49:25"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\reports\\v2_configs\\v2_3_perclass_ens_tuned_on_oof.json",
+    "size": 646,
+    "mtime": "2026-09-28 01:06:07"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\reports\\v2_configs\\v2_3_perclass_lr_tuned_on_oof.json",
+    "size": 645,
+    "mtime": "2026-09-28 01:06:07"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\reports\\v3_id_structure\\id_leakage_proof.json",
+    "size": 457,
+    "mtime": "2026-09-28 02:04:13"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\uap_submission\\reproducible\\models\\multilingual-e5-small_SHA256.json",
+    "size": 833,
+    "mtime": "2026-09-28 05:29:25"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\_fresh_exec_test\\models\\multilingual-e5-small_SHA256.json",
+    "size": 833,
+    "mtime": "2026-09-28 05:29:25"
+  },
+  {
+    "path": "d:\\Desktop\\UAP\\_preflight\\models\\multilingual-e5-small_SHA256.json",
+    "size": 833,
+    "mtime": "2026-09-28 05:29:25"
+  }
+]

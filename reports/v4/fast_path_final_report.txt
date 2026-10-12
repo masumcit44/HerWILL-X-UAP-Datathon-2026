@@ -1,0 +1,63 @@
+v4 FAST-PATH CANDIDATE REPORT
+======================================================================
+E5 BASE TEST CACHE: cache/v4/emb_e5base_test.npy  shape (11955,768) finite=True sha256=23ae71c52f28b57ace5942efd27e4f4a8f74c55b223c7b33d9a90d5ec3d850ad
+
+FOLD SET: cache/v2/fold_ids.npy  sizes 925065f4d4a0c6a533fad774f4875b039ea526eb915bee8c8c8b819c88760f56
+  canonical sha256 = 925065f4d4a0c6a533fad774f4875b039ea526eb915bee8c8c8b819c88760f56  match=True
+
+SOURCE AUDIT (OOF 47817x3 / TEST 11955x3):
+  id         oof=True test=True oofF1=0.614135
+  text       oof=True test=True oofF1=0.524057
+  e5_small   oof=True test=True oofF1=0.496241
+  e5_base    oof=True test=True oofF1=0.515829
+  GPU sources: {'xlmr_base': 'MISSING', 'xlmr_base_idhead': 'MISSING', 'fold_ids_colab': 'MISSING', 'base_sources': 'MISSING', 'export_meta': 'MISSING'}
+
+CANDIDATE A:
+  honest OOF Macro F1 = 0.663412   (delta vs 0.657612 = +0.005800)
+  per-class F1        = [0.77068, 0.630214, 0.589342]
+  accuracy            = 0.698308
+  fold scores         = [0.668271, 0.656511, 0.664011, 0.665743, 0.662514]
+  fold mean / std     = 0.663410 / 0.003945
+  worst fold          = 0.656511
+  confusion matrix    = [[19104, 4031, 621], [5856, 11030, 1277], [861, 1780, 3257]]
+  oof pred dist       = [25821, 16841, 5155]
+  test pred dist      = [6453, 4185, 1317]  [53.98, 35.01, 11.02]%
+  oof check           = True   test check = True
+
+CANDIDATE B:
+  honest OOF Macro F1 = 0.664275   (delta vs 0.657612 = +0.006663)
+  per-class F1        = [0.77064, 0.62976, 0.592426]
+  accuracy            = 0.698434
+  fold scores         = [0.668593, 0.656979, 0.663966, 0.666061, 0.665719]
+  fold mean / std     = 0.664264 / 0.003931
+  worst fold          = 0.656979
+  confusion matrix    = [[19098, 4028, 630], [5861, 11006, 1296], [849, 1756, 3293]]
+  oof pred dist       = [25808, 16790, 5219]
+  test pred dist      = [6446, 4193, 1316]  [53.92, 35.07, 11.01]%
+  oof check           = True   test check = True
+
+CANDIDATE C:
+  honest OOF Macro F1 = 0.662660   (delta vs 0.657612 = +0.005048)
+  per-class F1        = [0.770626, 0.627718, 0.589638]
+  accuracy            = 0.697283
+  fold scores         = [0.664025, 0.656508, 0.663869, 0.664359, 0.664441]
+  fold mean / std     = 0.662640 / 0.003073
+  worst fold          = 0.656508
+  confusion matrix    = [[19083, 4029, 644], [5868, 10970, 1325], [819, 1790, 3289]]
+  oof pred dist       = [25770, 16789, 5258]
+  test pred dist      = [6434, 4184, 1337]  [53.82, 35.0, 11.18]%
+  oof check           = True   test check = True
+
+WEIGHTS: {"per_fold": [[0.4444, 0.1111, 0.0556, 0.3889], [0.45, 0.1, 0.1, 0.35], [0.4444, 0.1111, 0.0556, 0.3889], [0.45, 0.15, 0.1, 0.3], [0.45, 0.15, 0.15, 0.25]], "median_consensus": [0.45, 0.1111, 0.1, 0.35], "coarse_alt": [0.4, 0.2, 0.0, 0.4], "refined_opt": [0.45, 0.1, 0.1, 0.35]}
+TEST DISAGREEMENT: {"A_B": 0.005521, "A_C": 0.055207, "max_abs_diff_A_B": 0.008358}
+CANDIDATE C CREATED: True
+
+ARTIFACT HASHES:
+  1e70b8eee58e16d93b513916942a12ff95457890409547ee49000ed09e0e5946  CANDIDATE_NOT_FOR_SUBMISSION_A_test_probs.npy
+  1fc24ce18db28bb75adb6873c1fffbd73930899f3f01a7b67ec35da747508e1b  CANDIDATE_NOT_FOR_SUBMISSION_B_test_probs.npy
+  c71950020c1447e5639fd2e0bf7420629e76a586caa7c99761ee3ffab3cadd2f  CANDIDATE_NOT_FOR_SUBMISSION_C_test_probs.npy
+  05db0932570f27f39c34bcc8bcd7c02ec34e907b8fdd4a851de3526e467232a8  candidate_A_oof_probs.npy
+  f64256549c9cb9f4a898d5f074f1805520e0d9905d6b0815f300cf2030c2b2ac  candidate_B_oof_probs.npy
+  05f5a776a933e4a74e3c01dd92c5bd061e2b25f12c9bdfd5b0363fec06977118  candidate_C_oof_probs.npy
+
+NO SUBMISSION CSV OR NOTEBOOK WAS CREATED. SUBMISSION FREEZE ACTIVE.

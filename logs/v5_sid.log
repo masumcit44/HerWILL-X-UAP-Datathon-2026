@@ -1,0 +1,18 @@
+fitting label-free SIM_VEC (char_wb 2-4, 80k) on train_clean ...
+  train sim matrix (47817, 80000) | test (11955, 80000) | vocab 80000
+
+[sid config A] {'KW': 120, 'k': 180, 'beta': 10.0, 'gamma': 1.0} -> ID-only OOF macro F1 = 0.612153  (22s)
+   per-class [0.740633, 0.60167, 0.494158]
+   fold scores  [0.611053, 0.619013, 0.611892, 0.607739, 0.611016]
+
+[sid config B] {'KW': 120, 'k': 90, 'beta': 8.0, 'gamma': 0.75} -> ID-only OOF macro F1 = 0.606312  (11s)
+   per-class [0.739122, 0.598797, 0.481018]
+   fold scores  [0.604383, 0.613582, 0.605655, 0.602874, 0.604925]
+
+[sid config C] {'KW': 120, 'k': 120, 'beta': 10.0, 'gamma': 1.0} -> ID-only OOF macro F1 = 0.612612  (15s)
+   per-class [0.739988, 0.602374, 0.495473]
+   fold scores  [0.612627, 0.618836, 0.611086, 0.608625, 0.61184]
+
+config A expectation 0.6280 +-0.001 -> diff 0.015847
+SID CONFIG A GATE: FAIL
+*** STOP: predeclared config A did not reach the expected band ***

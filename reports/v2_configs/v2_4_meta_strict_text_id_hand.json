@@ -1,0 +1,37 @@
+{
+  "meta_learner": "LogisticRegression",
+  "C": 1.0,
+  "max_iter": 2000,
+  "class_weight": "balanced",
+  "random_state": 42,
+  "features": [
+    "text_p0",
+    "text_p1",
+    "text_p2",
+    "id_p0",
+    "id_p1",
+    "id_p2",
+    "bangla_char_ratio",
+    "latin_char_ratio",
+    "digit_ratio",
+    "punctuation_density",
+    "repeated_char_run_max",
+    "emoji_count",
+    "has_url",
+    "has_mention",
+    "text_length"
+  ],
+  "base": "double-nested: meta-train base models never saw the meta-eval fold either",
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "evaluation_note": "base models here see 3/5 of the data, so this row is NOT directly comparable to 0.639579; the in-protocol reference (plain blend on the same strict base) is 0.630522",
+  "per_fold_macro_f1": [
+    0.61764,
+    0.614021,
+    0.620903,
+    0.617051,
+    0.623228
+  ]
+}

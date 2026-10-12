@@ -1,0 +1,382 @@
+TASK: Independently verify the FastText experiment and test whether FastText
+adds honest complementary value to the current best E5-based challenger.
+
+Read the entire prompt before modifying or running anything.
+
+======================================================================
+LOCKED REFERENCES
+======================================================================
+
+Validation baseline:
+0.639579
+
+Current best honest OOF:
+0.657612
+
+Current best configuration:
+- TF-IDF text source
+- k=20 inverse-distance ID prior
+- frozen intfloat/multilingual-e5-small embedding source
+- honest cross-fitted weights
+- refined weights selected consistently:
+  text = 0.15
+  id = 0.45
+  e5 = 0.40
+
+FastText claim to verify:
+- FastText-only OOF = 0.428033
+- Honest text+ID+FastText OOF = 0.641974
+- Claimed weights = text 0.30, id 0.50, FastText 0.20
+- All five folds reportedly selected the same weights
+
+Do not trust these claims without recomputing from disk or rerunning the
+canonical experiment.
+
+======================================================================
+ABSOLUTE SUBMISSION FREEZE
+======================================================================
+
+Until I explicitly write:
+
+GENERATE FINAL SUBMISSION
+
+DO NOT:
+
+- create any submission CSV
+- create submission_2.csv
+- create any notebook
+- overwrite submission_1.csv
+- modify the locked reproducible notebook
+- save final test labels as CSV
+- submit anything to Kaggle
+- tune using public leaderboard feedback
+
+Candidate test probabilities may only be saved as .npy or .npz under:
+
+predictions/v3_candidates/
+
+Use filenames containing:
+
+CANDIDATE_NOT_FOR_SUBMISSION
+
+======================================================================
+PROTECTED FILES
+======================================================================
+
+Treat as read-only:
+
+train.csv
+test.csv
+sample_submission.csv
+submission_1.csv
+submission_reproducible_file_1.ipynb
+
+Verify their hashes against:
+
+reports/v3_protected_manifest.json
+
+Recheck after completing the experiment.
+
+Abort if any protected file changes.
+
+======================================================================
+CANONICAL VALIDATION
+======================================================================
+
+Use exactly the existing canonical folds:
+
+- 5-fold StratifiedGroupKFold
+- seed = 42
+- group = clean_text(text).lower().strip()
+- exact fold identity from cache/v2/fold_ids.npy
+- fold SHA256 must match the existing package/config
+- zero cleaned-text groups crossing folds
+- zero validation IDs in training pools
+
+Primary metric:
+
+pooled OOF Macro F1
+
+All blend selection must be honest cross-fitted:
+
+For outer fold k:
+- select blend weights using only the other four folds
+- apply selected weights to unseen fold k
+
+Never select and score weights on the same rows.
+
+======================================================================
+PHASE 1: INSPECT EXISTING ARTIFACTS
+======================================================================
+
+Search the repository for:
+
+src/experiment_v3_4_fasttext_embeddings.py
+predictions/v3_candidates/oof_emb_fasttext.npy
+FastText model files
+FastText scaler files
+FastText LogisticRegression head files
+FastText metrics or logs
+FastText test-probability arrays
+
+Also inspect:
+
+models/v3/v3_3_frozen_e5_small/refined_oof_probs.npy
+models/v3/v3_3_frozen_e5_small/refined_blend_weights.json
+reports/v3_configs/v3_frozen_emb_metrics.json
+cache/v3/emb_e5_small_train.npy
+cache/v3/emb_e5_small_test.npy
+predictions/v3_candidates/CANDIDATE_NOT_FOR_SUBMISSION_v3_frozen_emb_test_probs.npy
+cache/v2/fold_ids.npy
+
+Report FOUND or MISSING for every required artifact.
+
+======================================================================
+PHASE 2: VERIFY OR REPRODUCE FASTTEXT OOF
+======================================================================
+
+If a valid FastText OOF array exists:
+
+- load it from disk
+- verify shape = (47817, 3)
+- verify finite probabilities
+- verify values between 0 and 1
+- verify rows sum to 1
+- recompute standalone Macro F1
+- recompute per-class F1
+- recompute fold scores and fold standard deviation
+
+If it does not exist:
+
+Run the FastText experiment using canonical folds.
+
+FastText requirements:
+
+- trained from scratch separately inside each fold
+- training text only for each fold
+- no pretrained vectors
+- no internet data
+- vector_size = 100
+- window = 5
+- min_count = 2
+- sg = 1
+- epochs = 10
+- seed = 42
+- min_n = 3
+- max_n = 6
+- deterministic worker behavior where practical
+
+Sentence representation:
+
+mean pooled FastText vectors
+
+Head:
+
+StandardScaler fitted on fold training embeddings only
+
+LogisticRegression:
+- C = 4.0
+- class_weight = balanced
+- max_iter = 2000
+- random_state = 42
+- multiclass-compatible solver
+
+Save verified FastText OOF as:
+
+predictions/v3_candidates/
+CANDIDATE_NOT_FOR_SUBMISSION_v3_fasttext_oof_probs.npy
+
+Also save:
+
+reports/v3_configs/v3_fasttext_verified_metrics.json
+
+Report any unavoidable nondeterminism caused by multithreaded FastText.
+
+======================================================================
+PHASE 3: RECONSTRUCT BASE SOURCES
+======================================================================
+
+Obtain ID-aligned OOF probability arrays for:
+
+1. TF-IDF text source
+2. k=20 inverse-distance ID prior
+3. frozen E5-small embedding source
+4. FastText embedding source
+
+Do not treat refined_oof_probs.npy as the E5 component.
+
+refined_oof_probs.npy is already a blended result.
+
+The four-source experiment requires the individual component probabilities.
+
+Required shapes:
+
+(47817, 3) for every source
+
+Verify:
+
+- identical row order
+- identical IDs
+- identical fold assignments
+- finite values
+- probability rows sum to 1
+
+If any individual source is unavailable and cannot be reconstructed
+deterministically, stop and report the missing source.
+
+======================================================================
+PHASE 4: HONEST FOUR-SOURCE BLEND
+======================================================================
+
+Blend:
+
+P =
+w_text * P_text
++ w_id * P_id
++ w_e5 * P_e5
++ w_fasttext * P_fasttext
+
+Constraints:
+
+all weights >= 0
+weights sum to 1
+
+First use a coarse simplex grid with step 0.10.
+
+Then refine around the best region using step 0.05.
+
+Include the current best region:
+
+text = 0.15
+id = 0.45
+e5 = 0.40
+FastText = 0.00
+
+The search must be honest cross-fitted.
+
+For each unseen outer fold:
+
+1. Search weights using the other four folds only.
+2. Apply selected weights to the unseen fold.
+3. Record selected weights and unseen-fold Macro F1.
+
+Combine all unseen-fold predictions into one pooled OOF array.
+
+Report:
+
+- same-OOF diagnostic best, clearly labeled OPTIMISTIC
+- honest cross-fitted pooled Macro F1
+- delta versus 0.657612
+- per-class F1
+- five fold scores
+- fold mean and standard deviation
+- selected weights for every fold
+- prediction disagreement versus the E5 refined candidate
+- rows corrected by FastText
+- rows damaged by FastText
+- Class 1 and Class 2 changes
+
+Only the honest cross-fitted score may determine the verdict.
+
+======================================================================
+DECISION RULE
+======================================================================
+
+If honest four-source OOF:
+
+< 0.657612
+FASTTEXT_REJECTED
+
+0.657612 to 0.658611
+NO_MEANINGFUL_GAIN
+
+0.658612 to 0.661999
+PROMISING_INCREMENT
+
+0.662000 to 0.669999
+STRONG_NEW_CHALLENGER
+
+>= 0.670000
+MAJOR_CHALLENGER
+
+Do not call a tiny same-OOF gain a winner.
+
+FastText must receive a positive weight consistently across unseen folds to
+be considered genuinely useful.
+
+======================================================================
+PHASE 5: SAVE RESEARCH ARTIFACTS
+======================================================================
+
+Save the honest four-source OOF probabilities as:
+
+predictions/v3_candidates/
+CANDIDATE_NOT_FOR_SUBMISSION_v3_4way_oof_probs.npy
+
+Save the fold-wise weights and metrics as:
+
+reports/v3_configs/v3_4way_fasttext_e5_metrics.json
+
+Update:
+
+reports/v3_experiment_tracker.csv
+
+Preserve:
+
+- source SHA256
+- fold SHA256
+- OOF SHA256
+- package versions
+- FastText configuration
+- selected weights by fold
+- per-class F1
+- fold scores
+- fold std
+- error-overlap statistics
+- protected-file hash check
+
+If FastText is useful, preserve any required fold models/scalers under:
+
+models/v3/v3_4_fasttext/
+
+Do not create final blended test probabilities yet unless every individual
+test component already exists.
+
+If test-side FastText inference is performed, save only:
+
+predictions/v3_candidates/
+CANDIDATE_NOT_FOR_SUBMISSION_v3_fasttext_test_probs.npy
+
+Never save test labels as CSV.
+
+======================================================================
+FINAL OUTPUT
+======================================================================
+
+Print only:
+
+FASTTEXT OOF ARTIFACT:
+FASTTEXT STANDALONE F1:
+FASTTEXT SCORE VERIFIED: PASS/FAIL
+SOURCE ALIGNMENT: PASS/FAIL
+CURRENT E5 BEST: 0.657612
+OPTIMISTIC FOUR-WAY SCORE:
+HONEST FOUR-WAY SCORE:
+DELTA VS 0.657612:
+PER-CLASS F1:
+FOLD SCORES:
+FOLD STD:
+SELECTED WEIGHTS BY FOLD:
+FASTTEXT POSITIVE WEIGHT IN HOW MANY FOLDS:
+ROWS CORRECTED:
+ROWS DAMAGED:
+OOF ARTIFACT:
+METRICS FILE:
+MODEL PACKAGE:
+PROTECTED FILES: PASS/FAIL
+FINAL STATUS:
+SUBMISSION GENERATED: NO
+
+Stop after this report.
+Do not start another model.
+Do not create a submission.

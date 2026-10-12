@@ -1,0 +1,49 @@
+{
+  "fold_ids_colab.npy": {
+    "sha256": "5ab5cfe96a72b04c8bd30adc45c1eeeee477707b0c382a19d179d8635295fbbd",
+    "bytes": 382664,
+    "int64_bytes_sha256": "cc4fdd169110aeee6d3d5566095234461041b1a9290e2e916ce850c31d27a7ca",
+    "source_in_zip": "final_sources/fold_ids.npy",
+    "note": "Colab fold ids. FILE sha256 covers the .npy container; int64_bytes_sha256 covers the raw int64 array payload."
+  },
+  "emb_e5-base_final.npz": {
+    "sha256": "bca3e9ec8fa9b28804ff1323ac6de9d53ff257d9fe13a5ebde73465e1adde1ce",
+    "bytes": 1435028,
+    "source_in_zip": "final_sources/emb_e5-base_final.npz"
+  },
+  "xlmr_base_idhead_final.npz": {
+    "sha256": "8cc027296059e14849ec862b192f54293ed6551c5b487dbb7e532c9fdb1ff177",
+    "bytes": 717764,
+    "source_in_zip": "final_sources/xlmr_base_idhead_final.npz"
+  },
+  "xlmr_base_idhead_fold0.npz": {
+    "sha256": "c6c1953e89db8e6d4e8f318c04474ba195d3e4a58e4ba647a2fd0f4ea4f2dabc",
+    "bytes": 335050,
+    "source_in_zip": "per_fold_sources/xlmr_base_idhead_fold0.npz"
+  },
+  "xlmr_base_idhead_fold1.npz": {
+    "sha256": "d27f69100c41fc0ab269aae99f8db6dd9873d6e990617b2ee5a21e9258046e7e",
+    "bytes": 335110,
+    "source_in_zip": "per_fold_sources/xlmr_base_idhead_fold1.npz"
+  },
+  "xlmr_base_idhead_fold2.npz": {
+    "sha256": "df3a279d6e7c5a8d4df5ef6f322b91ba06ce67993556d79285b5e1b55fb791ff",
+    "bytes": 335610,
+    "source_in_zip": "per_fold_sources/xlmr_base_idhead_fold2.npz"
+  },
+  "xlmr_base_idhead_fold3.npz": {
+    "sha256": "6f13875e067d76addb3e93cd575c45427a92ddd5683f587208ffa51bafc0faee",
+    "bytes": 335810,
+    "source_in_zip": "per_fold_sources/xlmr_base_idhead_fold3.npz"
+  },
+  "xlmr_base_idhead_fold4.npz": {
+    "sha256": "8ca5c57c85d0eda87a6862a66aa07f363f4f704a803a153aee3339beef54c414",
+    "bytes": 335710,
+    "source_in_zip": "per_fold_sources/xlmr_base_idhead_fold4.npz"
+  },
+  "config_submission_3.json": {
+    "sha256": "52907a4d7e9b809cd3142d56a50bac28e0d88fb7d76e46a58dd58c67016d1c63",
+    "bytes": 1557,
+    "source_in_zip": "generated"
+  }
+}

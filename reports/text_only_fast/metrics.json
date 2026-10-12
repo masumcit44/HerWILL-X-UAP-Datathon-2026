@@ -1,0 +1,400 @@
+{
+  "experiment": "text_only_fast_sprint",
+  "text_only": true,
+  "uses_id_or_sid": false,
+  "uses_xlmr_idhead": false,
+  "uses_row_order": false,
+  "fold_set": "A (local canonical) cache/v2/fold_ids.npy",
+  "fold_file_sha256": "2bd8cfdedb32342931d17cc27ca0a1be99d8a567bb8128e32955ec18cd91880d",
+  "fold_int64_sha256": "925065f4d4a0c6a533fad774f4875b039ea526eb915bee8c8c8b819c88760f56",
+  "fold_sizes": [
+    9564,
+    9564,
+    9563,
+    9563,
+    9563
+  ],
+  "n_folds": 5,
+  "blend_sources": [
+    "e5_base",
+    "e5_small",
+    "text",
+    "text_all3"
+  ],
+  "test_capable_blend_sources": [
+    "e5_base",
+    "e5_small",
+    "text"
+  ],
+  "simplex_step": 0.1,
+  "n_simplex_candidates": 286,
+  "source_standalone": {
+    "text_base": {
+      "pooled_macro_f1": 0.512943,
+      "per_class_f1": [
+        0.640457,
+        0.4947,
+        0.403673
+      ],
+      "accuracy": 0.553799,
+      "fold_scores": [
+        0.510089,
+        0.503986,
+        0.520463,
+        0.516183,
+        0.513963
+      ],
+      "fold_std": 0.005594,
+      "pred_dist": [
+        22842,
+        18348,
+        6627
+      ],
+      "test_available": false,
+      "disagreement": {
+        "text_all3": 0.21026,
+        "text": 0.107409,
+        "e5_small": 0.445825,
+        "e5_base": 0.43449
+      }
+    },
+    "text_all3": {
+      "pooled_macro_f1": 0.518947,
+      "per_class_f1": [
+        0.640387,
+        0.494611,
+        0.421843
+      ],
+      "accuracy": 0.556037,
+      "fold_scores": [
+        0.51901,
+        0.516184,
+        0.520964,
+        0.518371,
+        0.520065
+      ],
+      "fold_std": 0.00163,
+      "pred_dist": [
+        22794,
+        18395,
+        6628
+      ],
+      "test_available": false,
+      "disagreement": {
+        "text": 0.104586,
+        "e5_small": 0.44549,
+        "e5_base": 0.436205
+      }
+    },
+    "text": {
+      "pooled_macro_f1": 0.524057,
+      "per_class_f1": [
+        0.647738,
+        0.502176,
+        0.422256
+      ],
+      "accuracy": 0.563063,
+      "fold_scores": [
+        0.524827,
+        0.51777,
+        0.525849,
+        0.526533,
+        0.525212
+      ],
+      "fold_std": 0.003187,
+      "pred_dist": [
+        23016,
+        18370,
+        6431
+      ],
+      "test_available": true,
+      "disagreement": {
+        "e5_small": 0.439572,
+        "e5_base": 0.428467
+      }
+    },
+    "e5_small": {
+      "pooled_macro_f1": 0.496241,
+      "per_class_f1": [
+        0.627904,
+        0.444316,
+        0.416502
+      ],
+      "accuracy": 0.525441,
+      "fold_scores": [
+        0.50058,
+        0.489827,
+        0.498099,
+        0.500451,
+        0.49214
+      ],
+      "fold_std": 0.004426,
+      "pred_dist": [
+        21184,
+        14836,
+        11797
+      ],
+      "test_available": true,
+      "disagreement": {
+        "e5_base": 0.296861
+      }
+    },
+    "e5_base": {
+      "pooled_macro_f1": 0.515829,
+      "per_class_f1": [
+        0.646069,
+        0.468118,
+        0.4333
+      ],
+      "accuracy": 0.545873,
+      "fold_scores": [
+        0.514027,
+        0.51734,
+        0.515611,
+        0.516707,
+        0.515442
+      ],
+      "fold_std": 0.00114,
+      "pred_dist": [
+        21394,
+        15132,
+        11291
+      ],
+      "test_available": true
+    }
+  },
+  "source_audit": {
+    "text_base": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "text_base",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "OOF_ONLY"
+    },
+    "text_all3": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "text_all3",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "OOF_ONLY"
+    },
+    "text": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "text",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "FOUND_AND_ALIGNED",
+      "test_path": "predictions/v4_candidates/CANDIDATE_NOT_FOR_SUBMISSION_source_text_test_probs.npy",
+      "test_sha256": "88eed39318d251eb14033415e7243ef781ef4a1499facb05157a4cf800d0dbed"
+    },
+    "e5_small": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "e5_small",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "FOUND_AND_ALIGNED",
+      "test_path": "predictions/v4_candidates/CANDIDATE_NOT_FOR_SUBMISSION_source_e5_small_test_probs.npy",
+      "test_sha256": "9662fa8d979f24f613fc46f6134367c220dca9202b400cef168a545a14b401a6"
+    },
+    "e5_base": {
+      "oof_path": "cache/v4/sources_oof.npz",
+      "oof_key": "e5_base",
+      "oof_sha256": "661b5f89b4fe44b8eea27f2edcfb391ea0c34fe238ac811acce1c7b5166d7e4d",
+      "fold_set": "A (local canonical)",
+      "integrity": "shape ok, finite, in [0,1], rowsum dev < 1e-6",
+      "status": "FOUND_AND_ALIGNED",
+      "test_path": "predictions/v4_candidates/CANDIDATE_NOT_FOR_SUBMISSION_source_e5_base_test_probs.npy",
+      "test_sha256": "83b96db4b29f9f60d33f3a1283b3ea3e49145223e31eb931beef0946162030f8"
+    }
+  },
+  "other_sources_considered": {
+    "xlmr_idhead": {
+      "fold_set": "B (Colab)",
+      "status": "EXCLUDED",
+      "reason": "ID-head forbidden by task"
+    },
+    "plain_xlmr_base": {
+      "status": "MISSING",
+      "note": "xlmr_base_final.npz lost; 0.544479 historical only"
+    },
+    "fold_set_B_text_and_e5": {
+      "status": "NOT_MIXED",
+      "reason": "different fold set; never combined"
+    }
+  },
+  "honest_oof_macro_f1": 0.559094,
+  "honest_oof_without_offsets": 0.552649,
+  "per_class_f1": [
+    0.673872,
+    0.519367,
+    0.484043
+  ],
+  "accuracy": 0.590313,
+  "confusion": [
+    [
+      15805,
+      6424,
+      1527
+    ],
+    [
+      6408,
+      9252,
+      2503
+    ],
+    [
+      939,
+      1789,
+      3170
+    ]
+  ],
+  "fold_scores": [
+    0.554776,
+    0.555329,
+    0.565105,
+    0.562936,
+    0.557502
+  ],
+  "fold_std": 0.004153,
+  "final_median_weights": {
+    "e5_base": 0.4,
+    "e5_small": 0.2,
+    "text": 0.3,
+    "text_all3": 0.1
+  },
+  "test_capable_median_weights": {
+    "e5_base": 0.4,
+    "e5_small": 0.2,
+    "text": 0.4
+  },
+  "same_oof_OPTIMISTIC_DIAGNOSTIC_ONLY": 0.553788,
+  "offsets_tested": [
+    {
+      "offsets": [
+        0.0,
+        0.0
+      ],
+      "honest_oof": 0.552649,
+      "gain": 0.0,
+      "adopt": false,
+      "reason": "reference (no offsets)"
+    },
+    {
+      "offsets": [
+        0.0,
+        -0.1
+      ],
+      "honest_oof": 0.559094,
+      "gain": 0.006445,
+      "folds_not_regressed": 5,
+      "worst_class_drop": -0.001682,
+      "fold_std": 0.004153,
+      "adopt": true,
+      "reason": "gain >= +0.001, 5/5 folds, no class F1 drop > 0.005, std not worsened"
+    },
+    {
+      "offsets": [
+        -0.1,
+        -0.1
+      ],
+      "honest_oof": null,
+      "adopt": false,
+      "reason": "measured in sprint log; failed adoption criteria"
+    },
+    {
+      "offsets": [
+        -0.1,
+        0.0
+      ],
+      "honest_oof": null,
+      "adopt": false,
+      "reason": "measured in sprint log; failed adoption criteria"
+    },
+    {
+      "offsets": [
+        -0.1,
+        0.1
+      ],
+      "honest_oof": null,
+      "adopt": false,
+      "reason": "measured in sprint log; failed adoption criteria"
+    },
+    {
+      "offsets": [
+        0.0,
+        0.1
+      ],
+      "honest_oof": null,
+      "adopt": false,
+      "reason": "measured in sprint log; failed adoption criteria"
+    },
+    {
+      "offsets": [
+        0.1,
+        -0.1
+      ],
+      "honest_oof": null,
+      "adopt": false,
+      "reason": "measured in sprint log; failed adoption criteria"
+    },
+    {
+      "offsets": [
+        0.1,
+        0.0
+      ],
+      "honest_oof": null,
+      "adopt": false,
+      "reason": "measured in sprint log; failed adoption criteria"
+    },
+    {
+      "offsets": [
+        0.1,
+        0.1
+      ],
+      "honest_oof": null,
+      "adopt": false,
+      "reason": "measured in sprint log; failed adoption criteria"
+    }
+  ],
+  "offsets_adopted": [
+    0.0,
+    -0.1
+  ],
+  "best_single_source": "text",
+  "best_single_macro_f1": 0.524057,
+  "delta_from_best_single": 0.035037,
+  "test_capable_honest_oof": 0.553638,
+  "test_pred_dist": [
+    5766,
+    4140,
+    2049
+  ],
+  "test_class_share": [
+    0.4823,
+    0.3463,
+    0.1714
+  ],
+  "train_class_share": [
+    0.4968,
+    0.3798,
+    0.1233
+  ],
+  "artifacts": {
+    "oof": "predictions/text_only_fast/candidate_text_fast_oof_probs.npy",
+    "oof_sha256": "e19953f3c892c6a41fc31868986310b9a53c4e03f81b6873c6b5fbbefdbfc883",
+    "test": "predictions/text_only_fast/CANDIDATE_NOT_FOR_SUBMISSION_text_fast_test_probs.npy",
+    "test_sha256": "e1c9079fb6bbe246186631a7bc63cbc993fd23170ee016f3e27d70ca132504f0"
+  },
+  "versions": {
+    "python": "3.14.3",
+    "numpy": "2.4.4",
+    "sklearn": "1.9.0"
+  },
+  "elapsed_seconds": 0.4,
+  "stopped_due_to_time_limit": false,
+  "submission_generated": false,
+  "status": "WEAK"
+}

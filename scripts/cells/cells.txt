@@ -1,0 +1,885 @@
+===MD===
+# HerWILL X UAP Datathon 2026 -- reproducible submission #2
+
+## What this notebook is
+
+A **self-contained** reproduction of a three-signal blend that beats the original
+locked baseline on grouped, leak-free cross-validation.
+
+| | Pooled grouped OOF Macro F1 |
+|---|---|
+| Submission #1 (text TF-IDF LR + ID-locality prior, alpha = 0.40) | 0.639579 |
+| **Submission #2 (this notebook)** | **0.657612** |
+
+Gain over submission #1: **+0.018033**, measured under the *identical*
+validation protocol on the *same* fold assignment.
+
+## The task
+
+Each row is a short social-media style text with an integer label `y` in
+{0, 1, 2}. The competition metric is **Macro F1** on the hidden test split --
+the unweighted mean of per-class F1. Macro F1 punishes any class that is
+ignored, so a model excellent on the majority class and useless on the minority
+class scores badly.
+
+## How to run
+
+The notebook expects three files **beside it, in the same working directory**:
+
+    train.csv                 47,817 rows: id, text, y
+    test.csv                  11,955 rows: id, text
+    sample_submission.csv     11,955 rows: id, y_pred
+    models/multilingual-e5-small/    bundled frozen encoder, no download needed
+
+It runs top-to-bottom, needs **no network access**, no GPU, and no cached
+project artifacts, and writes `submission/submission_2.csv`.
+
+Runtime is roughly 45-60 minutes on 8 CPU threads. The dominant cost is
+encoding ~60k short texts with a 12-layer transformer. The model is used
+**frozen** (inference only, never fine-tuned), which is what keeps that cost
+tractable on CPU.
+===END===
+===CODE===
+import os
+
+# Force offline BEFORE any HF import so nothing can phone home at runtime.
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["TRANSFORMERS_OFFLINE"] = "1"
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+import random
+import re
+import time
+import json
+import hashlib
+import unicodedata
+import platform
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import scipy.sparse as sp
+import emoji as emoji_lib
+import torch
+import sklearn
+import transformers
+import sentence_transformers
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import StratifiedGroupKFold
+from sklearn.metrics import f1_score
+
+SEED = 42
+N_SPLITS = 5
+CLASSES = [0, 1, 2]
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+torch.set_num_threads(8)
+
+T0 = time.time()
+print("python          :", platform.python_version())
+print("numpy           :", np.__version__)
+print("pandas          :", pd.__version__)
+print("scikit-learn    :", sklearn.__version__)
+print("torch           :", torch.__version__)
+print("transformers    :", transformers.__version__)
+print("sentence-transf.:", sentence_transformers.__version__)
+print("emoji           :", emoji_lib.__version__)
+print("cuda available  :", torch.cuda.is_available(), "(CPU path is intended)")
+print("torch threads   :", torch.get_num_threads())
+===END===
+
+===MD===
+## 2. Relative-path data discovery
+
+No absolute paths, no Drive mount, no personal directories. The notebook walks
+up from the current working directory looking for the three competition CSVs.
+This lets it run unchanged whether executed from the package root, from a Colab
+session, or from a nested folder.
+===END===
+===CODE===
+def find_data(names=("train.csv", "test.csv", "sample_submission.csv")):
+    """Walk up from CWD (then from this notebook) until all files are found."""
+    here = Path.cwd().resolve()
+    roots = [here] + list(here.parents)[:4]
+    try:
+        roots.append(Path(__file__).resolve().parent)
+    except NameError:
+        pass
+    for root in roots:
+        if all((root / n).is_file() for n in names):
+            return root
+    raise FileNotFoundError("Could not locate " + ", ".join(names)
+                            + " walking up from " + str(here))
+
+
+ROOT = find_data()
+print("data root (relative):", ROOT.name or str(ROOT))
+
+train = pd.read_csv(ROOT / "train.csv", encoding="utf-8")
+test = pd.read_csv(ROOT / "test.csv", encoding="utf-8")
+sample = pd.read_csv(ROOT / "sample_submission.csv", encoding="utf-8")
+
+# The upstream loader coerces missing text to "" before any processing.
+for df in (train, test):
+    df["text"] = df["text"].astype("string").fillna("").astype(str)
+
+y = train["y"].to_numpy(dtype=int)
+ids = train["id"].to_numpy(dtype=np.int64)
+test_ids = test["id"].to_numpy(dtype=np.int64)
+
+print("train :", train.shape, list(train.columns))
+print("test  :", test.shape, list(test.columns))
+print("sample:", sample.shape, list(sample.columns))
+print("class counts:", {int(c): int((y == c).sum()) for c in CLASSES})
+===END===
+===CODE===
+# ---- dataset integrity checks ------------------------------------------------
+problems = []
+if list(train.columns) != ["id", "text", "y"]:
+    problems.append("train columns " + str(list(train.columns)))
+if list(test.columns) != ["id", "text"]:
+    problems.append("test columns " + str(list(test.columns)))
+if list(sample.columns) != ["id", "y_pred"]:
+    problems.append("sample columns " + str(list(sample.columns)))
+if len(train) != 47817:
+    problems.append("train rows %d != 47817" % len(train))
+if len(test) != 11955:
+    problems.append("test rows %d != 11955" % len(test))
+if len(sample) != 11955:
+    problems.append("sample rows %d != 11955" % len(sample))
+if train["id"].nunique() != len(train):
+    problems.append("duplicate train ids")
+if test["id"].nunique() != len(test):
+    problems.append("duplicate test ids")
+if not set(np.unique(y).tolist()) <= set(CLASSES):
+    problems.append("labels outside " + str(CLASSES))
+if not (test["id"].to_numpy() == sample["id"].to_numpy()).all():
+    problems.append("test id order differs from sample_submission.csv")
+_overlap = set(ids.tolist()) & set(test_ids.tolist())
+if _overlap:
+    problems.append("%d ids appear in both train and test" % len(_overlap))
+
+print("INTEGRITY CHECKS:", "OK" if not problems else problems)
+assert not problems, problems
+
+print("\ninput SHA256 (recorded for reproducibility):")
+for _n in ("train.csv", "test.csv", "sample_submission.csv"):
+    print("  %-24s %s" % (_n, hashlib.sha256((ROOT / _n).read_bytes()).hexdigest()))
+===END===
+===MD===
+## 3. Cleaning functions and the canonical fold split
+
+Two cleaners are used, both recovered verbatim from the project source.
+
+**`clean_text` (base)** -- URL to `URL`, `@mention` to `USER`, whitespace
+collapsed. Nothing else. This defines the *grouping key* for validation.
+
+**`clean_text_all3`** -- the Tier-0 upgrade, applied in a fixed order:
+
+1. Unicode **NFKC** normalisation (runs on the raw string, *before* masking)
+2. base masking (URL / mention / whitespace)
+3. **repeat collapse**: runs of 3+ identical characters reduced to exactly 2
+4. **emoji demojization**: `:grinning_face:` style, `language="en"`
+
+Rationale: abusive text here is often obfuscated with elongated characters
+("sooooo bad") and emoji substitution. Collapsing repeats and demojizing turns
+those into ordinary word tokens the TF-IDF vocabulary can match. Measured
+effect on the text model alone: **0.512943 -> 0.518947** (+0.006004).
+===END===
+===CODE===
+URL_RE = re.compile(r"(?:https?://|www\.)\S+", flags=re.IGNORECASE)
+MENTION_RE = re.compile(r"@\w+")
+WS_RE = re.compile(r"\s+", flags=re.UNICODE)
+REPEAT_RE = re.compile(r"(.)\1{2,}", flags=re.UNICODE)
+
+
+def clean_text(text):
+    """URL -> ' URL ', @mention -> ' USER ', collapse whitespace. Nothing else."""
+    s = "" if text is None else str(text)
+    s = URL_RE.sub(" URL ", s)
+    s = MENTION_RE.sub(" USER ", s)
+    return WS_RE.sub(" ", s).strip()
+
+
+def clean_text_all3(text):
+    """NFKC -> base mask -> repeat-collapse -> emoji demojize (fixed order)."""
+    s = "" if text is None else str(text)
+    if not s:
+        return ""
+    s = unicodedata.normalize("NFKC", s)            # 1
+    s = URL_RE.sub(" URL ", s)                      # 2
+    s = MENTION_RE.sub(" USER ", s)                # 2
+    s = WS_RE.sub(" ", s).strip()                   # 2
+    s = REPEAT_RE.sub(r"\1\1", s)                   # 3
+    return emoji_lib.demojize(s, language="en")     # 4
+
+
+def group_key(cleaned):
+    """Grouping key: cleaned text, lowercased and stripped."""
+    return str(cleaned).lower().strip()
+
+
+def build_grouped_folds(cleaned_texts, labels):
+    """StratifiedGroupKFold(5, shuffle=True, random_state=42) on cleaned text.
+
+    Every row sharing an identical cleaned text lands in the SAME fold, so a
+    duplicate of a validation row can never appear in that fold's training set.
+    This is the single most important anti-leakage control in the notebook.
+    """
+    keys = pd.Index([group_key(t) for t in cleaned_texts], dtype="object")
+    groups = pd.factorize(keys, sort=False)[0]
+    sgkf = StratifiedGroupKFold(n_splits=N_SPLITS, shuffle=True, random_state=SEED)
+    fold_ids = np.full(len(labels), -1, dtype=int)
+    for k, (_tr, va) in enumerate(sgkf.split(np.zeros(len(labels)), labels, groups)):
+        fold_ids[va] = k
+    assert (fold_ids >= 0).all()
+    crossing = pd.DataFrame({"g": groups, "f": fold_ids}).groupby("g")["f"].nunique()
+    n_cross = int((crossing > 1).sum())
+    assert n_cross == 0, "%d groups span more than one fold -> leakage" % n_cross
+    return fold_ids, n_cross
+
+
+base_clean = train["text"].map(clean_text).to_numpy()
+all3_clean = train["text"].map(clean_text_all3).to_numpy()
+
+FOLD_IDS, n_cross = build_grouped_folds(base_clean, y)
+print("canonical folds:", {int(c): int((FOLD_IDS == c).sum()) for c in range(N_SPLITS)})
+print("groups spanning >1 fold:", n_cross, "(must be 0)")
+print("fold assignment SHA256:", hashlib.sha256(FOLD_IDS.tobytes()).hexdigest())
+===END===
+===MD===
+## 4. The two TF-IDF text models
+
+Both use **identical** hyperparameters (recovered from the project harness):
+
+| Parameter | Value |
+|---|---|
+| word vectorizer | `analyzer='word'`, `ngram_range=(1,2)`, `min_df=2`, `max_features=60000`, `sublinear_tf=True` |
+| char vectorizer | `analyzer='char_wb'`, `ngram_range=(3,5)`, `min_df=2`, `max_features=60000`, `sublinear_tf=True` |
+| features | the two sparse blocks `hstack`ed |
+| classifier | `LogisticRegression(solver='lbfgs', C=4.0, class_weight='balanced', max_iter=2000, random_state=42)` |
+
+`class_weight='balanced'` counteracts the class imbalance (49.7% / 38.0% / 12.3%)
+so the optimiser does not ignore the minority class.
+
+They differ **only** in the cleaning applied before vectorisation.
+
+**Fold assignment.** The base model uses the canonical folds above. The all3
+model rebuilds folds from *its own* cleaned text, because the grouping key
+changes when the cleaning changes. This is reproduced exactly as in the verified
+experiment; the resulting assignments differ on most rows but have identical
+fold sizes. Each model's out-of-fold prediction for a row still comes from a
+model that never saw that row, so the blend remains leak-free. Blend metrics are
+then scored on the canonical folds.
+===END===
+===CODE===
+WORD_KW = dict(analyzer="word", ngram_range=(1, 2), min_df=2, max_features=60000,
+               sublinear_tf=True, dtype=np.float32)
+CHAR_KW = dict(analyzer="char_wb", ngram_range=(3, 5), min_df=2, max_features=60000,
+               sublinear_tf=True, dtype=np.float32)
+LR_KW = dict(solver="lbfgs", C=4.0, class_weight="balanced", max_iter=2000,
+             random_state=SEED)
+
+
+def text_oof(cleaned, labels, fold_ids, tag):
+    """Leak-free grouped OOF probabilities for the TF-IDF + LR text model."""
+    oof = np.zeros((len(labels), 3), dtype=np.float64)
+    for k in range(N_SPLITS):
+        va = np.flatnonzero(fold_ids == k)
+        tr = np.flatnonzero(fold_ids != k)
+        assert int(np.intersect1d(ids[va], ids[tr]).size) == 0, "id leak"
+        word = TfidfVectorizer(**WORD_KW).fit(cleaned[tr])
+        char = TfidfVectorizer(**CHAR_KW).fit(cleaned[tr])
+        Xtr = sp.hstack([word.transform(cleaned[tr]), char.transform(cleaned[tr])],
+                        format="csr").astype(np.float32)
+        Xva = sp.hstack([word.transform(cleaned[va]), char.transform(cleaned[va])],
+                        format="csr").astype(np.float32)
+        oof[va] = LogisticRegression(**LR_KW).fit(Xtr, labels[tr]).predict_proba(Xva)
+        print("  [%s] fold %d: macro F1 = %.6f"
+              % (tag, k, f1_score(labels[va], oof[va].argmax(1), average="macro")))
+        del word, char, Xtr, Xva
+    return oof
+
+
+t_txt = time.time()
+print("== base-cleaned text model ==")
+oof_text_base = text_oof(base_clean, y, FOLD_IDS, "base")
+print("base text-only OOF Macro F1: %.6f  (%.0fs)"
+      % (f1_score(y, oof_text_base.argmax(1), average="macro"), time.time() - t_txt))
+===END===
+===CODE===
+t_txt = time.time()
+all3_folds, n_cross3 = build_grouped_folds(all3_clean, y)
+print("== all3-cleaned text model == (groups spanning >1 fold: %d)" % n_cross3)
+oof_text_all3 = text_oof(all3_clean, y, all3_folds, "all3")
+print("all3 text-only OOF Macro F1: %.6f  (%.0fs)"
+      % (f1_score(y, oof_text_all3.argmax(1), average="macro"), time.time() - t_txt))
+
+# ---- combined text probability: 0.50 base + 0.50 all3 ------------------------
+oof_text = 0.50 * oof_text_base + 0.50 * oof_text_all3
+oof_text = oof_text / oof_text.sum(axis=1, keepdims=True)
+print("combined text OOF Macro F1: %.6f"
+      % f1_score(y, oof_text.argmax(1), average="macro"))
+===END===
+
+
+
+
+T0 = time.time()
+print("python          :", platform.python_version())
+print("numpy           :", np.__version__)
+===MD===
+## 5. The ID-locality prior
+
+`id` is a near-contiguous integer. Labels are strongly autocorrelated along that
+axis: two rows whose ids differ by 1 share a label **61.5%** of the time, versus
+**40.6%** for two random rows. Rows close in id were almost certainly collected
+close together in time, and labelling was likely done in sessions.
+
+For a query row we take its `k = 20` nearest labelled ids and weight each by
+`1 / (distance + 1e-6)`:
+
+    P(c) = sum over neighbours j of class c of  w_j
+    w_j  = 1 / (|id_j - id_q| + 1e-6)
+
+normalised to sum to 1. Self-matches are excluded.
+
+**Leak-freedom.** For a validation row the pool contains *only* that fold's
+training ids and labels, so a row's own label can never reach its own
+prediction. A brute-force reimplementation is diffed against the vectorised one.
+
+> **Ethical / deployment note.** This feature encodes an accident of *how this
+> dataset was collected*, not a property of the text. It would not transfer to
+> production data, and on a re-shuffled or differently-crawled corpus it would
+> carry no signal. It is legitimate here because the competition scores this
+> specific hidden test split, drawn from the same crawl. We flag it explicitly
+> rather than presenting it as content understanding.
+===END===
+===CODE===
+K_NEIGHBORS = 20
+ID_EPS = 1e-6
+
+
+def id_prior(query_ids, pool_ids, pool_labels, k=K_NEIGHBORS, eps=ID_EPS):
+    """k-nearest-id inverse-distance label prior. Pool excludes the query rows."""
+    q = np.asarray(query_ids, dtype=np.int64).ravel()
+    t = np.asarray(pool_ids, dtype=np.int64).ravel()
+    yy = np.asarray(pool_labels, dtype=np.int64).ravel()
+    assert t.size == yy.size and t.size == np.unique(t).size
+
+    order = np.argsort(t, kind="stable")
+    s_ids, s_y = t[order], yy[order]
+    n, kk = len(s_ids), min(k, len(s_ids))
+
+    pos = np.searchsorted(s_ids, q, side="left")
+    cand = pos[:, None] + np.arange(-k, k + 1)[None, :]
+    valid = (cand >= 0) & (cand < n)
+    cc = np.clip(cand, 0, n - 1)
+    d = np.abs(s_ids[cc] - q[:, None]).astype(np.float64)
+    d = np.where(valid & (s_ids[cc] != q[:, None]), d, np.inf)
+    sel = np.argsort(d, axis=1, kind="stable")[:, :kk]
+    dsel = np.take_along_axis(d, sel, axis=1)
+    ysel = s_y[cc[np.arange(len(q))[:, None], sel]]
+
+    good = np.isfinite(dsel)
+    w = np.where(good, 1.0 / (np.where(good, dsel, 0.0) + eps), 0.0)
+    P = np.stack([(w * (ysel == c)).sum(axis=1) for c in CLASSES], axis=1)
+    tot = P.sum(axis=1, keepdims=True)
+    P = P / np.where(tot > 0, tot, 1.0)
+    P[tot.ravel() <= 0] = 1.0 / len(CLASSES)
+    return P
+
+
+def id_prior_bruteforce(query_ids, pool_ids, pool_labels, k=K_NEIGHBORS, eps=ID_EPS):
+    """Independent O(n*m) reimplementation, used only to prove agreement."""
+    q = np.asarray(query_ids, dtype=np.int64).ravel()
+    t = np.asarray(pool_ids, dtype=np.int64).ravel()
+    yy = np.asarray(pool_labels, dtype=np.int64).ravel()
+    out = np.zeros((len(q), 3), dtype=np.float64)
+    for i, qi in enumerate(q):
+        diffs = np.abs(t - qi).astype(np.float64)
+        sel = np.lexsort((t, diffs))[:k]        # distance first, then smallest id
+        w = 1.0 / (diffs[sel] + eps)
+        for c in CLASSES:
+            out[i, c] = w[yy[sel] == c].sum()
+        s = out[i].sum()
+        out[i] = out[i] / s if s > 0 else 1.0 / 3
+    return out
+
+
+oof_id = np.zeros((len(y), 3), dtype=np.float64)
+for k in range(N_SPLITS):
+    va = np.flatnonzero(FOLD_IDS == k)
+    tr = np.flatnonzero(FOLD_IDS != k)
+    assert set(ids[va].tolist()).isdisjoint(ids[tr].tolist()), "pool/query id overlap"
+    oof_id[va] = id_prior(ids[va], ids[tr], y[tr])
+print("id-prior-only OOF Macro F1: %.6f"
+      % f1_score(y, oof_id.argmax(1), average="macro"))
+
+_probe = np.flatnonzero(FOLD_IDS == 0)[:200]
+_tr = np.flatnonzero(FOLD_IDS != 0)
+_maxdiff = float(np.abs(id_prior(ids[_probe], ids[_tr], y[_tr])
+                        - id_prior_bruteforce(ids[_probe], ids[_tr], y[_tr])).max())
+print("max |vectorised - bruteforce| =", _maxdiff, "(must be < 1e-10)")
+assert _maxdiff < 1e-10
+print("ID-prior leak proof: PASS")
+===END===
+===MD===
+## 6. Frozen multilingual E5 semantic representation
+
+The two signals above are weak *individually*: the text model scores 0.524 and
+the ID prior 0.614. Neither understands what a sentence **means**. So we add a
+third, genuinely different signal.
+
+**`intfloat/multilingual-e5-small`** -- a 12-layer XLM-RoBERTa encoder, 384
+dimensions, covering 100 languages including Bangla. Used **completely frozen**:
+no fine-tuning, no gradient step, just `encode()`.
+
+| Setting | Value |
+|---|---|
+| model | `intfloat/multilingual-e5-small` |
+| revision | `614241f622f53c4eeff9890bdc4f31cfecc418b3` |
+| device | CPU |
+| `normalize_embeddings` | `True` |
+| batch size | 64 |
+| max sequence length | 128 tokens (encoder default) |
+| embedding dim | 384 |
+| head | `LogisticRegression(C=4.0, class_weight='balanced', max_iter=2000, lbfgs, seed 42)` |
+
+Weights are **bundled** in `models/multilingual-e5-small/` next to this notebook,
+so execution needs no network. The cell below asserts the local files exist and
+records their hashes before loading.
+
+Fine-tuning was deliberately not done: on the available CPU-only machine a
+5-fold fine-tune of this encoder is not tractable, and the frozen signal already
+provides the complementarity that matters.
+===END===
+===CODE===
+E5_DIR = None
+for _cand in (ROOT / "models" / "multilingual-e5-small",
+              Path("models") / "multilingual-e5-small",
+              Path("multilingual-e5-small")):
+    if _cand.is_dir() and (_cand / "config.json").is_file():
+        E5_DIR = _cand
+        break
+assert E5_DIR is not None, "bundled multilingual-e5-small not found"
+print("E5 model directory:", E5_DIR)
+
+_e5_hashes = {}
+for _f in sorted(os.listdir(E5_DIR)):
+    _p = E5_DIR / _f
+    if _p.is_file():
+        _e5_hashes[_f] = hashlib.sha256(_p.read_bytes()).hexdigest()
+print("bundled E5 file SHA256:")
+for _k, _v in _e5_hashes.items():
+    print("  %-26s %s" % (_k, _v))
+===END===
+===CODE===
+from sentence_transformers import SentenceTransformer
+
+t_emb = time.time()
+encoder = SentenceTransformer(str(E5_DIR), device="cpu")
+print("loaded frozen encoder | dim =", encoder.get_sentence_embedding_dimension())
+
+with torch.no_grad():
+    emb_train = encoder.encode(train["text"].astype(str).tolist(),
+                               batch_size=64, show_progress_bar=True,
+                               normalize_embeddings=True,
+                               convert_to_numpy=True).astype(np.float32)
+    emb_test = encoder.encode(test["text"].astype(str).tolist(),
+                              batch_size=64, show_progress_bar=True,
+                              normalize_embeddings=True,
+                              convert_to_numpy=True).astype(np.float32)
+
+print("train embeddings", emb_train.shape, "| test embeddings", emb_test.shape)
+print("all finite:", bool(np.isfinite(emb_train).all() and np.isfinite(emb_test).all()))
+print("encoding took %.0fs" % (time.time() - t_emb))
+===END===
+===CODE===
+E5_LR_KW = dict(solver="lbfgs", C=4.0, class_weight="balanced", max_iter=2000,
+                random_state=SEED)
+
+oof_e5 = np.zeros((len(y), 3), dtype=np.float64)
+for k in range(N_SPLITS):
+    va = np.flatnonzero(FOLD_IDS == k)
+    tr = np.flatnonzero(FOLD_IDS != k)
+    oof_e5[va] = LogisticRegression(**E5_LR_KW).fit(
+        emb_train[tr], y[tr]).predict_proba(emb_train[va])
+    print("  [e5] fold %d: macro F1 = %.6f"
+          % (k, f1_score(y[va], oof_e5[va].argmax(1), average="macro")))
+
+e5_only = f1_score(y, oof_e5.argmax(1), average="macro")
+print("frozen-E5 standalone OOF Macro F1: %.6f" % e5_only)
+
+_locked = 0.40 * oof_text_base + 0.60 * oof_id
+_locked = _locked / _locked.sum(axis=1, keepdims=True)
+_disagree = float((_locked.argmax(1) != oof_e5.argmax(1)).mean())
+_fixed = int(((_locked.argmax(1) != y) & (oof_e5.argmax(1) == y)).sum())
+_broke = int(((_locked.argmax(1) == y) & (oof_e5.argmax(1) != y)).sum())
+print("")
+print("E5 is WEAKER alone (%.6f) than the ID prior -- but disagrees with the" % e5_only)
+print("locked blend on %.1f%% of rows, fixing %d errors and breaking %d."
+      % (_disagree * 100, _fixed, _broke))
+print("That is the point: a different kind of error, not a better model.")
+===END===
+
+
+===MD===
+## 7. The refined blend, and the honest cross-fitted evaluation
+
+    P(c) = 0.15 * P_text(c) + 0.45 * P_id(c) + 0.40 * P_e5(c)
+
+**How the weights were chosen -- and why the number is trustworthy.** A weight
+tuned on the same rows it is scored on is meaningless. So the search is
+*cross-fitted*: for each outer fold `k`, weights are selected using only the
+other four folds, then applied to the unseen fold `k`. The five unseen folds are
+pooled into a single out-of-fold prediction, and the reported score is computed
+once, on that. A coarse search (step 0.10) over the simplex selected
+`0.20 / 0.40 / 0.40`; a finer search (step 0.05) selected `0.15 / 0.45 / 0.40`.
+**All five folds independently chose the same point**, which suggests the
+optimum is a broad plateau rather than a lucky cell.
+
+This cell re-runs that honest search from scratch and asserts the result
+reproduces. **If it does not match, the notebook aborts before writing
+anything.**
+===END===
+===CODE===
+def normalize(P):
+    return P / P.sum(axis=1, keepdims=True)
+
+
+def honest_blend_search(step, lo_t, hi_t, lo_i, hi_i, label):
+    """Cross-fitted simplex search: weights chosen on 4 folds, scored on the 5th."""
+    grid = []
+    a = lo_t
+    while a <= hi_t + 1e-9:
+        b = lo_i
+        while b <= hi_i + 1e-9:
+            c = 1.0 - a - b
+            if c >= -1e-9:
+                grid.append((round(a, 4), round(b, 4), round(max(c, 0.0), 4)))
+            b += step
+        a += step
+    grid = sorted(set(grid))
+    print("[%s] %d simplex points, step %s" % (label, len(grid), step))
+
+    oof = np.zeros((len(y), 3), dtype=np.float64)
+    pred = np.zeros(len(y), dtype=int)
+    chosen, fold_scores = {}, []
+    for k in range(N_SPLITS):
+        va = np.flatnonzero(FOLD_IDS == k)
+        tr = np.flatnonzero(FOLD_IDS != k)
+        best = (-1.0, None)
+        for wt, wi, we in grid:
+            P = normalize(wt * oof_text[tr] + wi * oof_id[tr] + we * oof_e5[tr])
+            s = f1_score(y[tr], P.argmax(1), average="macro")
+            if s > best[0]:
+                best = (s, (wt, wi, we))
+        wt, wi, we = best[1]
+        chosen[k] = {"w_text": wt, "w_id": wi, "w_emb": we,
+                     "train_f1": round(best[0], 6)}
+        P = normalize(wt * oof_text[va] + wi * oof_id[va] + we * oof_e5[va])
+        oof[va] = P
+        pred[va] = P.argmax(1)
+        sc = f1_score(y[va], pred[va], average="macro")
+        fold_scores.append(float(sc))
+        print("  fold %d: chose (%s, %s, %s) train=%.6f -> held-out=%.6f"
+              % (k, wt, wi, we, best[0], sc))
+    return oof, pred, chosen, fold_scores
+
+
+oof_coarse, pred_coarse, coarse_w, coarse_scores = honest_blend_search(
+    0.10, 0.0, 0.4, 0.3, 0.6, "coarse")
+print("coarse honest pooled OOF Macro F1: %.6f"
+      % f1_score(y, pred_coarse, average="macro"))
+
+oof_final, oof_pred, final_w, final_scores = honest_blend_search(
+    0.05, 0.05, 0.45, 0.25, 0.65, "refined")
+
+refined_f1 = f1_score(y, oof_pred, average="macro")
+refined_pc = f1_score(y, oof_pred, average=None)
+refined_std = float(np.std(final_scores))
+print("")
+print("=== HONEST CROSS-FITTED RESULT ===")
+print("pooled OOF Macro F1 : %.6f" % refined_f1)
+print("per-class F1        : %s" % [round(v, 6) for v in refined_pc])
+print("fold scores         : %s" % [round(v, 6) for v in final_scores])
+print("fold std            : %.6f" % refined_std)
+print("weights per fold    : %s"
+      % {k: (v["w_text"], v["w_id"], v["w_emb"]) for k, v in final_w.items()})
+===END===
+===CODE===
+# ---- REPRODUCTION GATE ------------------------------------------------------
+EXPECTED_F1 = 0.657612
+EXPECTED_PC = [0.765439, 0.624523, 0.582876]
+EXPECTED_FOLDS = [0.663779, 0.645736, 0.659119, 0.660625, 0.658759]
+TOL = 0.0005
+
+print("")
+print("=== OOF REPRODUCTION GATE ===")
+print("%-26s %12s %12s %10s" % ("quantity", "expected", "reproduced", "|diff|"))
+gate_ok = True
+_checks = [("pooled Macro F1", EXPECTED_F1, refined_f1),
+           ("class 0 F1", EXPECTED_PC[0], refined_pc[0]),
+           ("class 1 F1", EXPECTED_PC[1], refined_pc[1]),
+           ("class 2 F1", EXPECTED_PC[2], refined_pc[2])]
+_checks += [("fold %d F1" % i, EXPECTED_FOLDS[i], final_scores[i])
+            for i in range(N_SPLITS)]
+for _name, _exp, _got in _checks:
+    _d = abs(_exp - _got)
+    if _d > TOL:
+        gate_ok = False
+    print("%-26s %12.6f %12.6f %10.6f  %s"
+          % (_name, _exp, _got, _d, "OK" if _d <= TOL else "MISMATCH"))
+
+print("")
+print("GATE:", "PASS -- proceeding to submission" if gate_ok
+      else "FAIL -- ABORTING, no submission will be written")
+if not gate_ok:
+    raise SystemExit(
+        "OOF reproduction gate failed: fresh honest Macro F1 %.6f differs from the "
+        "verified %.6f by more than %.4f." % (refined_f1, EXPECTED_F1, TOL))
+===END===
+
+===MD===
+## 8. Full-data refit and test prediction
+
+Everything is refit on **all 47,817 training rows** and applied to the test set.
+
+For the test-side ID prior the pool is the *entire* training set. This is not a
+leak: test labels are never available to the notebook, and no test row appears
+in the pool (verified in section 2). The prior is purely a nearest-neighbour
+lookup over training labels.
+===END===
+===CODE===
+# ---- A. base text test probabilities ----------------------------------------
+test_base_clean = test["text"].map(clean_text).to_numpy()
+word_f = TfidfVectorizer(**WORD_KW).fit(base_clean)
+char_f = TfidfVectorizer(**CHAR_KW).fit(base_clean)
+Xte_base = sp.hstack([word_f.transform(test_base_clean),
+                      char_f.transform(test_base_clean)],
+                     format="csr").astype(np.float32)
+p_text_base_test = LogisticRegression(**LR_KW).fit(
+    sp.hstack([word_f.transform(base_clean), char_f.transform(base_clean)],
+              format="csr").astype(np.float32), y).predict_proba(Xte_base)
+print("A. base text test probs  :", p_text_base_test.shape)
+
+# ---- B. all3 text test probabilities ----------------------------------------
+test_all3_clean = test["text"].map(clean_text_all3).to_numpy()
+word_g = TfidfVectorizer(**WORD_KW).fit(all3_clean)
+char_g = TfidfVectorizer(**CHAR_KW).fit(all3_clean)
+Xte_all3 = sp.hstack([word_g.transform(test_all3_clean),
+                      char_g.transform(test_all3_clean)],
+                     format="csr").astype(np.float32)
+p_text_all3_test = LogisticRegression(**LR_KW).fit(
+    sp.hstack([word_g.transform(all3_clean), char_g.transform(all3_clean)],
+              format="csr").astype(np.float32), y).predict_proba(Xte_all3)
+print("B. all3 text test probs   :", p_text_all3_test.shape)
+
+# ---- C. combined text --------------------------------------------------------
+p_text_test = normalize(0.50 * p_text_base_test + 0.50 * p_text_all3_test)
+print("C. combined text test probs:", p_text_test.shape)
+
+# ---- D. k=20 ID prior (pool = all training rows) ----------------------------
+p_id_test = id_prior(test_ids, ids, y)
+print("D. id-prior test probs    :", p_id_test.shape)
+
+# ---- E. frozen E5 test probabilities ----------------------------------------
+p_e5_test = LogisticRegression(**E5_LR_KW).fit(emb_train, y).predict_proba(emb_test)
+print("E. frozen-E5 test probs   :", p_e5_test.shape)
+
+# ---- F. final refined blend --------------------------------------------------
+W_TEXT, W_ID, W_EMB = 0.15, 0.45, 0.40
+p_test = normalize(W_TEXT * p_text_test + W_ID * p_id_test + W_EMB * p_e5_test)
+print("F. final blend = %s*text + %s*id + %s*e5 -> %s"
+      % (W_TEXT, W_ID, W_EMB, p_test.shape))
+
+assert p_test.shape == (len(test), 3)
+assert np.isfinite(p_test).all()
+assert (p_test >= 0).all() and (p_test <= 1).all()
+assert np.allclose(p_test.sum(axis=1), 1.0, atol=1e-9)
+print("probability integrity: finite, in [0,1], rows sum to 1  -> OK")
+===END===
+===MD===
+## 9. Unanimous duplicate-text override
+
+One conservative correction is applied **after** blending:
+
+* group *training* rows by base-cleaned text,
+* keep only groups whose label is **unanimous** across every occurrence
+  (conflicting groups are skipped entirely),
+* a *test* row whose base-cleaned text exactly matches one of those keys takes
+  that unanimous label; everything else keeps `argmax(blend)`.
+
+**Leak-safety.** Under grouped validation this affects **0 OOF rows** -- a
+validation row's exact twin always shares its fold, so it is never a training
+row for that fold. It is therefore not what produced the OOF score above; it is a
+test-time-only correction, applied identically to submission #1.
+===END===
+===CODE===
+def unanimous_lookup(texts, labels):
+    """Map cleaned text -> label for groups where EVERY occurrence agrees."""
+    df = pd.DataFrame({"t": pd.Series(list(texts), dtype="object"),
+                       "y": np.asarray(labels)})
+    g = df.groupby("t")["y"].agg(["nunique", "first"])
+    uni = g[g["nunique"] == 1]
+    lookup = dict((str(t), int(v)) for t, v in uni["first"].items())
+    return lookup, int((g["nunique"] > 1).sum())
+
+
+def apply_override(texts, pred, lookup):
+    out = np.asarray(pred).copy()
+    hits = 0
+    for i, t in enumerate(texts):
+        v = lookup.get(str(t))
+        if v is not None:
+            out[i] = v
+            hits += 1
+    return out, hits
+
+
+pred_pure = p_test.argmax(1)
+lookup_full, n_conflict = unanimous_lookup(base_clean, y)
+pred_final, n_hits = apply_override(test_base_clean, pred_pure, lookup_full)
+n_changed = int((pred_final != pred_pure).sum())
+print("override: %d/%d test rows matched a unanimous training text"
+      % (n_hits, len(test_ids)))
+print("         %d labels changed | conflicting groups skipped = %d"
+      % (n_changed, n_conflict))
+
+oof_changed = 0
+for k in range(N_SPLITS):
+    va = np.flatnonzero(FOLD_IDS == k)
+    tr = np.flatnonzero(FOLD_IDS != k)
+    lk, _ = unanimous_lookup(base_clean[tr], y[tr])
+    _, h = apply_override(base_clean[va], oof_pred[va], lk)
+    oof_changed += h
+print("rows the same rule would touch under grouped OOF: %d (expected 0)" % oof_changed)
+===END===
+
+===MD===
+## 10. Submission: validate, write, re-read, validate again
+===END===
+===CODE===
+out_dir = Path("submission")      # RELATIVE path
+out_dir.mkdir(parents=True, exist_ok=True)
+out_path = out_dir / "submission_2.csv"
+
+assert len(pred_final) == len(test_ids), ("override/test length mismatch", len(pred_final), len(test_ids))
+sub = pd.DataFrame({"id": test_ids, "y_pred": pred_final.astype(int)})[["id", "y_pred"]]
+
+
+def validate_frame(df, where):
+    problems = []
+    if list(df.columns) != ["id", "y_pred"]:
+        problems.append("columns=" + str(list(df.columns)))
+    if len(df) != 11955:
+        problems.append("rows=%d (expected 11955)" % len(df))
+    if df["id"].nunique() != len(df):
+        problems.append("duplicate ids")
+    if not (df["id"].to_numpy() == sample["id"].to_numpy()).all():
+        problems.append("id order differs from sample_submission.csv")
+    if int(df.isna().to_numpy().sum()) > 0:
+        problems.append("nulls present")
+    vals = df["y_pred"].to_numpy()
+    if not set(map(int, pd.unique(vals))) <= {0, 1, 2}:
+        problems.append("labels outside 0/1/2: " + str(sorted(pd.unique(vals))))
+    if vals.dtype.kind not in "iu":
+        problems.append("dtype not integer: " + str(df["y_pred"].dtype))
+    print("VALIDATION %s:" % where, "OK" if not problems else problems)
+    assert not problems, problems
+    return True
+
+
+# probability-side checks
+assert p_test.shape == (11955, 3)
+assert np.isfinite(p_test).all()
+assert (p_test >= 0).all() and (p_test <= 1).all()
+assert np.allclose(p_test.sum(axis=1), 1.0, atol=1e-9)
+print("VALIDATION probabilities: shape (11955,3), finite, in [0,1], rows sum to 1 -> OK")
+
+validate_frame(sub, "BEFORE writing")
+sub.to_csv(out_path, index=False, encoding="utf-8")
+
+reread = pd.read_csv(out_path, encoding="utf-8")
+validate_frame(reread, "AFTER writing (re-read from disk)")
+
+sha = hashlib.sha256(out_path.read_bytes()).hexdigest()
+print("")
+print("wrote:", out_path.as_posix(), "(relative)")
+print("label counts:", {int(c): int((reread["y_pred"] == c).sum()) for c in CLASSES})
+print("prediction distribution %:",
+      {int(c): round(100.0 * float((reread["y_pred"] == c).mean()), 2) for c in CLASSES})
+print("train label distribution %:",
+      {int(c): round(100.0 * float((y == c).mean()), 2) for c in CLASSES})
+print("SUBMISSION SHA256:", sha)
+print("")
+print("total runtime: %.0fs" % (time.time() - T0))
+===END===
+
+lookup_full, n_conflict = unanimous_lookup(base_clean, y)
+===MD===
+## 11. Results, limitations and honest caveats
+
+### What the three signals contribute
+
+| Signal | Standalone pooled OOF Macro F1 |
+|---|---|
+| base TF-IDF + LR text model | 0.512943 |
+| all3-cleaned TF-IDF + LR text model | 0.518947 |
+| k=20 ID-locality prior | 0.614135 |
+| frozen multilingual-e5-small + LR | 0.496241 |
+| **refined 3-way blend** | **0.657612** |
+
+The encoder is the **weakest** signal on its own and still contributes ~+0.016
+to the blend, because it fails on different rows than the lexical model. Its
+value is diversity, not accuracy.
+
+### Honest limitations
+
+* **The ID-locality prior is competition-specific.** It exploits the fact that
+  this corpus was crawled in id order and labelled in sessions. It is not a
+  content feature, it would not survive re-shuffling, and it must not be
+  described as a general technique. We consider it legitimate for this
+  leaderboard and inappropriate for production.
+* **Fold standard deviation is 0.0062**, above the ~0.0038 of the lexical-only
+  submission. No single fold swings alone (range 0.6457-0.6638) and the
+  improvement is consistent across all five, but the added variance is real and
+  partly attributable to the encoder.
+* **Class 2 remains the weak class** (F1 0.582876 vs 0.765439 for class 0).
+  Macro F1 is dominated by that gap; most of the remaining headroom is there.
+* **A ~0.018 honest-OOF gain does not guarantee a proportional leaderboard
+  gain.** Local grouped OOF and the public leaderboard are different samples; we
+  make no claim about private-board performance.
+* **The blend weights were selected by cross-validation.** Cross-fitting makes
+  the reported number honest, but the weights are still fitted to this dataset
+  and could be mildly overfit to it.
+
+### Ethics
+
+The classifier is trained to detect harmful content. Two cautions. First, the
+label scheme is inherited from the competition and we did not audit it for
+bias; a model trained this way inherits and may amplify any labelling biases,
+and should not be deployed for moderation without that audit. Second, the
+semantic encoder is a general-purpose multilingual model that encodes offensive
+language as ordinary text -- this is dual-use capability, and the artefact here
+is a competition entry, not a safety tool.
+
+### Reproducibility
+
+* `SEED = 42` for `random`, `numpy`, `torch` and every scikit-learn estimator.
+* Validation is `StratifiedGroupKFold(5, shuffle=True, random_state=42)` with
+  group = `clean_text(text).lower().strip()`; the fold assignment SHA256 is
+  printed in section 3 and the OOF gate in section 7 asserts the exact expected
+  scores.
+* No external labelled data, no manual test labelling, no leaderboard-based
+  tuning, no network access at runtime.
+* The E5 weights are bundled at `models/multilingual-e5-small/`
+  (revision `614241f622f53c4eeff9890bdc4f31cfecc418b3`); their SHA256 sums are
+  printed in section 6.
+* Package versions are printed in the first code cell.
+===END===

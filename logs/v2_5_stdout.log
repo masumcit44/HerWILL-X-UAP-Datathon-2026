@@ -1,0 +1,51 @@
+
+==============================================================================
+EXP 5 -- combine the surviving candidates (cross-fitted protocol)
+==============================================================================
+protected uap_submission/reproducible/submission_reproducible_file_1.ipynb: unchanged
+protected uap_submission/reproducible/submission/submission_1.csv: unchanged
+protected train.csv: unchanged
+protected test.csv: unchanged
+protected sample_submission.csv: unchanged
+train (47817, 4) | test (11955, 3) | sample (11955, 2)
+class counts: {0: 23756, 1: 18163, 2: 5898}
+locked baseline: OOF 0.639579 | per-fold std 0.003809
+comparison band: a delta is only meaningful if it survives cross-fitting AND exceeds the fold-noise scale (~0.0038)
+
+--- GATE: single-experiment honest deltas ---
+  v2_1_text_ensemble       OOF 0.634323 | honest delta -0.005256 | beats=False | exceeds fold noise=True
+  v2_2_hand_features       OOF 0.638747 | honest delta -0.000832 | beats=False | exceeds fold noise=False
+  v2_3_per_class_alpha     OOF 0.639812 | honest delta +0.000233 | beats=True | exceeds fold noise=False
+  v2_4_meta_stacker        OOF 0.625762 | honest delta -0.013817 | beats=False | exceeds fold noise=True
+
+GATE: NOT PASSED -- survivors exceeding both tests: none; gate NOT passed -> the combination below is reported for completeness only and does not qualify as beating the baseline
+
+--- COMBINATION (every free parameter cross-fitted) ---
+EXP3 survivor: per-class w on LR text + id prior     OOF=0.639812 (delta +0.000233) | fixed-alpha same-protocol 0.639579 (delta -0.000000) | std 0.004052 vs 0.003809
+EXP2 text (hand scale 0.1) + per-class w + id prior  OOF=0.639476 (delta -0.000103) | fixed-alpha same-protocol 0.638747 (delta -0.000832) | std 0.004679 vs 0.003631
+COMBO: mean(LR, hand) text + per-class w + id prior  OOF=0.639299 (delta -0.000280) | fixed-alpha same-protocol 0.639230 (delta -0.000349) | std 0.003749 vs 0.003846
+COMBO: mean(LR, ensemble) text + per-class w + id prior OOF=0.636486 (delta -0.003093) | fixed-alpha same-protocol 0.637273 (delta -0.002306) | std 0.004717 vs 0.004330
+COMBO: mean(LR, hand, ensemble) text + per-class w + id prior OOF=0.637525 (delta -0.002054) | fixed-alpha same-protocol 0.638320 (delta -0.001259) | std 0.004455 vs 0.005306
+fixed alpha 0.40 | LR text (baseline)                OOF=0.639579 (delta -0.000000) | std 0.003809
+fixed alpha 0.40 | hand scale 0.1 text               OOF=0.638747 (delta -0.000832) | std 0.003631
+fixed alpha 0.40 | mean(LR, hand)                    OOF=0.639230 (delta -0.000349) | std 0.003846
+fixed alpha 0.40 | mean(LR, ens)                     OOF=0.637273 (delta -0.002306) | std 0.004331
+fixed alpha 0.40 | mean(LR, hand, ens)               OOF=0.638320 (delta -0.001259) | std 0.005306
+
+best cross-fitted combination: EXP3 survivor: per-class w on LR text + id prior -> 0.639812 (delta +0.000233)
+best overall configuration     : EXP3 survivor: per-class w on LR text + id prior -> 0.639812 (delta +0.000233)
+
+--- STOP CONDITIONS ---
+per-fold std 0.004052 vs baseline 0.003809 -> |delta| 0.000243 <= 0.005: True
+per-fold delta vs fixed alpha (no single-fold swing): [0.001058, -0.000294, -0.000981, 0.001935, -0.000553]
+max |per-fold swing| 0.001935 (OK)
+ID-prior leak-freedom re-verified: val ids disjoint from prior pool on all 5 folds, production prior == independent re-implementation (max |diff| <= 1e-10) -- see reports/v2_0_baseline_anchor_metrics.json -> id_prior_leak_proof
+protected uap_submission/reproducible/submission_reproducible_file_1.ipynb: unchanged
+protected uap_submission/reproducible/submission/submission_1.csv: unchanged
+protected train.csv: unchanged
+protected test.csv: unchanged
+protected sample_submission.csv: unchanged
+no submission file was written by this script (by design)
+[comparison] v2_5_combined_best: OOF 0.639812 (delta +0.000233) -> v2_comparison_table.csv, config -> reports/v2_configs/v2_5_combined_best.json
+
+metrics -> reports/v2_5_combined_metrics.json | best config -> reports/v2_configs/best_validated_config.json | runtime 92.2s

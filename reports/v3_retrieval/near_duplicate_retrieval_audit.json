@@ -1,0 +1,98 @@
+[
+  {
+    "threshold": 0.8,
+    "coverage_count": 1642,
+    "coverage_pct": 3.43,
+    "retrieval_accuracy": 0.6328,
+    "baseline_accuracy_on_subset": 0.7753,
+    "changed_predictions": 525,
+    "false_overrides": 362,
+    "correct_overrides": 128,
+    "macro_f1": 0.634874,
+    "delta_vs_baseline": -0.004705
+  },
+  {
+    "threshold": 0.85,
+    "coverage_count": 1003,
+    "coverage_pct": 2.1,
+    "retrieval_accuracy": 0.6351,
+    "baseline_accuracy_on_subset": 0.7747,
+    "changed_predictions": 326,
+    "false_overrides": 221,
+    "correct_overrides": 81,
+    "macro_f1": 0.636959,
+    "delta_vs_baseline": -0.00262
+  },
+  {
+    "threshold": 0.9,
+    "coverage_count": 582,
+    "coverage_pct": 1.22,
+    "retrieval_accuracy": 0.6357,
+    "baseline_accuracy_on_subset": 0.7629,
+    "changed_predictions": 182,
+    "false_overrides": 122,
+    "correct_overrides": 48,
+    "macro_f1": 0.63833,
+    "delta_vs_baseline": -0.001249
+  },
+  {
+    "threshold": 0.92,
+    "coverage_count": 465,
+    "coverage_pct": 0.97,
+    "retrieval_accuracy": 0.6344,
+    "baseline_accuracy_on_subset": 0.7613,
+    "changed_predictions": 150,
+    "false_overrides": 99,
+    "correct_overrides": 40,
+    "macro_f1": 0.63851,
+    "delta_vs_baseline": -0.001069
+  },
+  {
+    "threshold": 0.95,
+    "coverage_count": 287,
+    "coverage_pct": 0.6,
+    "retrieval_accuracy": 0.6446,
+    "baseline_accuracy_on_subset": 0.7631,
+    "changed_predictions": 76,
+    "false_overrides": 53,
+    "correct_overrides": 19,
+    "macro_f1": 0.63896,
+    "delta_vs_baseline": -0.000619
+  },
+  {
+    "threshold": 0.97,
+    "coverage_count": 171,
+    "coverage_pct": 0.36,
+    "retrieval_accuracy": 0.6433,
+    "baseline_accuracy_on_subset": 0.7251,
+    "changed_predictions": 39,
+    "false_overrides": 26,
+    "correct_overrides": 12,
+    "macro_f1": 0.639345,
+    "delta_vs_baseline": -0.000234
+  },
+  {
+    "threshold": 0.98,
+    "coverage_count": 120,
+    "coverage_pct": 0.25,
+    "retrieval_accuracy": 0.5833,
+    "baseline_accuracy_on_subset": 0.6917,
+    "changed_predictions": 30,
+    "false_overrides": 21,
+    "correct_overrides": 8,
+    "macro_f1": 0.639367,
+    "delta_vs_baseline": -0.000212
+  },
+  {
+    "threshold": 0.99,
+    "coverage_count": 98,
+    "coverage_pct": 0.2,
+    "retrieval_accuracy": 0.602,
+    "baseline_accuracy_on_subset": 0.6837,
+    "changed_predictions": 25,
+    "false_overrides": 16,
+    "correct_overrides": 8,
+    "macro_f1": 0.639454,
+    "delta_vs_baseline": -0.000125
+  }
+]

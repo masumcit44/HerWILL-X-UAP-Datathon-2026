@@ -1,0 +1,17 @@
+# Notebook cell 18 - code: summary
+# --- summary -----------------------------------------------------------------
+print("=" * 68)
+print("SUMMARY")
+print("  text-only OOF macro-F1      {:.6f}".format(text_only))
+print("  plain-ID OOF macro-F1       {:.6f}".format(plain_only))
+print("  sid ID-only OOF macro-F1    {:.6f}".format(sid_only))
+print("  honest blend OOF macro-F1   {:.6f}".format(blend_f1))
+print("  plain-ID blend OOF macro-F1 {:.6f}".format(plain_blend_f1))
+print("  per-class F1                {}".format(per_class_f1(y, blend_oof)))
+print("  fold scores                 {}".format([round(v, 6) for v in blend_folds]))
+print("  fold std                    {:.6f}".format(blend_std))
+print("  final weights               {}".format(np.round(final_w, 4).tolist()))
+print("  override rows/labels        {} / {}".format(n_hits, changed))
+print("  test class share            {}".format([round(v, 4) for v in test_share]))
+print("  submission written          {}".format(csv_path))
+print("=" * 68)

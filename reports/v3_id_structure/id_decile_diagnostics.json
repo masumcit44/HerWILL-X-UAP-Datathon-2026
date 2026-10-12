@@ -1,0 +1,82 @@
+[
+  {
+    "decile": 0,
+    "count": 4782,
+    "id_f1": 0.522156,
+    "blend_f1": 0.534207,
+    "mean_conf": 0.691,
+    "mean_entropy": 0.6382
+  },
+  {
+    "decile": 1,
+    "count": 4782,
+    "id_f1": 0.434805,
+    "blend_f1": 0.48893,
+    "mean_conf": 0.6399,
+    "mean_entropy": 0.7413
+  },
+  {
+    "decile": 2,
+    "count": 4781,
+    "id_f1": 0.507799,
+    "blend_f1": 0.574933,
+    "mean_conf": 0.6732,
+    "mean_entropy": 0.7047
+  },
+  {
+    "decile": 3,
+    "count": 4782,
+    "id_f1": 0.514309,
+    "blend_f1": 0.58262,
+    "mean_conf": 0.6179,
+    "mean_entropy": 0.8112
+  },
+  {
+    "decile": 4,
+    "count": 4782,
+    "id_f1": 0.534443,
+    "blend_f1": 0.524832,
+    "mean_conf": 0.6589,
+    "mean_entropy": 0.7271
+  },
+  {
+    "decile": 5,
+    "count": 4781,
+    "id_f1": 0.59236,
+    "blend_f1": 0.615305,
+    "mean_conf": 0.7145,
+    "mean_entropy": 0.5889
+  },
+  {
+    "decile": 6,
+    "count": 4782,
+    "id_f1": 0.839859,
+    "blend_f1": 0.843911,
+    "mean_conf": 0.8166,
+    "mean_entropy": 0.3955
+  },
+  {
+    "decile": 7,
+    "count": 4781,
+    "id_f1": 0.503937,
+    "blend_f1": 0.579319,
+    "mean_conf": 0.7469,
+    "mean_entropy": 0.5371
+  },
+  {
+    "decile": 8,
+    "count": 4782,
+    "id_f1": 0.630639,
+    "blend_f1": 0.627453,
+    "mean_conf": 0.7763,
+    "mean_entropy": 0.4918
+  },
+  {
+    "decile": 9,
+    "count": 4782,
+    "id_f1": 0.732009,
+    "blend_f1": 0.743228,
+    "mean_conf": 0.7366,
+    "mean_entropy": 0.5669
+  }
+]

@@ -1,0 +1,155 @@
+{
+  "submission": 4,
+  "title": "LightGBM stacker over six base probability sources (ID-DERIVED)",
+  "validation_classification": "STANDARD_OOF_STACKING_WITH_DEPENDENCY",
+  "validation_note": "NOT strictly outer-fold safe. Base-source OOF arrays are standard stacking inputs: for a training row of fold j the base model saw folds != j, which include fold k, so the stacker's training features encode fold-k label information. The per-fold class offsets are additionally chosen on the other four folds' stacker OOF (single-level, not double-nested). No claim of strict nesting is made.",
+  "metric": "macro_f1",
+  "classes": [
+    0,
+    1,
+    2
+  ],
+  "n_splits": 5,
+  "fold_set": "B",
+  "fold_ids_int64_sha256": "cc4fdd169110aeee6d3d5566095234461041b1a9290e2e916ce850c31d27a7ca",
+  "feature_policy": {
+    "n_features": 60,
+    "source_order": [
+      "tfidf",
+      "knn",
+      "e5",
+      "sid",
+      "pid",
+      "idh"
+    ],
+    "source_derivation": {
+      "tfidf": "text-derived",
+      "knn": "text-derived",
+      "e5": "text-derived",
+      "sid": "ID-derived",
+      "pid": "ID-derived",
+      "idh": "ID-derived"
+    },
+    "id_neighbour_windows": [
+      3,
+      10,
+      30,
+      100,
+      300
+    ],
+    "id_neighbour_offsets": [
+      1,
+      2,
+      3
+    ],
+    "neighbour_pool": "train rows of the OTHER folds only",
+    "raw_id_feature": "rid",
+    "text_meta": [
+      "len",
+      "nwords",
+      "bn",
+      "lat",
+      "emoji",
+      "caps",
+      "excl",
+      "q",
+      "digits"
+    ]
+  },
+  "lightgbm_params": {
+    "objective": "multiclass",
+    "num_class": 3,
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "min_data_in_leaf": 40,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "lambda_l2": 1.0,
+    "num_threads": 2,
+    "verbose": -1
+  },
+  "rounds": 400,
+  "seeds": [
+    42,
+    7,
+    2026
+  ],
+  "seed_policy": "three fixed seeds averaged; each seed also sets bagging_seed and feature_fraction_seed; num_threads pinned to 2 for determinism",
+  "class_balance": "cw=len(y)/(3*bincount(y)); sample weight = cw[y]",
+  "class_correction": {
+    "kind": "per-fold additive logit offset",
+    "frozen": true,
+    "fold_offsets": [
+      [
+        0.0,
+        -0.05,
+        -0.6
+      ],
+      [
+        0.0,
+        -0.0,
+        -0.55
+      ],
+      [
+        0.0,
+        -0.0,
+        -0.55
+      ],
+      [
+        0.0,
+        -0.0,
+        -0.5
+      ],
+      [
+        0.0,
+        -0.1,
+        -0.65
+      ]
+    ],
+    "final_offset": [
+      0.0,
+      -0.0,
+      -0.55
+    ],
+    "applied_to": "argmax(log p + offset)",
+    "selection": "each fold's offset maximises macro-F1 on the OTHER four folds"
+  },
+  "duplicate_override": {
+    "enabled": true,
+    "rule": "unanimous cleaned-text train groups",
+    "rows_matched": 272,
+    "labels_changed": 37,
+    "source": "submission_reproducible_file_3.ipynb cells 5 and 15 (verbatim)"
+  },
+  "reproduced": {
+    "pooled_oof_macro_f1": 0.703904,
+    "recorded_target": 0.704001,
+    "difference": -9.7e-05,
+    "folds": [
+      0.709531,
+      0.705706,
+      0.699544,
+      0.700173,
+      0.704385
+    ],
+    "per_class_f1": [
+      0.782266,
+      0.67259,
+      0.656856
+    ],
+    "seed_scores": [
+      0.693895,
+      0.694031,
+      0.692881
+    ]
+  },
+  "train_rows": 47817,
+  "test_rows": 11955,
+  "train_class_share": [
+    0.496811,
+    0.379844,
+    0.123345
+  ],
+  "leakage_disclosure": "Base-source OOF arrays are standard stacking inputs; see validation_note. Folds are grouped by cleaned text so no group spans folds."
+}

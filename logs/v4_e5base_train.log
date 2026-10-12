@@ -1,0 +1,28 @@
+[train] rows=47817 chunks=24 already_done=0
+[train] model loaded dim=768
+[train] chunk 1/24 rows 2000/47817 elapsed=2.3min
+[train] chunk 2/24 rows 4000/47817 elapsed=4.8min
+[train] chunk 3/24 rows 6000/47817 elapsed=6.9min
+[train] chunk 4/24 rows 8000/47817 elapsed=9.0min
+[train] chunk 5/24 rows 10000/47817 elapsed=11.5min
+[train] chunk 6/24 rows 12000/47817 elapsed=13.4min
+[train] chunk 7/24 rows 14000/47817 elapsed=15.1min
+[train] chunk 8/24 rows 16000/47817 elapsed=17.0min
+[train] chunk 9/24 rows 18000/47817 elapsed=19.1min
+[train] chunk 10/24 rows 20000/47817 elapsed=20.8min
+[train] chunk 11/24 rows 22000/47817 elapsed=22.7min
+[train] chunk 12/24 rows 24000/47817 elapsed=24.5min
+[train] chunk 13/24 rows 26000/47817 elapsed=26.8min
+[train] chunk 14/24 rows 28000/47817 elapsed=28.7min
+[train] chunk 15/24 rows 30000/47817 elapsed=30.4min
+[train] chunk 16/24 rows 32000/47817 elapsed=32.2min
+[train] chunk 17/24 rows 34000/47817 elapsed=33.8min
+[train] chunk 18/24 rows 36000/47817 elapsed=35.6min
+[train] chunk 19/24 rows 38000/47817 elapsed=37.4min
+[train] chunk 20/24 rows 40000/47817 elapsed=39.5min
+[train] chunk 21/24 rows 42000/47817 elapsed=41.4min
+[train] chunk 22/24 rows 44000/47817 elapsed=43.1min
+[train] chunk 23/24 rows 46000/47817 elapsed=44.9min
+[train] chunk 24/24 rows 47817/47817 elapsed=46.5min
+[cache/v4/emb_e5base_train] assembled (47817, 768) -> cache/v4/emb_e5base_train.npy
+[train] DONE in 46.5 min

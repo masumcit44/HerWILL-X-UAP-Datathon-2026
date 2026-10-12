@@ -1,0 +1,357 @@
+[2026-09-27 20:27:05] id_prior[unit]: queries=1 pool=6 k=3 mean_neighbours=3.0 mean_kth_dist=5.0 pool_disjoint_from_queries=True
+[2026-09-27 20:27:05] WARN id_prior[unit-selfmatch]: 1 query ids also occur in the neighbour pool; their exact self-match is excluded from the neighbourhood
+[2026-09-27 20:27:05] id_prior[unit-selfmatch]: queries=1 pool=6 k=3 mean_neighbours=3.0 mean_kth_dist=9.0 pool_disjoint_from_queries=False
+[2026-09-27 20:27:05] id_prior[small-pool]: queries=1 pool=3 k=20 mean_neighbours=3.0 mean_kth_dist=102.0 pool_disjoint_from_queries=True
+[2026-09-27 20:27:49] ==============================================================================
+[2026-09-27 20:27:49] EXPERIMENT text_id_blend -- text TF-IDF + ID-locality prior -- start
+[2026-09-27 20:27:49] resources: cpus=8 ram_total=14.98GB ram_free=2.53GB n_jobs=2 gpu_used=False
+[2026-09-27 20:27:49] loaded train=(47817, 4) test=(11955, 3) sample=(11955, 2)
+[2026-09-27 20:27:49] id structure: overlap=0 union=59772 span=59772 contiguous_0..N=True dup_ids=0
+[2026-09-27 20:27:49] clean_text sanity: train chars raw=3,158,072 clean=3,154,355; URL tags=5 USER tags=263
+[2026-09-27 20:27:49] fold[0]: n_train=38253 n_val=9564 val_counts=(4752,3632,1180) id_overlap=0 val_rows_with_dup_text_in_train=174 (1.819%)
+[2026-09-27 20:27:49] fold[1]: n_train=38253 n_val=9564 val_counts=(4751,3633,1180) id_overlap=0 val_rows_with_dup_text_in_train=170 (1.777%)
+[2026-09-27 20:27:49] fold[2]: n_train=38254 n_val=9563 val_counts=(4751,3633,1179) id_overlap=0 val_rows_with_dup_text_in_train=188 (1.966%)
+[2026-09-27 20:27:49] fold[3]: n_train=38254 n_val=9563 val_counts=(4751,3633,1179) id_overlap=0 val_rows_with_dup_text_in_train=185 (1.935%)
+[2026-09-27 20:27:49] fold[4]: n_train=38254 n_val=9563 val_counts=(4751,3632,1180) id_overlap=0 val_rows_with_dup_text_in_train=175 (1.83%)
+[2026-09-27 20:27:50] wrote data_checks\text_id_blend_fold_assignments.csv rows=47817
+[2026-09-27 20:28:03] matrix[fold0_train_matrix]: shape=(38253, 109212) nnz=4,570,077 dtype=float32 est~0.037GB
+[2026-09-27 20:28:24] fold0: text model fitted in 34.8s (0.58 min) (word=49,212 char=60,000 nnz=4,570,077 lbfgs_iter=[199])
+[2026-09-27 20:28:28] fold[0]: saved _textid_fold0_val_text_probs.csv + fold model; free_ram=2.66GB
+[2026-09-27 20:28:28] id_prior[fold0_val]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.859 pool_disjoint_from_queries=True
+[2026-09-27 20:28:28] override lookup: distinct_texts=37825 unanimous_groups=37788 conflicting_groups_skipped=37 (rows in conflicting groups=90)
+[2026-09-27 20:28:28] fold[0]: macro_f1 text=0.518704 id=0.618244 blend@0.40=0.642907 | acc text=0.557926 blend=0.688938 | free_ram=2.71GB
+[2026-09-27 20:28:42] matrix[fold1_train_matrix]: shape=(38253, 109177) nnz=4,572,572 dtype=float32 est~0.037GB
+[2026-09-27 20:29:00] fold1: text model fitted in 32.0s (0.53 min) (word=49,177 char=60,000 nnz=4,572,572 lbfgs_iter=[182])
+[2026-09-27 20:29:04] fold[1]: saved _textid_fold1_val_text_probs.csv + fold model; free_ram=2.39GB
+[2026-09-27 20:29:04] id_prior[fold1_val]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.899 pool_disjoint_from_queries=True
+[2026-09-27 20:29:05] override lookup: distinct_texts=37817 unanimous_groups=37779 conflicting_groups_skipped=38 (rows in conflicting groups=93)
+[2026-09-27 20:29:05] fold[1]: macro_f1 text=0.515202 id=0.608836 blend@0.40=0.634099 | acc text=0.557821 blend=0.679005 | free_ram=2.44GB
+[2026-09-27 20:29:18] matrix[fold2_train_matrix]: shape=(38254, 108588) nnz=4,556,878 dtype=float32 est~0.036GB
+[2026-09-27 20:29:34] fold2: text model fitted in 29.1s (0.48 min) (word=48,588 char=60,000 nnz=4,556,878 lbfgs_iter=[159])
+[2026-09-27 20:29:39] fold[2]: saved _textid_fold2_val_text_probs.csv + fold model; free_ram=2.36GB
+[2026-09-27 20:29:39] id_prior[fold2_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.851 pool_disjoint_from_queries=True
+[2026-09-27 20:29:39] override lookup: distinct_texts=37841 unanimous_groups=37803 conflicting_groups_skipped=38 (rows in conflicting groups=90)
+[2026-09-27 20:29:39] fold[2]: macro_f1 text=0.522421 id=0.619466 blend@0.40=0.644822 | acc text=0.560703 blend=0.687337 | free_ram=2.4GB
+[2026-09-27 20:29:53] matrix[fold3_train_matrix]: shape=(38254, 109360) nnz=4,574,054 dtype=float32 est~0.037GB
+[2026-09-27 20:30:12] fold3: text model fitted in 33.2s (0.55 min) (word=49,360 char=60,000 nnz=4,574,054 lbfgs_iter=[191])
+[2026-09-27 20:30:16] fold[3]: saved _textid_fold3_val_text_probs.csv + fold model; free_ram=2.31GB
+[2026-09-27 20:30:16] id_prior[fold3_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.87 pool_disjoint_from_queries=True
+[2026-09-27 20:30:17] override lookup: distinct_texts=37839 unanimous_groups=37803 conflicting_groups_skipped=36 (rows in conflicting groups=84)
+[2026-09-27 20:30:17] fold[3]: macro_f1 text=0.524024 id=0.614986 blend@0.40=0.643815 | acc text=0.561853 blend=0.684409 | free_ram=2.36GB
+[2026-09-27 20:30:29] matrix[fold4_train_matrix]: shape=(38254, 109528) nnz=4,587,793 dtype=float32 est~0.037GB
+[2026-09-27 20:30:50] fold4: text model fitted in 33.7s (0.56 min) (word=49,528 char=60,000 nnz=4,587,793 lbfgs_iter=[198])
+[2026-09-27 20:30:54] fold[4]: saved _textid_fold4_val_text_probs.csv + fold model; free_ram=2.3GB
+[2026-09-27 20:30:54] id_prior[fold4_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.857 pool_disjoint_from_queries=True
+[2026-09-27 20:30:54] override lookup: distinct_texts=37825 unanimous_groups=37790 conflicting_groups_skipped=35 (rows in conflicting groups=86)
+[2026-09-27 20:30:54] fold[4]: macro_f1 text=0.524123 id=0.614170 blend@0.40=0.645865 | acc text=0.563317 blend=0.689637 | free_ram=2.33GB
+[2026-09-27 20:30:54] cross-validation finished in 184.9s (3.08 min)
+[2026-09-27 20:30:54] fold expectation check PASSED: every fold's text/id/blend macro F1 sits inside the externally verified range
+[2026-09-27 20:30:55] alpha grid (pooled OOF): best alpha=0.40 -> macro_f1=0.642278 | alpha=0.40 -> 0.642278 | text-only(1.0) -> 0.520908 | id-only(0.0) -> 0.615136
+[2026-09-27 20:30:55] leak-free OOF override effect: 858 rows overridden, macro F1 0.642278 -> 0.643150 (+0.000871)
+[2026-09-27 20:30:56] wrote OOF artifacts: oof_text_id_blend.csv, oof_text_only_lbfgs.csv, oof_id_prior_only.csv
+[2026-09-27 20:30:56] final fit: refitting TF-IDF + LogisticRegression on the FULL training set
+[2026-09-27 20:31:13] matrix[full_train_matrix]: shape=(47817, 119971) nnz=5,722,940 dtype=float32 est~0.046GB
+[2026-09-27 20:31:36] full: text model fitted in 39.9s (0.66 min) (word=59,971 char=60,000 nnz=5,722,940 lbfgs_iter=[187])
+[2026-09-27 20:31:40] id_prior[full_test]: queries=11955 pool=47817 k=20 mean_neighbours=20.0 mean_kth_dist=12.752 pool_disjoint_from_queries=True
+[2026-09-27 20:31:40] test blend computed at alpha=0.40; mean max prob=0.6387
+[2026-09-27 20:31:40] override lookup: distinct_texts=47195 unanimous_groups=47142 conflicting_groups_skipped=53 (rows in conflicting groups=132)
+[2026-09-27 20:31:40] test override: 272 / 11,955 rows (2.275%) matched a unanimous training text; label changed on 39 rows
+[2026-09-27 20:31:40] wrote test probability artifacts: test_text_id_blend.csv, test_text_only_lbfgs.csv, test_id_prior_only.csv
+[2026-09-27 20:31:40] bias sanity check PASSED: every class share is within 10pp of the training distribution
+[2026-09-27 20:31:40] CHECK PASS: oof_columns_exact :: got=['id', 'y_true', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'fold', 'model_name']
+[2026-09-27 20:31:40] CHECK PASS: oof_rows_equal_train_rows :: oof=47817 train=47817
+[2026-09-27 20:31:40] CHECK PASS: oof_ids_unique :: nunique=47817
+[2026-09-27 20:31:40] CHECK PASS: oof_ids_match_train :: symmetric set equality
+[2026-09-27 20:31:40] CHECK PASS: oof_labels_subset_of_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:31:40] CHECK PASS: oof_y_true_matches_train :: mismatch=0
+[2026-09-27 20:31:40] CHECK PASS: oof_probs_finite :: non_finite=0
+[2026-09-27 20:31:40] CHECK PASS: oof_probs_in_0_1 :: min=9.36979e-07 max=0.999936
+[2026-09-27 20:31:40] CHECK PASS: oof_probs_rows_sum_to_1 :: max_abs_dev=3.33e-16 tol=1e-06
+[2026-09-27 20:31:40] CHECK PASS: oof_pred_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:31:40] CHECK PASS: oof_pred_equals_argmax :: mismatch=0
+[2026-09-27 20:31:40] CHECK PASS: oof_no_missing :: n_missing=0
+[2026-09-27 20:31:40] CHECK PASS: fold_sizes_sum_to_train_rows :: sum(n_val)=47817 fold sizes=[9564, 9564, 9563, 9563, 9563]
+[2026-09-27 20:31:40] CHECK PASS: fold_ids_cover_all_rows :: folds=[np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)]
+[2026-09-27 20:31:40] CHECK PASS: train_val_id_overlap_zero_in_every_fold :: fold0=0; fold1=0; fold2=0; fold3=0; fold4=0
+[2026-09-27 20:31:40] CHECK PASS: id_prior_labels_train_only :: prior built exclusively from each fold's training ids/labels
+[2026-09-27 20:31:40] CHECK PASS: oof_pred_class_distribution_logged :: {0: 26227, 1: 17532, 2: 4058}
+[2026-09-27 20:31:40] CHECK PASS: test_prob_columns_exact :: got=['id', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'model_name']
+[2026-09-27 20:31:40] CHECK PASS: test_prob_rows_equal_test_rows :: probs=11955 test=11955
+[2026-09-27 20:31:40] CHECK PASS: test_prob_id_order_equals_test_csv :: row order comparison
+[2026-09-27 20:31:40] CHECK PASS: test_prob_probs_finite :: non_finite=0
+[2026-09-27 20:31:40] CHECK PASS: test_prob_probs_in_0_1 :: min=3.4045e-07 max=0.999815
+[2026-09-27 20:31:40] CHECK PASS: test_prob_probs_rows_sum_to_1 :: max_abs_dev=2.22e-16 tol=1e-06
+[2026-09-27 20:31:40] CHECK PASS: test_prob_pred_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:31:40] CHECK PASS: test_prob_pred_equals_argmax :: mismatch=0
+[2026-09-27 20:31:40] CHECK PASS: test_prob_no_missing :: n_missing=0
+[2026-09-27 20:31:40] CHECK PASS: submission_columns_exact :: got=['id', 'y_pred']
+[2026-09-27 20:31:40] CHECK PASS: submission_rows_equal_sample :: sub=11955 sample=11955
+[2026-09-27 20:31:40] CHECK PASS: submission_id_order_equals_sample :: row order comparison
+[2026-09-27 20:31:40] CHECK PASS: submission_id_set_equals_sample :: symmetric set equality
+[2026-09-27 20:31:40] CHECK PASS: submission_ids_unique :: nunique=11955
+[2026-09-27 20:31:40] CHECK PASS: submission_no_nulls :: n_missing=0
+[2026-09-27 20:31:40] CHECK PASS: submission_values_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:31:40] CHECK PASS: submission_values_integer :: dtype=int64
+[2026-09-27 20:31:40] CHECK PASS: submission_pred_class_distribution_logged :: {0: 6556, 1: 4358, 2: 1041}
+[2026-09-27 20:31:40] wrote submissions\submission_text_id_blend.csv rows=11955 (validated before writing)
+[2026-09-27 20:31:40] CHECK PASS: submission_re_read_from_disk_is_valid :: rows=11955
+[2026-09-27 20:31:40] wrote reports\text_id_blend_metrics.json and reports\text_id_blend_fold_scores.csv
+[2026-09-27 20:31:40] wrote reports\text_id_blend_summary.md
+[2026-09-27 20:31:40] EXPERIMENT FAILED -- traceback follows
+[2026-09-27 20:31:40] Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1271, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 941, in main
+    return finalize(t_start, train, test, sample, y, train_ids, test_ids, train_clean,
+                    test_clean, fold_ids, fold_info, fold_rows, fold_va_idx, fold_lookups,
+                    oof_text, oof_id, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1003, in finalize
+    return _final_stage(t_start, train, test, sample, y, train_ids, test_ids, train_clean,
+                        test_clean, fold_info, fold_scores, fold_stats, oof_df, oof_overall,
+                        chosen_alpha, grid, cm, overall_before, after, ov_hits_total,
+                        fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1060, in _final_stage
+    return _submit_and_report(t_start, train, test, sample, y, train_ids, fold_info,
+                              fold_scores, fold_stats, oof_df, oof_overall, chosen_alpha, grid,
+    ...<2 lines>...
+                              test_probs_df, test_pred_override, test_ids, fmeta, idiag_test,
+                              t_final, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1108, in _submit_and_report
+    return _emit_metrics(t_start, train, test, sample, y, fold_info, fold_scores, fold_stats,
+                         oof_df, oof_overall, chosen_alpha, grid, cm, overall_before, after,
+                         ov_hits_total, ostats_full, n_test_override, test_override_share,
+                         changed, test_probs_df, sub, bias, checks, fmeta, idiag_test,
+                         t_final, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1167, in _emit_metrics
+    return _emit_metrics_tail(metrics, t_start, fold_info, fold_scores, grid, checks, bias,
+                              override_stats, oof_overall, fold_stats, cm, sub, fmeta,
+                              idiag_test, t_final, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1217, in _emit_metrics_tail
+    _print_final_block(metrics, oof_overall, fold_stats, cm, bias, override_stats)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1229, in _print_final_block
+    lines.append(f"   fold{r['fold']}: {r['macro_f1_text']:.6f} | {r['macro_f1_id']:.6f} | "
+                                        ~^^^^^^^^^^^^^^^^^
+KeyError: 'macro_f1_text'
+
+[2026-09-27 20:31:40] Completed fold artifacts on disk will be reused on the next run (resume).
+[2026-09-27 20:32:48] ==============================================================================
+[2026-09-27 20:32:48] EXPERIMENT text_id_blend -- text TF-IDF + ID-locality prior -- start
+[2026-09-27 20:32:48] resources: cpus=8 ram_total=14.98GB ram_free=2.2GB n_jobs=2 gpu_used=False
+[2026-09-27 20:32:49] loaded train=(47817, 4) test=(11955, 3) sample=(11955, 2)
+[2026-09-27 20:32:49] id structure: overlap=0 union=59772 span=59772 contiguous_0..N=True dup_ids=0
+[2026-09-27 20:32:49] clean_text sanity: train chars raw=3,158,072 clean=3,154,355; URL tags=5 USER tags=263
+[2026-09-27 20:32:49] fold[0]: n_train=38253 n_val=9564 val_counts=(4752,3632,1180) id_overlap=0 val_rows_with_dup_text_in_train=174 (1.819%)
+[2026-09-27 20:32:49] fold[1]: n_train=38253 n_val=9564 val_counts=(4751,3633,1180) id_overlap=0 val_rows_with_dup_text_in_train=170 (1.777%)
+[2026-09-27 20:32:49] fold[2]: n_train=38254 n_val=9563 val_counts=(4751,3633,1179) id_overlap=0 val_rows_with_dup_text_in_train=188 (1.966%)
+[2026-09-27 20:32:49] fold[3]: n_train=38254 n_val=9563 val_counts=(4751,3633,1179) id_overlap=0 val_rows_with_dup_text_in_train=185 (1.935%)
+[2026-09-27 20:32:49] fold[4]: n_train=38254 n_val=9563 val_counts=(4751,3632,1180) id_overlap=0 val_rows_with_dup_text_in_train=175 (1.83%)
+[2026-09-27 20:32:49] wrote data_checks\text_id_blend_fold_assignments.csv rows=47817
+[2026-09-27 20:32:50] fold[0]: RESUME -> reused _textid_fold0_val_text_probs.csv + saved fold model (no refit); free_ram=2.21GB
+[2026-09-27 20:32:50] id_prior[fold0_val]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.859 pool_disjoint_from_queries=True
+[2026-09-27 20:32:50] override lookup: distinct_texts=37825 unanimous_groups=37788 conflicting_groups_skipped=37 (rows in conflicting groups=90)
+[2026-09-27 20:32:50] fold[0]: macro_f1 text=0.518704 id=0.618244 blend@0.40=0.642907 | acc text=0.557926 blend=0.688938 | free_ram=2.21GB
+[2026-09-27 20:32:51] fold[1]: RESUME -> reused _textid_fold1_val_text_probs.csv + saved fold model (no refit); free_ram=2.19GB
+[2026-09-27 20:32:51] id_prior[fold1_val]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.899 pool_disjoint_from_queries=True
+[2026-09-27 20:32:51] override lookup: distinct_texts=37817 unanimous_groups=37779 conflicting_groups_skipped=38 (rows in conflicting groups=93)
+[2026-09-27 20:32:51] fold[1]: macro_f1 text=0.515202 id=0.608836 blend@0.40=0.634099 | acc text=0.557821 blend=0.679005 | free_ram=2.24GB
+[2026-09-27 20:32:52] fold[2]: RESUME -> reused _textid_fold2_val_text_probs.csv + saved fold model (no refit); free_ram=2.21GB
+[2026-09-27 20:32:52] id_prior[fold2_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.851 pool_disjoint_from_queries=True
+[2026-09-27 20:32:52] override lookup: distinct_texts=37841 unanimous_groups=37803 conflicting_groups_skipped=38 (rows in conflicting groups=90)
+[2026-09-27 20:32:52] fold[2]: macro_f1 text=0.522421 id=0.619466 blend@0.40=0.644822 | acc text=0.560703 blend=0.687337 | free_ram=2.25GB
+[2026-09-27 20:32:53] fold[3]: RESUME -> reused _textid_fold3_val_text_probs.csv + saved fold model (no refit); free_ram=2.21GB
+[2026-09-27 20:32:53] id_prior[fold3_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.87 pool_disjoint_from_queries=True
+[2026-09-27 20:32:54] override lookup: distinct_texts=37839 unanimous_groups=37803 conflicting_groups_skipped=36 (rows in conflicting groups=84)
+[2026-09-27 20:32:54] fold[3]: macro_f1 text=0.524024 id=0.614986 blend@0.40=0.643815 | acc text=0.561853 blend=0.684409 | free_ram=2.25GB
+[2026-09-27 20:32:54] fold[4]: RESUME -> reused _textid_fold4_val_text_probs.csv + saved fold model (no refit); free_ram=2.3GB
+[2026-09-27 20:32:54] id_prior[fold4_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.857 pool_disjoint_from_queries=True
+[2026-09-27 20:32:55] override lookup: distinct_texts=37825 unanimous_groups=37790 conflicting_groups_skipped=35 (rows in conflicting groups=86)
+[2026-09-27 20:32:55] fold[4]: macro_f1 text=0.524123 id=0.614170 blend@0.40=0.645865 | acc text=0.563317 blend=0.689637 | free_ram=2.33GB
+[2026-09-27 20:32:55] cross-validation finished in 5.5s (0.09 min)
+[2026-09-27 20:32:55] fold expectation check PASSED: every fold's text/id/blend macro F1 sits inside the externally verified range
+[2026-09-27 20:32:55] alpha grid (pooled OOF): best alpha=0.40 -> macro_f1=0.642278 | alpha=0.40 -> 0.642278 | text-only(1.0) -> 0.520908 | id-only(0.0) -> 0.615136
+[2026-09-27 20:32:55] leak-free OOF override effect: 858 rows overridden, macro F1 0.642278 -> 0.643150 (+0.000871)
+[2026-09-27 20:32:56] wrote OOF artifacts: oof_text_id_blend.csv, oof_text_only_lbfgs.csv, oof_id_prior_only.csv
+[2026-09-27 20:32:56] final fit: refitting TF-IDF + LogisticRegression on the FULL training set
+[2026-09-27 20:33:13] matrix[full_train_matrix]: shape=(47817, 119971) nnz=5,722,940 dtype=float32 est~0.046GB
+[2026-09-27 20:33:37] full: text model fitted in 41.5s (0.69 min) (word=59,971 char=60,000 nnz=5,722,940 lbfgs_iter=[187])
+[2026-09-27 20:33:42] id_prior[full_test]: queries=11955 pool=47817 k=20 mean_neighbours=20.0 mean_kth_dist=12.752 pool_disjoint_from_queries=True
+[2026-09-27 20:33:42] test blend computed at alpha=0.40; mean max prob=0.6387
+[2026-09-27 20:33:42] override lookup: distinct_texts=47195 unanimous_groups=47142 conflicting_groups_skipped=53 (rows in conflicting groups=132)
+[2026-09-27 20:33:42] test override: 272 / 11,955 rows (2.275%) matched a unanimous training text; label changed on 39 rows
+[2026-09-27 20:33:42] wrote test probability artifacts: test_text_id_blend.csv, test_text_only_lbfgs.csv, test_id_prior_only.csv
+[2026-09-27 20:33:42] bias sanity check PASSED: every class share is within 10pp of the training distribution
+[2026-09-27 20:33:42] CHECK PASS: oof_columns_exact :: got=['id', 'y_true', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'fold', 'model_name']
+[2026-09-27 20:33:42] CHECK PASS: oof_rows_equal_train_rows :: oof=47817 train=47817
+[2026-09-27 20:33:42] CHECK PASS: oof_ids_unique :: nunique=47817
+[2026-09-27 20:33:42] CHECK PASS: oof_ids_match_train :: symmetric set equality
+[2026-09-27 20:33:42] CHECK PASS: oof_labels_subset_of_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:33:42] CHECK PASS: oof_y_true_matches_train :: mismatch=0
+[2026-09-27 20:33:42] CHECK PASS: oof_probs_finite :: non_finite=0
+[2026-09-27 20:33:42] CHECK PASS: oof_probs_in_0_1 :: min=9.36979e-07 max=0.999936
+[2026-09-27 20:33:42] CHECK PASS: oof_probs_rows_sum_to_1 :: max_abs_dev=3.33e-16 tol=1e-06
+[2026-09-27 20:33:42] CHECK PASS: oof_pred_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:33:42] CHECK PASS: oof_pred_equals_argmax :: mismatch=0
+[2026-09-27 20:33:42] CHECK PASS: oof_no_missing :: n_missing=0
+[2026-09-27 20:33:42] CHECK PASS: fold_sizes_sum_to_train_rows :: sum(n_val)=47817 fold sizes=[9564, 9564, 9563, 9563, 9563]
+[2026-09-27 20:33:42] CHECK PASS: fold_ids_cover_all_rows :: folds=[np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)]
+[2026-09-27 20:33:42] CHECK PASS: train_val_id_overlap_zero_in_every_fold :: fold0=0; fold1=0; fold2=0; fold3=0; fold4=0
+[2026-09-27 20:33:42] CHECK PASS: id_prior_labels_train_only :: prior built exclusively from each fold's training ids/labels
+[2026-09-27 20:33:42] CHECK PASS: oof_pred_class_distribution_logged :: {0: 26227, 1: 17532, 2: 4058}
+[2026-09-27 20:33:42] CHECK PASS: test_prob_columns_exact :: got=['id', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'model_name']
+[2026-09-27 20:33:42] CHECK PASS: test_prob_rows_equal_test_rows :: probs=11955 test=11955
+[2026-09-27 20:33:42] CHECK PASS: test_prob_id_order_equals_test_csv :: row order comparison
+[2026-09-27 20:33:42] CHECK PASS: test_prob_probs_finite :: non_finite=0
+[2026-09-27 20:33:42] CHECK PASS: test_prob_probs_in_0_1 :: min=3.4045e-07 max=0.999815
+[2026-09-27 20:33:42] CHECK PASS: test_prob_probs_rows_sum_to_1 :: max_abs_dev=2.22e-16 tol=1e-06
+[2026-09-27 20:33:42] CHECK PASS: test_prob_pred_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:33:42] CHECK PASS: test_prob_pred_equals_argmax :: mismatch=0
+[2026-09-27 20:33:42] CHECK PASS: test_prob_no_missing :: n_missing=0
+[2026-09-27 20:33:42] CHECK PASS: submission_columns_exact :: got=['id', 'y_pred']
+[2026-09-27 20:33:42] CHECK PASS: submission_rows_equal_sample :: sub=11955 sample=11955
+[2026-09-27 20:33:42] CHECK PASS: submission_id_order_equals_sample :: row order comparison
+[2026-09-27 20:33:42] CHECK PASS: submission_id_set_equals_sample :: symmetric set equality
+[2026-09-27 20:33:42] CHECK PASS: submission_ids_unique :: nunique=11955
+[2026-09-27 20:33:42] CHECK PASS: submission_no_nulls :: n_missing=0
+[2026-09-27 20:33:42] CHECK PASS: submission_values_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:33:42] CHECK PASS: submission_values_integer :: dtype=int64
+[2026-09-27 20:33:42] CHECK PASS: submission_pred_class_distribution_logged :: {0: 6556, 1: 4358, 2: 1041}
+[2026-09-27 20:33:42] wrote submissions\submission_text_id_blend.csv rows=11955 (validated before writing)
+[2026-09-27 20:33:42] CHECK PASS: submission_re_read_from_disk_is_valid :: rows=11955
+[2026-09-27 20:33:42] wrote reports\text_id_blend_metrics.json and reports\text_id_blend_fold_scores.csv
+[2026-09-27 20:33:42] wrote reports\text_id_blend_summary.md
+[2026-09-27 20:33:42] 
+[2026-09-27 20:33:42] ============ TEXT + ID-PRIOR BLEND -- VERIFIED RESULTS ============
+[2026-09-27 20:33:42] Validation: StratifiedKFold(5, shuffle=True, random_state=42); metric: Macro F1
+[2026-09-27 20:33:42] 1. Per-fold Macro F1 (text | id-prior | blend@0.40):
+[2026-09-27 20:33:42]    fold0: 0.518704 | 0.618244 | 0.642907  (n_val=9564)
+[2026-09-27 20:33:42]    fold1: 0.515202 | 0.608836 | 0.634099  (n_val=9564)
+[2026-09-27 20:33:42]    fold2: 0.522421 | 0.619466 | 0.644822  (n_val=9563)
+[2026-09-27 20:33:42]    fold3: 0.524024 | 0.614986 | 0.643815  (n_val=9563)
+[2026-09-27 20:33:42]    fold4: 0.524123 | 0.614170 | 0.645865  (n_val=9563)
+[2026-09-27 20:33:42] 2. Fold mean+-std: text 0.520895+-0.003457 | id 0.615140+-0.003716 | blend@0.40 0.642302+-0.004219
+[2026-09-27 20:33:42] 3. Pooled OOF Macro F1: text-only 0.520908 | id-only 0.615136 | blend@0.40 0.642278 | blend@0.40 0.642278
+[2026-09-27 20:33:42] 4. Per-class F1 (OOF, blend@chosen): class0 0.759858, class1 0.621376, class2 0.545601
+[2026-09-27 20:33:42] 5. OOF accuracy (blend@chosen): 0.685865
+[2026-09-27 20:33:42] 6. Confusion matrix (OOF, rows=true, cols=pred, order [0,1,2]):
+[2026-09-27 20:33:42]    [18990, 4338, 428]
+[2026-09-27 20:33:42]    [6159, 11090, 914]
+[2026-09-27 20:33:42]    [1078, 2104, 2716]
+[2026-09-27 20:33:42] 7. Chosen alpha (text weight) on OOF = 0.40; reference alpha 0.40 -> 0.642278
+[2026-09-27 20:33:42] 8. Override: 272/11,955 test rows (2.275%); 39 labels changed; leak-free OOF 0.642278 -> 0.643150 (+0.000871); conflicting groups skipped=53
+[2026-09-27 20:33:42] 9. Bias check: pred shares {0: 54.84, 1: 36.45, 2: 8.71} vs train {0: 49.68, 1: 37.98, 2: 12.33} (drift pp {0: 5.16, 1: -1.53, 2: -3.63}, threshold 10pp, passed=True)
+[2026-09-27 20:33:42] 10. Invariants: 36/36 passed; submission submissions\submission_text_id_blend.csv (rows=11,955)
+[2026-09-27 20:33:42]     External references: text ~0.52 | id-prior ~0.61-0.62 | blend ~0.64
+[2026-09-27 20:33:42] =================================================================
+[2026-09-27 20:33:42] EXPERIMENT finished in 54.0s (0.90 min); submission written and validated; chosen alpha=0.40
+[2026-09-27 20:35:46] id_prior[stability-new]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.859 pool_disjoint_from_queries=True
+[2026-09-27 20:35:55] ==============================================================================
+[2026-09-27 20:35:55] EXPERIMENT text_id_blend -- text TF-IDF + ID-locality prior -- start
+[2026-09-27 20:35:55] resources: cpus=8 ram_total=14.98GB ram_free=6.62GB n_jobs=4 gpu_used=False
+[2026-09-27 20:35:56] loaded train=(47817, 4) test=(11955, 3) sample=(11955, 2)
+[2026-09-27 20:35:56] id structure: overlap=0 union=59772 span=59772 contiguous_0..N=True dup_ids=0
+[2026-09-27 20:35:56] clean_text sanity: train chars raw=3,158,072 clean=3,154,355; URL tags=5 USER tags=263
+[2026-09-27 20:35:56] fold[0]: n_train=38253 n_val=9564 val_counts=(4752,3632,1180) id_overlap=0 val_rows_with_dup_text_in_train=174 (1.819%)
+[2026-09-27 20:35:56] fold[1]: n_train=38253 n_val=9564 val_counts=(4751,3633,1180) id_overlap=0 val_rows_with_dup_text_in_train=170 (1.777%)
+[2026-09-27 20:35:56] fold[2]: n_train=38254 n_val=9563 val_counts=(4751,3633,1179) id_overlap=0 val_rows_with_dup_text_in_train=188 (1.966%)
+[2026-09-27 20:35:56] fold[3]: n_train=38254 n_val=9563 val_counts=(4751,3633,1179) id_overlap=0 val_rows_with_dup_text_in_train=185 (1.935%)
+[2026-09-27 20:35:56] fold[4]: n_train=38254 n_val=9563 val_counts=(4751,3632,1180) id_overlap=0 val_rows_with_dup_text_in_train=175 (1.83%)
+[2026-09-27 20:35:56] wrote data_checks\text_id_blend_fold_assignments.csv rows=47817
+[2026-09-27 20:35:57] fold[0]: RESUME -> reused _textid_fold0_val_text_probs.csv + saved fold model (no refit); free_ram=6.65GB
+[2026-09-27 20:35:57] id_prior[fold0_val]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.859 pool_disjoint_from_queries=True
+[2026-09-27 20:35:57] override lookup: distinct_texts=37825 unanimous_groups=37788 conflicting_groups_skipped=37 (rows in conflicting groups=90)
+[2026-09-27 20:35:57] fold[0]: macro_f1 text=0.518704 id=0.618244 blend@0.40=0.642747 | acc text=0.557926 blend=0.688729 | free_ram=6.64GB
+[2026-09-27 20:35:58] fold[1]: RESUME -> reused _textid_fold1_val_text_probs.csv + saved fold model (no refit); free_ram=6.61GB
+[2026-09-27 20:35:58] id_prior[fold1_val]: queries=9564 pool=38253 k=20 mean_neighbours=20.0 mean_kth_dist=15.899 pool_disjoint_from_queries=True
+[2026-09-27 20:35:58] override lookup: distinct_texts=37817 unanimous_groups=37779 conflicting_groups_skipped=38 (rows in conflicting groups=93)
+[2026-09-27 20:35:58] fold[1]: macro_f1 text=0.515202 id=0.608781 blend@0.40=0.634119 | acc text=0.557821 blend=0.679005 | free_ram=6.63GB
+[2026-09-27 20:35:59] fold[2]: RESUME -> reused _textid_fold2_val_text_probs.csv + saved fold model (no refit); free_ram=6.6GB
+[2026-09-27 20:35:59] id_prior[fold2_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.851 pool_disjoint_from_queries=True
+[2026-09-27 20:36:00] override lookup: distinct_texts=37841 unanimous_groups=37803 conflicting_groups_skipped=38 (rows in conflicting groups=90)
+[2026-09-27 20:36:00] fold[2]: macro_f1 text=0.522421 id=0.619377 blend@0.40=0.644688 | acc text=0.560703 blend=0.687232 | free_ram=6.62GB
+[2026-09-27 20:36:00] fold[3]: RESUME -> reused _textid_fold3_val_text_probs.csv + saved fold model (no refit); free_ram=6.63GB
+[2026-09-27 20:36:01] id_prior[fold3_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.87 pool_disjoint_from_queries=True
+[2026-09-27 20:36:01] override lookup: distinct_texts=37839 unanimous_groups=37803 conflicting_groups_skipped=36 (rows in conflicting groups=84)
+[2026-09-27 20:36:01] fold[3]: macro_f1 text=0.524024 id=0.614708 blend@0.40=0.643815 | acc text=0.561853 blend=0.684409 | free_ram=6.64GB
+[2026-09-27 20:36:02] fold[4]: RESUME -> reused _textid_fold4_val_text_probs.csv + saved fold model (no refit); free_ram=6.62GB
+[2026-09-27 20:36:02] id_prior[fold4_val]: queries=9563 pool=38254 k=20 mean_neighbours=20.0 mean_kth_dist=15.857 pool_disjoint_from_queries=True
+[2026-09-27 20:36:02] override lookup: distinct_texts=37825 unanimous_groups=37790 conflicting_groups_skipped=35 (rows in conflicting groups=86)
+[2026-09-27 20:36:02] fold[4]: macro_f1 text=0.524123 id=0.614113 blend@0.40=0.645667 | acc text=0.563317 blend=0.689533 | free_ram=6.62GB
+[2026-09-27 20:36:02] cross-validation finished in 5.5s (0.09 min)
+[2026-09-27 20:36:02] fold expectation check PASSED: every fold's text/id/blend macro F1 sits inside the externally verified range
+[2026-09-27 20:36:02] alpha grid (pooled OOF): best alpha=0.40 -> macro_f1=0.642185 | alpha=0.40 -> 0.642185 | text-only(1.0) -> 0.520908 | id-only(0.0) -> 0.615040
+[2026-09-27 20:36:02] leak-free OOF override effect: 858 rows overridden, macro F1 0.642185 -> 0.643056 (+0.000871)
+[2026-09-27 20:36:03] wrote OOF artifacts: oof_text_id_blend.csv, oof_text_only_lbfgs.csv, oof_id_prior_only.csv
+[2026-09-27 20:36:03] final fit: refitting TF-IDF + LogisticRegression on the FULL training set
+[2026-09-27 20:36:20] matrix[full_train_matrix]: shape=(47817, 119971) nnz=5,722,940 dtype=float32 est~0.046GB
+[2026-09-27 20:36:42] full: text model fitted in 39.1s (0.65 min) (word=59,971 char=60,000 nnz=5,722,940 lbfgs_iter=[187])
+[2026-09-27 20:36:47] id_prior[full_test]: queries=11955 pool=47817 k=20 mean_neighbours=20.0 mean_kth_dist=12.752 pool_disjoint_from_queries=True
+[2026-09-27 20:36:47] test blend computed at alpha=0.40; mean max prob=0.6387
+[2026-09-27 20:36:47] override lookup: distinct_texts=47195 unanimous_groups=47142 conflicting_groups_skipped=53 (rows in conflicting groups=132)
+[2026-09-27 20:36:47] test override: 272 / 11,955 rows (2.275%) matched a unanimous training text; label changed on 39 rows
+[2026-09-27 20:36:47] wrote test probability artifacts: test_text_id_blend.csv, test_text_only_lbfgs.csv, test_id_prior_only.csv
+[2026-09-27 20:36:47] bias sanity check PASSED: every class share is within 10pp of the training distribution
+[2026-09-27 20:36:47] CHECK PASS: oof_columns_exact :: got=['id', 'y_true', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'fold', 'model_name']
+[2026-09-27 20:36:47] CHECK PASS: oof_rows_equal_train_rows :: oof=47817 train=47817
+[2026-09-27 20:36:47] CHECK PASS: oof_ids_unique :: nunique=47817
+[2026-09-27 20:36:47] CHECK PASS: oof_ids_match_train :: symmetric set equality
+[2026-09-27 20:36:47] CHECK PASS: oof_labels_subset_of_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:36:47] CHECK PASS: oof_y_true_matches_train :: mismatch=0
+[2026-09-27 20:36:47] CHECK PASS: oof_probs_finite :: non_finite=0
+[2026-09-27 20:36:47] CHECK PASS: oof_probs_in_0_1 :: min=9.36979e-07 max=0.999936
+[2026-09-27 20:36:47] CHECK PASS: oof_probs_rows_sum_to_1 :: max_abs_dev=3.33e-16 tol=1e-06
+[2026-09-27 20:36:47] CHECK PASS: oof_pred_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:36:47] CHECK PASS: oof_pred_equals_argmax :: mismatch=0
+[2026-09-27 20:36:47] CHECK PASS: oof_no_missing :: n_missing=0
+[2026-09-27 20:36:47] CHECK PASS: fold_sizes_sum_to_train_rows :: sum(n_val)=47817 fold sizes=[9564, 9564, 9563, 9563, 9563]
+[2026-09-27 20:36:47] CHECK PASS: fold_ids_cover_all_rows :: folds=[np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)]
+[2026-09-27 20:36:47] CHECK PASS: train_val_id_overlap_zero_in_every_fold :: fold0=0; fold1=0; fold2=0; fold3=0; fold4=0
+[2026-09-27 20:36:47] CHECK PASS: id_prior_labels_train_only :: prior built exclusively from each fold's training ids/labels
+[2026-09-27 20:36:47] CHECK PASS: oof_pred_class_distribution_logged :: {0: 26223, 1: 17533, 2: 4061}
+[2026-09-27 20:36:47] CHECK PASS: test_prob_columns_exact :: got=['id', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'model_name']
+[2026-09-27 20:36:47] CHECK PASS: test_prob_rows_equal_test_rows :: probs=11955 test=11955
+[2026-09-27 20:36:47] CHECK PASS: test_prob_id_order_equals_test_csv :: row order comparison
+[2026-09-27 20:36:47] CHECK PASS: test_prob_probs_finite :: non_finite=0
+[2026-09-27 20:36:47] CHECK PASS: test_prob_probs_in_0_1 :: min=3.4045e-07 max=0.999815
+[2026-09-27 20:36:47] CHECK PASS: test_prob_probs_rows_sum_to_1 :: max_abs_dev=2.22e-16 tol=1e-06
+[2026-09-27 20:36:47] CHECK PASS: test_prob_pred_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:36:47] CHECK PASS: test_prob_pred_equals_argmax :: mismatch=0
+[2026-09-27 20:36:47] CHECK PASS: test_prob_no_missing :: n_missing=0
+[2026-09-27 20:36:47] CHECK PASS: submission_columns_exact :: got=['id', 'y_pred']
+[2026-09-27 20:36:47] CHECK PASS: submission_rows_equal_sample :: sub=11955 sample=11955
+[2026-09-27 20:36:47] CHECK PASS: submission_id_order_equals_sample :: row order comparison
+[2026-09-27 20:36:47] CHECK PASS: submission_id_set_equals_sample :: symmetric set equality
+[2026-09-27 20:36:47] CHECK PASS: submission_ids_unique :: nunique=11955
+[2026-09-27 20:36:47] CHECK PASS: submission_no_nulls :: n_missing=0
+[2026-09-27 20:36:47] CHECK PASS: submission_values_in_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 20:36:47] CHECK PASS: submission_values_integer :: dtype=int64
+[2026-09-27 20:36:47] CHECK PASS: submission_pred_class_distribution_logged :: {0: 6554, 1: 4361, 2: 1040}
+[2026-09-27 20:36:47] wrote submissions\submission_text_id_blend.csv rows=11955 (validated before writing)
+[2026-09-27 20:36:47] CHECK PASS: submission_re_read_from_disk_is_valid :: rows=11955
+[2026-09-27 20:36:47] wrote reports\text_id_blend_metrics.json and reports\text_id_blend_fold_scores.csv
+[2026-09-27 20:36:47] wrote reports\text_id_blend_summary.md
+[2026-09-27 20:36:47] 
+[2026-09-27 20:36:47] ============ TEXT + ID-PRIOR BLEND -- VERIFIED RESULTS ============
+[2026-09-27 20:36:47] Validation: StratifiedKFold(5, shuffle=True, random_state=42); metric: Macro F1
+[2026-09-27 20:36:47] 1. Per-fold Macro F1 (text | id-prior | blend@0.40):
+[2026-09-27 20:36:47]    fold0: 0.518704 | 0.618244 | 0.642747  (n_val=9564)
+[2026-09-27 20:36:47]    fold1: 0.515202 | 0.608781 | 0.634119  (n_val=9564)
+[2026-09-27 20:36:47]    fold2: 0.522421 | 0.619377 | 0.644688  (n_val=9563)
+[2026-09-27 20:36:47]    fold3: 0.524024 | 0.614708 | 0.643815  (n_val=9563)
+[2026-09-27 20:36:47]    fold4: 0.524123 | 0.614113 | 0.645667  (n_val=9563)
+[2026-09-27 20:36:47] 2. Fold mean+-std: text 0.520895+-0.003457 | id 0.615045+-0.003721 | blend@0.40 0.642207+-0.004157
+[2026-09-27 20:36:47] 3. Pooled OOF Macro F1: text-only 0.520908 | id-only 0.615040 | blend@0.40 0.642185 | blend@0.40 0.642185
+[2026-09-27 20:36:47] 4. Per-class F1 (OOF, blend@chosen): class0 0.759759, class1 0.621358, class2 0.545436
+[2026-09-27 20:36:47] 5. OOF accuracy (blend@chosen): 0.685781
+[2026-09-27 20:36:47] 6. Confusion matrix (OOF, rows=true, cols=pred, order [0,1,2]):
+[2026-09-27 20:36:47]    [18986, 4339, 431]
+[2026-09-27 20:36:48]    [6159, 11090, 914]
+[2026-09-27 20:36:48]    [1078, 2104, 2716]
+[2026-09-27 20:36:48] 7. Chosen alpha (text weight) on OOF = 0.40; reference alpha 0.40 -> 0.642185
+[2026-09-27 20:36:48] 8. Override: 272/11,955 test rows (2.275%); 39 labels changed; leak-free OOF 0.642185 -> 0.643056 (+0.000871); conflicting groups skipped=53
+[2026-09-27 20:36:48] 9. Bias check: pred shares {0: 54.82, 1: 36.48, 2: 8.7} vs train {0: 49.68, 1: 37.98, 2: 12.33} (drift pp {0: 5.14, 1: -1.51, 2: -3.64}, threshold 10pp, passed=True)
+[2026-09-27 20:36:48] 10. Invariants: 36/36 passed; submission submissions\submission_text_id_blend.csv (rows=11,955)
+[2026-09-27 20:36:48]     External references: text ~0.52 | id-prior ~0.61-0.62 | blend ~0.64
+[2026-09-27 20:36:48] =================================================================
+[2026-09-27 20:36:48] EXPERIMENT finished in 51.8s (0.86 min); submission written and validated; chosen alpha=0.40

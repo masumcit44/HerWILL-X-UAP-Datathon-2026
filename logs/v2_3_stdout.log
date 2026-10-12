@@ -1,0 +1,37 @@
+
+==============================================================================
+EXP 3 -- per-class blend weights (3-vector alpha)
+==============================================================================
+train (47817, 4) | test (11955, 3) | sample (11955, 2)
+class counts: {0: 23756, 1: 18163, 2: 5898}
+
+--- text source: lr ---
+single alpha @0.40        : 0.639579
+single alpha best (0.40) : 0.639579
+per-class w, Nelder-Mead   : [0.4165, 0.3614, 0.4197] -> 0.640810
+per-class w, 0.05-grid (9261 pts): [0.45, 0.35, 0.4] -> 0.640224
+per-class w, local 0.01 grid: [0.4165, 0.3614, 0.4197] -> 0.640810
+  note: NM beat the 0.05 grid (grid is coarse); the local 0.01 grid confirms the optimum (0.640810)
+cross-fitted per-class w   : 0.639812 (same-protocol fixed alpha 0.40: 0.639579, delta +0.000233)
+  per-fold w: {0: [0.417, 0.3648, 0.4198], 1: [0.3617, 0.3275, 0.4063], 2: [0.4697, 0.3521, 0.3872], 3: [0.4216, 0.3235, 0.4055], 4: [0.4187, 0.3569, 0.4178]}
+  fold0: fixed=0.642898 per-class(cross-fitted)=0.643956 w=[0.417, 0.3648, 0.4198]
+  fold1: fixed=0.632324 per-class(cross-fitted)=0.632030 w=[0.3617, 0.3275, 0.4063]
+  fold2: fixed=0.641935 per-class(cross-fitted)=0.640954 w=[0.4697, 0.3521, 0.3872]
+  fold3: fixed=0.639295 per-class(cross-fitted)=0.641230 w=[0.4216, 0.3235, 0.4055]
+  fold4: fixed=0.641384 per-class(cross-fitted)=0.640831 w=[0.4187, 0.3569, 0.4178]
+
+--- text source: ens ---
+single alpha @0.40        : 0.632463
+single alpha best (0.45) : 0.634323
+per-class w, Nelder-Mead   : [0.634, 0.3089, 0.4793] -> 0.636280
+per-class w, 0.05-grid (9261 pts): [0.75, 0.25, 0.2] -> 0.637143
+per-class w, local 0.01 grid: [0.634, 0.3089, 0.4793] -> 0.636280
+cross-fitted per-class w   : 0.632904 (same-protocol fixed alpha 0.40: 0.632463, delta +0.000440)
+  per-fold w: {0: [0.5572, 0.3715, 0.3042], 1: [0.5196, 0.3477, 0.4667], 2: [0.6576, 0.4345, 0.3406], 3: [0.6413, 0.3601, 0.1635], 4: [0.4005, 0.4544, 0.5288]}
+  fold0: fixed=0.636277 per-class(cross-fitted)=0.636183 w=[0.5572, 0.3715, 0.3042]
+  fold1: fixed=0.624360 per-class(cross-fitted)=0.625908 w=[0.5196, 0.3477, 0.4667]
+  fold2: fixed=0.639376 per-class(cross-fitted)=0.637698 w=[0.6576, 0.4345, 0.3406]
+  fold3: fixed=0.628339 per-class(cross-fitted)=0.630407 w=[0.6413, 0.3601, 0.1635]
+  fold4: fixed=0.633895 per-class(cross-fitted)=0.634278 w=[0.4005, 0.4544, 0.5288]
+
+saved reports/v2_3_per_class_alpha_metrics.json

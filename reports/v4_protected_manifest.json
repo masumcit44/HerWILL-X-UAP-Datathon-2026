@@ -1,0 +1,30 @@
+{
+  "train.csv": {
+    "sha256": "a269ad841f824c6e60930cfda8cb25bdce58a6a1ee01fc1fe663d23b19e34449",
+    "size": 5357729
+  },
+  "test.csv": {
+    "sha256": "cca36f5416abfb8a41b1c84e5fa83aec18ffbff32fecd277c668a3f73312a38f",
+    "size": 1290735
+  },
+  "sample_submission.csv": {
+    "sha256": "0f7d405dbd1e88ea285c7138514b7652f7441e995dcaed338bb208a86c2f347d",
+    "size": 105398
+  },
+  "uap_submission/reproducible/submission_reproducible_file_1.ipynb": {
+    "sha256": "6366a78d5a4e08e05a496bd563a374f6d168e28c2b5310fd4cb57c6baf780d56",
+    "size": 34290
+  },
+  "uap_submission/reproducible/submission/submission_1.csv": {
+    "sha256": "1b173503d8fdd0e4a3f4dad4e38f743dbca9ae10e0ed460216399740fee40a50",
+    "size": 105398
+  },
+  "uap_submission/reproducible/submission_reproducible_file_2.ipynb": {
+    "sha256": "f3b8f60883dfa0e659b86e07d4be7ffda2ce5b1048904891e21ad1bb1efe9597",
+    "size": 48748
+  },
+  "uap_submission/submission/submission_2.csv": {
+    "sha256": "894ce6c210ccc0f2e956c1e6d32fcb82189f1798a6993ea4646555f93bfae40e",
+    "size": 105398
+  }
+}

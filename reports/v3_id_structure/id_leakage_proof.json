@@ -1,0 +1,22 @@
+{
+  "k_1": {
+    "all_folds_disjoint": true,
+    "max_abs_diff_vs_brute": 0.0,
+    "pass": true
+  },
+  "k_5": {
+    "all_folds_disjoint": true,
+    "max_abs_diff_vs_brute": 0.0,
+    "pass": true
+  },
+  "k_20": {
+    "all_folds_disjoint": true,
+    "max_abs_diff_vs_brute": 2.220446049250313e-16,
+    "pass": true
+  },
+  "k_80": {
+    "all_folds_disjoint": true,
+    "max_abs_diff_vs_brute": 2.220446049250313e-16,
+    "pass": true
+  }
+}

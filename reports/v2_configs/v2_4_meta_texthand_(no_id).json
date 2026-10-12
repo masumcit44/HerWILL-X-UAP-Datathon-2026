@@ -1,0 +1,35 @@
+{
+  "meta_learner": "LogisticRegression",
+  "C": 1.0,
+  "max_iter": 2000,
+  "class_weight": "balanced",
+  "random_state": 42,
+  "features": [
+    "text_p0",
+    "text_p1",
+    "text_p2",
+    "id_p0",
+    "id_p1",
+    "id_p2",
+    "bangla_char_ratio",
+    "latin_char_ratio",
+    "digit_ratio",
+    "punctuation_density",
+    "repeated_char_run_max",
+    "emoji_count"
+  ],
+  "base": "grouped OOF text_probs + id_probs",
+  "inner_cv": "same grouped 5-fold split (asserted identical)",
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "evaluation_note": "meta-learner cross-fitted: trained on 4 folds, scored on the 5th",
+  "per_fold_macro_f1": [
+    0.499317,
+    0.499992,
+    0.505266,
+    0.50239,
+    0.510306
+  ]
+}

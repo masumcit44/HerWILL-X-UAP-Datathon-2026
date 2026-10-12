@@ -1,0 +1,53 @@
+{
+  "experiment_id": "v3_text_ens_perclass_alpha",
+  "timestamp": "2026-09-28 02:18:37",
+  "description": "Text Ensemble (Base + All3) + k=20 ID Prior with honest cross-fitted per-class weights",
+  "validation_protocol": "StratifiedGroupKFold(5, shuffle=True, random_state=42), group=clean_text(text).lower().strip()",
+  "oof_macro_f1": 0.641715,
+  "delta_vs_baseline": 0.002136,
+  "class0_f1": 0.758094,
+  "class1_f1": 0.620846,
+  "class2_f1": 0.546204,
+  "per_fold_scores": [
+    0.644517,
+    0.636163,
+    0.644915,
+    0.642312,
+    0.640658
+  ],
+  "fold_mean": 0.641713,
+  "fold_std": 0.003174,
+  "tuned_weights_per_fold": {
+    "0": [
+      0.4854,
+      0.3554,
+      0.4471
+    ],
+    "1": [
+      0.4602,
+      0.4175,
+      0.4466
+    ],
+    "2": [
+      0.4589,
+      0.4186,
+      0.4443
+    ],
+    "3": [
+      0.4491,
+      0.4017,
+      0.4623
+    ],
+    "4": [
+      0.4846,
+      0.4105,
+      0.4403
+    ]
+  },
+  "average_weights": [
+    0.4676,
+    0.4007,
+    0.4481
+  ],
+  "test_probability_artifact": "predictions/v3_candidates/CANDIDATE_NOT_FOR_SUBMISSION_v3_ens_pc_test_probs.npy"
+}

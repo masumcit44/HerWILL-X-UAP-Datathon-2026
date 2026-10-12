@@ -1,0 +1,63 @@
+{
+  "seed": 42,
+  "n_splits": 5,
+  "classes": [
+    0,
+    1,
+    2
+  ],
+  "metric": "macro_f1",
+  "use_dup_override": true,
+  "source_order": [
+    "text",
+    "sid",
+    "e5_base",
+    "xlmr_idhead"
+  ],
+  "source_meaning": {
+    "text": "TF-IDF word(1,2) + char_wb(3,5) -> LogisticRegression (CPU)",
+    "sid": "similarity-weighted id prior, KW=120 k=180 beta=10 gamma=1.0",
+    "e5_base": "intfloat/e5-base-v2 zero-shot logits (verified export, GPU-trained)",
+    "xlmr_idhead": "xlm-roberta-base + id-head classifier (verified export, GPU-trained)"
+  },
+  "final_weights": [
+    0.10526315789473685,
+    0.4210526315789474,
+    0.2105263157894737,
+    0.2631578947368421
+  ],
+  "honest_blend_oof_macro_f1": 0.682311,
+  "honest_blend_per_class_f1": [
+    0.782202,
+    0.640594,
+    0.624137
+  ],
+  "honest_blend_fold_scores": [
+    0.682243,
+    0.685245,
+    0.680023,
+    0.680668,
+    0.683172
+  ],
+  "plain_id_blend_oof_macro_f1": 0.677401,
+  "sid_id_only_oof_macro_f1": 0.627895,
+  "text_only_oof_macro_f1": 0.516093,
+  "plain_id_only_oof_macro_f1": 0.613631,
+  "golden_test_max_abs_diff": 0.00014716424732809028,
+  "simplex_step": 0.05,
+  "override_rows_matched": 272,
+  "override_labels_changed": 42,
+  "override_conflicting_groups": 53,
+  "test_class_share": [
+    0.526474278544542,
+    0.3524048515265579,
+    0.12112086992890005
+  ],
+  "train_class_share": [
+    0.4968107576803229,
+    0.3798439885396407,
+    0.12334525378003638
+  ],
+  "run_gpu_retrain": false,
+  "mode": "A"
+}

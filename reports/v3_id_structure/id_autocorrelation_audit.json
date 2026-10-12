@@ -1,0 +1,123 @@
+{
+  "class_distribution": {
+    "0": 0.496811,
+    "1": 0.379844,
+    "2": 0.123345
+  },
+  "random_reference_same_label_prob": 0.406316,
+  "autocorrelation_audit": [
+    {
+      "distance": 1,
+      "pairs": 38249,
+      "same_label_prob": 0.615127,
+      "random_agreement": 0.406316,
+      "lift": 0.208811
+    },
+    {
+      "distance": 2,
+      "pairs": 38302,
+      "same_label_prob": 0.593598,
+      "random_agreement": 0.406316,
+      "lift": 0.187282
+    },
+    {
+      "distance": 3,
+      "pairs": 38250,
+      "same_label_prob": 0.585908,
+      "random_agreement": 0.406316,
+      "lift": 0.179592
+    },
+    {
+      "distance": 5,
+      "pairs": 38308,
+      "same_label_prob": 0.572622,
+      "random_agreement": 0.406316,
+      "lift": 0.166305
+    },
+    {
+      "distance": 10,
+      "pairs": 38247,
+      "same_label_prob": 0.555233,
+      "random_agreement": 0.406316,
+      "lift": 0.148917
+    },
+    {
+      "distance": 20,
+      "pairs": 38212,
+      "same_label_prob": 0.537842,
+      "random_agreement": 0.406316,
+      "lift": 0.131525
+    },
+    {
+      "distance": 30,
+      "pairs": 38238,
+      "same_label_prob": 0.526126,
+      "random_agreement": 0.406316,
+      "lift": 0.119809
+    },
+    {
+      "distance": 40,
+      "pairs": 38182,
+      "same_label_prob": 0.517574,
+      "random_agreement": 0.406316,
+      "lift": 0.111257
+    },
+    {
+      "distance": 50,
+      "pairs": 38261,
+      "same_label_prob": 0.511957,
+      "random_agreement": 0.406316,
+      "lift": 0.105641
+    },
+    {
+      "distance": 80,
+      "pairs": 38190,
+      "same_label_prob": 0.499424,
+      "random_agreement": 0.406316,
+      "lift": 0.093107
+    },
+    {
+      "distance": 100,
+      "pairs": 38142,
+      "same_label_prob": 0.504824,
+      "random_agreement": 0.406316,
+      "lift": 0.098508
+    },
+    {
+      "distance": 160,
+      "pairs": 38198,
+      "same_label_prob": 0.481334,
+      "random_agreement": 0.406316,
+      "lift": 0.075018
+    },
+    {
+      "distance": 250,
+      "pairs": 38136,
+      "same_label_prob": 0.479468,
+      "random_agreement": 0.406316,
+      "lift": 0.073152
+    },
+    {
+      "distance": 500,
+      "pairs": 37941,
+      "same_label_prob": 0.447695,
+      "random_agreement": 0.406316,
+      "lift": 0.041379
+    },
+    {
+      "distance": 1000,
+      "pairs": 37613,
+      "same_label_prob": 0.416452,
+      "random_agreement": 0.406316,
+      "lift": 0.010135
+    }
+  ],
+  "directional_properties": {
+    "total_eval_points": 47815,
+    "p_true_given_left": 0.611063,
+    "p_true_given_right": 0.611084,
+    "both_agree_share": 0.58971,
+    "p_true_given_left_equals_right": 0.741143,
+    "both_disagree_share": 0.41029
+  }
+}

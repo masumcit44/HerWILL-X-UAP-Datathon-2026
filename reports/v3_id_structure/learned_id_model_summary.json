@@ -1,0 +1,15 @@
+{
+  "model_A_regularized_multinomial_lr": {
+    "standalone_oof_macro_f1": 0.6166,
+    "honest_blend_macro_f1": 0.635429,
+    "delta_vs_baseline": -0.00415,
+    "status": "REJECTED"
+  },
+  "model_B_lightgbm": {
+    "standalone_oof_macro_f1": 0.608476,
+    "diagnostic_blend_macro_f1": 0.635095,
+    "honest_blend_macro_f1": 0.634206,
+    "delta_vs_baseline": -0.005373,
+    "status": "REJECTED"
+  }
+}

@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1271, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 941, in main
+    return finalize(t_start, train, test, sample, y, train_ids, test_ids, train_clean,
+                    test_clean, fold_ids, fold_info, fold_rows, fold_va_idx, fold_lookups,
+                    oof_text, oof_id, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1003, in finalize
+    return _final_stage(t_start, train, test, sample, y, train_ids, test_ids, train_clean,
+                        test_clean, fold_info, fold_scores, fold_stats, oof_df, oof_overall,
+                        chosen_alpha, grid, cm, overall_before, after, ov_hits_total,
+                        fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1060, in _final_stage
+    return _submit_and_report(t_start, train, test, sample, y, train_ids, fold_info,
+                              fold_scores, fold_stats, oof_df, oof_overall, chosen_alpha, grid,
+    ...<2 lines>...
+                              test_probs_df, test_pred_override, test_ids, fmeta, idiag_test,
+                              t_final, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1108, in _submit_and_report
+    return _emit_metrics(t_start, train, test, sample, y, fold_info, fold_scores, fold_stats,
+                         oof_df, oof_overall, chosen_alpha, grid, cm, overall_before, after,
+                         ov_hits_total, ostats_full, n_test_override, test_override_share,
+                         changed, test_probs_df, sub, bias, checks, fmeta, idiag_test,
+                         t_final, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1167, in _emit_metrics
+    return _emit_metrics_tail(metrics, t_start, fold_info, fold_scores, grid, checks, bias,
+                              override_stats, oof_overall, fold_stats, cm, sub, fmeta,
+                              idiag_test, t_final, fold_seconds)
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1217, in _emit_metrics_tail
+    _print_final_block(metrics, oof_overall, fold_stats, cm, bias, override_stats)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\UAP\src\experiment_text_id_blend.py", line 1229, in _print_final_block
+    lines.append(f"   fold{r['fold']}: {r['macro_f1_text']:.6f} | {r['macro_f1_id']:.6f} | "
+                                        ~^^^^^^^^^^^^^^^^^
+KeyError: 'macro_f1_text'

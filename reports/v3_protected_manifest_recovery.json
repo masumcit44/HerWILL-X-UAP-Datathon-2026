@@ -1,0 +1,51 @@
+{
+  "train.csv": {
+    "exists": true,
+    "sha256": "a269ad841f824c6e60930cfda8cb25bdce58a6a1ee01fc1fe663d23b19e34449",
+    "sha1": "66c6b109c8fd187f4c2c474a09159905d25978cd",
+    "size": 5357729,
+    "mtime": "2026-09-24 20:58:10"
+  },
+  "test.csv": {
+    "exists": true,
+    "sha256": "cca36f5416abfb8a41b1c84e5fa83aec18ffbff32fecd277c668a3f73312a38f",
+    "sha1": "9caf35ded5a6fe4b2765cdc3340f192d0994d072",
+    "size": 1290735,
+    "mtime": "2026-09-24 20:58:10"
+  },
+  "sample_submission.csv": {
+    "exists": true,
+    "sha256": "0f7d405dbd1e88ea285c7138514b7652f7441e995dcaed338bb208a86c2f347d",
+    "sha1": "73345c6143ad4e155bac35de1bf8d5d81ed1d039",
+    "size": 105398,
+    "mtime": "2026-09-24 20:56:44"
+  },
+  "uap_submission/reproducible/submission/submission_1.csv": {
+    "exists": true,
+    "sha256": "1b173503d8fdd0e4a3f4dad4e38f743dbca9ae10e0ed460216399740fee40a50",
+    "sha1": "cd623b33101873a3e22a19e7ad44197d791d1b4f",
+    "size": 105398,
+    "mtime": "2026-09-27 21:41:56"
+  },
+  "uap_submission/reproducible/submission_reproducible_file_1.ipynb": {
+    "exists": true,
+    "sha256": "6366a78d5a4e08e05a496bd563a374f6d168e28c2b5310fd4cb57c6baf780d56",
+    "sha1": "fa0e055fc226b20f6e0c366d9909ce4e813e33bb",
+    "size": 34290,
+    "mtime": "2026-09-27 21:41:57"
+  },
+  "uap_submission/reproducible/submission_reproducible_file_2.ipynb": {
+    "exists": true,
+    "sha256": "f3b8f60883dfa0e659b86e07d4be7ffda2ce5b1048904891e21ad1bb1efe9597",
+    "sha1": "b18dc7c84baeab957208780367afe94f65524170",
+    "size": 48748,
+    "mtime": "2026-09-28 06:51:36"
+  },
+  "uap_submission/submission/submission_2.csv": {
+    "exists": true,
+    "sha256": "894ce6c210ccc0f2e956c1e6d32fcb82189f1798a6993ea4646555f93bfae40e",
+    "sha1": "c82e29e653d1b29ae117716bdcfbd8c9986e86a5",
+    "size": 105398,
+    "mtime": "2026-09-28 07:00:12"
+  }
+}

@@ -1,0 +1,6 @@
+fold,n_train,n_val,n_val_after_grouping,macro_f1_text,accuracy_text,macro_f1_id,accuracy_id,macro_f1_blend_0.40,accuracy_blend_0.40,f1_class0_blend,f1_class1_blend,f1_class2_blend,text_fit_seconds,text_model_resumed,lr_n_iter,text_model_path,id_prior_mean_neighbours,id_prior_mean_kth_distance,fold_override_unanimous_texts,val_rows_with_text_also_in_train
+0,38253,9564,9564,0.518704,0.557926,0.618244,0.666248,0.642747,0.688729,0.763171,0.626263,0.538808,0.0,True,None,models\text_id_blend\fold0\lr.joblib,20.0,15.859,37788,174
+1,38253,9564,9564,0.515202,0.557821,0.608781,0.655583,0.634119,0.679005,0.7556,0.61362,0.533136,0.0,True,None,models\text_id_blend\fold1\lr.joblib,20.0,15.899,37779,170
+2,38254,9563,9563,0.522421,0.560703,0.619377,0.659835,0.644688,0.687232,0.759633,0.623402,0.551031,0.0,True,None,models\text_id_blend\fold2\lr.joblib,20.0,15.851,37803,188
+3,38254,9563,9563,0.524024,0.561853,0.614708,0.66088,0.643815,0.684409,0.755511,0.619983,0.555949,0.0,True,None,models\text_id_blend\fold3\lr.joblib,20.0,15.87,37803,185
+4,38254,9563,9563,0.524123,0.563317,0.614113,0.662031,0.645667,0.689533,0.764883,0.623536,0.548583,0.0,True,None,models\text_id_blend\fold4\lr.joblib,20.0,15.857,37790,175

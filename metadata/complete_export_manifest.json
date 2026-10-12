@@ -1,0 +1,108 @@
+{
+  "created_utc": "2026-09-28T06:41:42Z",
+  "purpose": "GPU probability artifact export for local honest blending and reproducibility",
+  "submission_created": false,
+  "train_rows": 47817,
+  "test_rows": 11955,
+  "fold_sizes": [
+    9543,
+    9546,
+    9571,
+    9581,
+    9576
+  ],
+  "fold_sha256": "5ab5cfe96a72b04c8bd30adc45c1eeeee477707b0c382a19d179d8635295fbbd",
+  "expected_source_scores": {
+    "emb_e5-base": 0.521535,
+    "xlmr_base": 0.544479,
+    "xlmr_base_idhead": 0.648743
+  },
+  "required_files_missing": [],
+  "preferred_files_missing": [
+    "base_sources.npz",
+    "results_summary.json",
+    "xlmr_base_final.npz"
+  ],
+  "array_validation": {
+    "emb_e5-base_final.npz": {
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "oof_finite": true,
+      "test_finite": true,
+      "oof_in_range": true,
+      "test_in_range": true,
+      "oof_max_rowsum_error": 2.220446049250313e-16,
+      "test_max_rowsum_error": 2.220446049250313e-16,
+      "valid": true,
+      "keys": [
+        "oof",
+        "test"
+      ]
+    },
+    "xlmr_base_idhead_final.npz": {
+      "oof_shape": [
+        47817,
+        3
+      ],
+      "test_shape": [
+        11955,
+        3
+      ],
+      "oof_finite": true,
+      "test_finite": true,
+      "oof_in_range": true,
+      "test_in_range": true,
+      "oof_max_rowsum_error": 1.7881393432617188e-07,
+      "test_max_rowsum_error": 1.1920928955078125e-07,
+      "valid": true,
+      "keys": [
+        "oof",
+        "test"
+      ]
+    }
+  },
+  "files": {
+    "final_sources/emb_e5-base_final.npz": {
+      "size_bytes": 1435028,
+      "sha256": "bca3e9ec8fa9b28804ff1323ac6de9d53ff257d9fe13a5ebde73465e1adde1ce"
+    },
+    "final_sources/fold_ids.npy": {
+      "size_bytes": 382664,
+      "sha256": "5ab5cfe96a72b04c8bd30adc45c1eeeee477707b0c382a19d179d8635295fbbd"
+    },
+    "final_sources/xlmr_base_idhead_final.npz": {
+      "size_bytes": 717764,
+      "sha256": "8cc027296059e14849ec862b192f54293ed6551c5b487dbb7e532c9fdb1ff177"
+    },
+    "metadata/export_meta.json": {
+      "size_bytes": 366,
+      "sha256": "04bfbbbda25d526bacaf055c572e90476cbf108e2067f036a96a1987349a09c1"
+    },
+    "per_fold_sources/xlmr_base_idhead_fold0.npz": {
+      "size_bytes": 335050,
+      "sha256": "c6c1953e89db8e6d4e8f318c04474ba195d3e4a58e4ba647a2fd0f4ea4f2dabc"
+    },
+    "per_fold_sources/xlmr_base_idhead_fold1.npz": {
+      "size_bytes": 335110,
+      "sha256": "d27f69100c41fc0ab269aae99f8db6dd9873d6e990617b2ee5a21e9258046e7e"
+    },
+    "per_fold_sources/xlmr_base_idhead_fold2.npz": {
+      "size_bytes": 335610,
+      "sha256": "df3a279d6e7c5a8d4df5ef6f322b91ba06ce67993556d79285b5e1b55fb791ff"
+    },
+    "per_fold_sources/xlmr_base_idhead_fold3.npz": {
+      "size_bytes": 335810,
+      "sha256": "6f13875e067d76addb3e93cd575c45427a92ddd5683f587208ffa51bafc0faee"
+    },
+    "per_fold_sources/xlmr_base_idhead_fold4.npz": {
+      "size_bytes": 335710,
+      "sha256": "8ca5c57c85d0eda87a6862a66aa07f363f4f704a803a153aee3339beef54c414"
+    }
+  }
+}

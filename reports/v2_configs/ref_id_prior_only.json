@@ -1,0 +1,16 @@
+{
+  "k": 20,
+  "weights": "1/(distance+1e-6)",
+  "pool": "fold-train ids only",
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "per_fold_macro_f1": [
+    0.617552,
+    0.605212,
+    0.618944,
+    0.614778,
+    0.614136
+  ]
+}

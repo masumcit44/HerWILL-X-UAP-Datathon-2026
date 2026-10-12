@@ -1,0 +1,58 @@
+========================================================================
+PERFORMANCE TRACK - uses ID-locality; not for judge-facing track
+========================================================================
+fold set B locked: int64 cc4fdd169110aeee | sizes [9543, 9546, 9571, 9581, 9576]
+  loaded lexical   text             oof(47817, 3) test(11955, 3)  cache/v6/step123.npz
+  loaded id        sid              oof(47817, 3) test(11955, 3)  cache/v6/step123.npz
+  loaded semantic  e5               oof(47817, 3) test(11955, 3)  final_sources/emb_e5-base_final.npz
+  loaded id        xlmr_idhead      oof(47817, 3) test(11955, 3)  final_sources/xlmr_base_idhead_final.npz
+
+--- result (honest cross-fitted, fold set B) ---
+  label            : reference_repro
+  sources (4)      : ['e5', 'sid', 'text', 'xlmr_idhead']
+  pooled OOF       : 0.682311   (Submission 3 ref 0.682311)
+  delta vs ref     : +0.000000
+  per-class F1     : [0.782202, 0.640594, 0.624137]
+  accuracy         : 0.710730
+  fold scores      : [0.682243, 0.685245, 0.680023, 0.680668, 0.683172]
+  fold std / worst : 0.001859 / 0.680023
+  paired per-fold  : mean +0.000000  SE 0.000000  t 3.8975 (df=4)
+                      per-fold [0.0, 0.0, 0.0, 0.0, 0.0]
+  OPTIMISTIC same-OOF (not a result): 0.684918  w=[0.2, 0.45, 0.1, 0.25]
+  median weights   : {'e5': 0.2105, 'sid': 0.4211, 'text': 0.1053, 'xlmr_idhead': 0.2632}
+  weights per fold : {'0': [0.2, 0.4, 0.1, 0.3], '1': [0.2, 0.4, 0.15, 0.25], '2': [0.25, 0.45, 0.05, 0.25], '3': [0.25, 0.45, 0.05, 0.25], '4': [0.2, 0.4, 0.15, 0.25]}
+  test share/drift : [0.5265, 0.3524, 0.1211]  [2.97, 2.74, 0.22]
+  gates            : {'G1_delta_ge_0_0015': 'FAIL', 'G2_4folds_not_worse': 'PASS', 'G3_no_class_drop_gt_0_005': 'PASS', 'G4_std_le_1_5x': 'PASS', 'G5_worst_fold': 'PASS', 'G6_test_integrity': 'PASS', 'G7_test_share_within_6pp': 'PASS'}
+  ALL GATES PASS   : False
+
+  report: reports/performance_v7_gpu/perf_blend_reference_repro.json  (no CSV, no P-file)
+  elapsed 108.3s
+========================================================================
+PERFORMANCE TRACK - uses ID-locality; not for judge-facing track
+========================================================================
+fold set B locked: int64 cc4fdd169110aeee | sizes [9543, 9546, 9571, 9581, 9576]
+  loaded lexical   text             oof(47817, 3) test(11955, 3)  cache/v6/step123.npz
+  loaded id        sid              oof(47817, 3) test(11955, 3)  cache/v6/step123.npz
+  loaded semantic  e5               oof(47817, 3) test(11955, 3)  final_sources/emb_e5-base_final.npz
+  loaded id        xlmr_idhead      oof(47817, 3) test(11955, 3)  final_sources/xlmr_base_idhead_final.npz
+
+--- result (honest cross-fitted, fold set B) ---
+  label            : reference_repro
+  sources (4)      : ['e5', 'sid', 'text', 'xlmr_idhead']
+  pooled OOF       : 0.682311   (Submission 3 ref 0.682311)
+  delta vs ref     : +0.000000
+  per-class F1     : [0.782202, 0.640594, 0.624137]
+  accuracy         : 0.710730
+  fold scores      : [0.682243, 0.685245, 0.680023, 0.680668, 0.683172]
+  fold std / worst : 0.001859 / 0.680023
+  paired per-fold  : mean +0.000000  SE 0.000000  t 3.8975 (df=4)
+                      per-fold [0.0, 0.0, 0.0, 0.0, 0.0]
+  OPTIMISTIC same-OOF (not a result): 0.684918  w=[0.2, 0.45, 0.1, 0.25]
+  median weights   : {'e5': 0.2105, 'sid': 0.4211, 'text': 0.1053, 'xlmr_idhead': 0.2632}
+  weights per fold : {'0': [0.2, 0.4, 0.1, 0.3], '1': [0.2, 0.4, 0.15, 0.25], '2': [0.25, 0.45, 0.05, 0.25], '3': [0.25, 0.45, 0.05, 0.25], '4': [0.2, 0.4, 0.15, 0.25]}
+  test share/drift : [0.5265, 0.3524, 0.1211]  [2.97, 2.74, 0.22]
+  gates            : {'G1_delta_ge_0_0015': 'FAIL', 'G2_4folds_not_worse': 'PASS', 'G3_no_class_drop_gt_0_005': 'PASS', 'G4_std_le_1_5x': 'PASS', 'G5_worst_fold': 'PASS', 'G6_test_integrity': 'PASS', 'G7_test_share_within_6pp': 'PASS'}
+  ALL GATES PASS   : False
+
+  report: reports/performance_v7_gpu/perf_blend_reference_repro.json  (no CSV, no P-file)
+  elapsed 108.8s

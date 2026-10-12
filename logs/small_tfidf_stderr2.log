@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 968, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 873, in main
+    return _finish(train, test, sample, y, train_ids, test_ids, fold_ids, fold_info,
+                   word_info, char_info, matrix_info, fold_rows, val_parts, test_parts,
+                   feat_seconds, fold_seconds, t_start)
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 920, in _finish
+    _print_final_block(metrics)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 935, in _print_final_block
+    f"(word={m['features']['word_tfidf']['n_features']} + "
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'n_features'

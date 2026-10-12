@@ -1,0 +1,363 @@
+{
+  "experiment": "small_tfidf_lr",
+  "model_name": "lr_small_tfidf",
+  "timestamp": "2026-09-27 19:59:05",
+  "resources": {
+    "cpu_count": 8,
+    "ram_total_gb": 14.98,
+    "ram_free_gb": 2.84,
+    "n_jobs": 2,
+    "gpu_used": false,
+    "sparse_dtype": "float32"
+  },
+  "validation": {
+    "method": "StratifiedGroupKFold",
+    "n_splits": 3,
+    "shuffle": true,
+    "random_state": 42,
+    "groups": "normalized text (NFKC, lowercase, ws-collapse, <url>, <user>)",
+    "metric": "macro_f1",
+    "strategy": "StratifiedGroupKFold",
+    "grouping": "NFKC+lower+ws-collapse+<url>+<user>",
+    "n_groups": 47147,
+    "n_rows": 47817,
+    "n_duplicate_groups": 486,
+    "rows_in_duplicate_groups": 1156,
+    "duplicate_row_share": 0.0242,
+    "max_group_size": 18,
+    "groups_spanning_multiple_folds": 0,
+    "leak_check_passed": true,
+    "fold_balance": [
+      {
+        "fold": 0,
+        "n_val": 15939,
+        "val_rows_in_dup_groups": 380,
+        "n_groups": 15721,
+        "val_c0": 7919,
+        "val_c1": 6054,
+        "val_c2": 1966
+      },
+      {
+        "fold": 1,
+        "n_val": 15939,
+        "val_rows_in_dup_groups": 380,
+        "n_groups": 15719,
+        "val_c0": 7919,
+        "val_c1": 6054,
+        "val_c2": 1966
+      },
+      {
+        "fold": 2,
+        "n_val": 15939,
+        "val_rows_in_dup_groups": 396,
+        "n_groups": 15707,
+        "val_c0": 7918,
+        "val_c1": 6055,
+        "val_c2": 1966
+      }
+    ]
+  },
+  "features": {
+    "word_tfidf": {
+      "n_features": 60000,
+      "loaded_from": "models\\small_tfidf\\word_vectorizer.joblib",
+      "n_documents_fit": 59772,
+      "fitted_on": "concatenated train+test text (reloaded from joblib, resume)"
+    },
+    "char_tfidf": {
+      "n_features": 60000,
+      "loaded_from": "models\\small_tfidf\\char_vectorizer.joblib",
+      "n_documents_fit": 59772,
+      "fitted_on": "concatenated train+test text (reloaded from joblib, resume)"
+    },
+    "combined": {
+      "train": {
+        "name": "train_combined",
+        "shape": [
+          47817,
+          120000
+        ],
+        "nnz": 5712066,
+        "sparsity_pct": 99.90045,
+        "est_gb": 0.046
+      },
+      "test": {
+        "name": "test_combined",
+        "shape": [
+          11955,
+          120000
+        ],
+        "nnz": 1411745,
+        "sparsity_pct": 99.90159,
+        "est_gb": 0.011
+      },
+      "n_documents_fit": 59772
+    },
+    "combination": "scipy.sparse.hstack (CSR, float32)"
+  },
+  "model": {
+    "type": "LogisticRegression",
+    "C": "4.0",
+    "solver": "liblinear",
+    "class_weight": "balanced",
+    "max_iter": "2000",
+    "random_state": "42 + fold",
+    "wrapper": "OneVsRestClassifier(n_jobs=1) -- required because sklearn 1.9 dropped native multiclass support in solver='liblinear'; the requested OvR scheme, solver, C, class_weight and max_iter are unchanged",
+    "probability_source": "OneVsRestClassifier.predict_proba (per-class OvR scores normalized to sum to 1)"
+  },
+  "fold_scores": [
+    {
+      "fold": 0,
+      "n_val": 15939,
+      "macro_f1": 0.523044,
+      "accuracy": 0.562896,
+      "f1_class0": 0.6439,
+      "f1_class1": 0.508378,
+      "f1_class2": 0.416853
+    },
+    {
+      "fold": 1,
+      "n_val": 15939,
+      "macro_f1": 0.521321,
+      "accuracy": 0.560198,
+      "f1_class0": 0.643712,
+      "f1_class1": 0.501635,
+      "f1_class2": 0.418616
+    },
+    {
+      "fold": 2,
+      "n_val": 15939,
+      "macro_f1": 0.517509,
+      "accuracy": 0.559634,
+      "f1_class0": 0.644747,
+      "f1_class1": 0.498527,
+      "f1_class2": 0.409253
+    }
+  ],
+  "fold_macro_f1_mean": 0.520625,
+  "fold_macro_f1_std": 0.002313,
+  "fold_macro_f1_min": 0.517509,
+  "oof_macro_f1": 0.520652,
+  "oof_accuracy": 0.560909,
+  "oof_per_class": {
+    "class0": {
+      "label": "explicitly_toxic",
+      "f1": 0.644122,
+      "support": 23756
+    },
+    "class1": {
+      "label": "subtly_toxic",
+      "f1": 0.502857,
+      "support": 18163
+    },
+    "class2": {
+      "label": "non_toxic",
+      "f1": 0.414976,
+      "support": 5898
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "0_explicitly_toxic",
+      "1_subtly_toxic",
+      "2_non_toxic"
+    ],
+    "matrix": [
+      [
+        15076,
+        7152,
+        1528
+      ],
+      [
+        6781,
+        9240,
+        2142
+      ],
+      [
+        1198,
+        2195,
+        2505
+      ]
+    ]
+  },
+  "prediction_distribution": {
+    "train_truth": {
+      "0": 23756,
+      "1": 18163,
+      "2": 5898
+    },
+    "train_prior_pct": {
+      "0": 49.68,
+      "1": 37.98,
+      "2": 12.33
+    },
+    "oof_pred": {
+      "0": 23055,
+      "1": 18587,
+      "2": 6175
+    },
+    "test_pred": {
+      "0": 5955,
+      "1": 4589,
+      "2": 1411
+    }
+  },
+  "oof_mean_max_prob": 0.614464,
+  "test_mean_max_prob": 0.592151,
+  "benchmarks": {
+    "robust_grouped_oof_best": 0.525448,
+    "research_best": 0.525574,
+    "delta_vs_robust": -0.004796,
+    "delta_vs_research": -0.004922
+  },
+  "verdict": "USEFUL DIVERSITY ONLY",
+  "verdict_reason": "OOF Macro F1 is 0.004796 below the robust benchmark; the model remains interesting only if its errors are sufficiently different (blend test not performed in this run).",
+  "integrity_checks": [
+    {
+      "check": "oof_columns_exact",
+      "status": "PASS",
+      "detail": "got=['id', 'y_true', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'fold', 'model_name']"
+    },
+    {
+      "check": "test_probs_columns_exact",
+      "status": "PASS",
+      "detail": "got=['id', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'model_name']"
+    },
+    {
+      "check": "oof_rows_equals_train",
+      "status": "PASS",
+      "detail": "oof=47817 train=47817 expected=47817"
+    },
+    {
+      "check": "test_prob_rows_equals_test",
+      "status": "PASS",
+      "detail": "test_probs=11955 test=11955 expected=11955"
+    },
+    {
+      "check": "oof_ids_unique",
+      "status": "PASS",
+      "detail": "nunique=47817"
+    },
+    {
+      "check": "oof_ids_match_train",
+      "status": "PASS",
+      "detail": "symmetric set equality"
+    },
+    {
+      "check": "test_ids_preserve_test_csv_order",
+      "status": "PASS",
+      "detail": "row order compared against test.csv"
+    },
+    {
+      "check": "test_ids_also_preserve_sample_order",
+      "status": "PASS",
+      "detail": "row order compared against sample_submission.csv"
+    },
+    {
+      "check": "oof_no_missing",
+      "status": "PASS",
+      "detail": "n_missing=0"
+    },
+    {
+      "check": "test_probs_no_missing",
+      "status": "PASS",
+      "detail": "n_missing=0"
+    },
+    {
+      "check": "oof_probs_finite",
+      "status": "PASS",
+      "detail": "non_finite=0"
+    },
+    {
+      "check": "oof_probs_in_0_1",
+      "status": "PASS",
+      "detail": "min=6.36868e-05 max=0.997612"
+    },
+    {
+      "check": "oof_probs_sum_to_1",
+      "status": "PASS",
+      "detail": "max_abs_deviation=2.22e-16"
+    },
+    {
+      "check": "oof_labels_only_012",
+      "status": "PASS",
+      "detail": "unique=[np.int64(0), np.int64(1), np.int64(2)]"
+    },
+    {
+      "check": "oof_labels_are_argmax",
+      "status": "PASS",
+      "detail": "mismatch=0"
+    },
+    {
+      "check": "test_probs_probs_finite",
+      "status": "PASS",
+      "detail": "non_finite=0"
+    },
+    {
+      "check": "test_probs_probs_in_0_1",
+      "status": "PASS",
+      "detail": "min=1.86933e-05 max=0.997069"
+    },
+    {
+      "check": "test_probs_probs_sum_to_1",
+      "status": "PASS",
+      "detail": "max_abs_deviation=2.22e-16"
+    },
+    {
+      "check": "test_probs_labels_only_012",
+      "status": "PASS",
+      "detail": "unique=[np.int64(0), np.int64(1), np.int64(2)]"
+    },
+    {
+      "check": "test_probs_labels_are_argmax",
+      "status": "PASS",
+      "detail": "mismatch=0"
+    },
+    {
+      "check": "oof_y_true_matches_train_labels",
+      "status": "PASS",
+      "detail": "mismatch=0"
+    },
+    {
+      "check": "duplicate_groups_never_cross_folds",
+      "status": "PASS",
+      "detail": "groups_spanning_multiple_folds=0 (n_groups=47147, n_dup_groups=486)"
+    },
+    {
+      "check": "fold_ids_cover_all_rows",
+      "status": "PASS",
+      "detail": "folds=[np.int64(0), np.int64(1), np.int64(2)]"
+    },
+    {
+      "check": "protected_inputs_unmodified",
+      "status": "PASS",
+      "detail": "train.csv/test.csv/sample_submission.csv opened read-only"
+    }
+  ],
+  "integrity_all_passed": true,
+  "runtime": {
+    "total_seconds": 43.64,
+    "feature_seconds": 9.93,
+    "fold_seconds": 20.73,
+    "oof_aggregation": "out-of-fold rows only: each training row is predicted by the fold model that never saw it",
+    "test_probability_aggregation": "unweighted mean of the 3 fold-model probability matrices",
+    "folds_trained_this_run": 3,
+    "folds_resumed_from_disk": 0
+  },
+  "outputs": {
+    "oof": "predictions\\oof\\oof_small_tfidf_lr.csv",
+    "test_probs": "predictions\\test\\test_small_tfidf_lr.csv",
+    "fold_scores": "reports\\small_tfidf_fold_scores.csv",
+    "summary": "reports\\small_tfidf_summary.md",
+    "fold_assignments": "data_checks\\fold_assignments_3fold.csv",
+    "models_dir": "models\\small_tfidf"
+  },
+  "scope_notes": [
+    "No submission file was created (out of scope for this experiment).",
+    "No ensemble/blend weights were fitted; the benchmark comparison is indicative.",
+    "3-fold OOF is not strictly comparable to benchmarks computed with a different fold count; fold count changes the amount of training data per fold.",
+    "TF-IDF vocabularies were fitted unsupervised on concatenated train+test text; no labels, no external data, no pretrained weights were used.",
+    "Duplicate-safe folds were verified: zero normalized-text groups span >1 fold.",
+    "Compatibility deviation (documented): the requested solver='liblinear' is kept, but wrapped in OneVsRestClassifier because scikit-learn 1.9 no longer allows native multiclass liblinear models."
+  ]
+}

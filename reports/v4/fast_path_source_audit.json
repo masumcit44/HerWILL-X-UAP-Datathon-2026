@@ -1,0 +1,143 @@
+{
+  "fold_sha256": "925065f4d4a0c6a533fad774f4875b039ea526eb915bee8c8c8b819c88760f56",
+  "canonical": true,
+  "gpu_sources": {
+    "xlmr_base": "MISSING",
+    "xlmr_base_idhead": "MISSING",
+    "fold_ids_colab": "MISSING",
+    "base_sources": "MISSING",
+    "export_meta": "MISSING"
+  },
+  "id": {
+    "oof": {
+      "tag": "id_oof",
+      "shape": [
+        47817,
+        3
+      ],
+      "expected": [
+        47817,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 3.3306690738754696e-16,
+      "PASS": true
+    },
+    "test": {
+      "tag": "id_test",
+      "shape": [
+        11955,
+        3
+      ],
+      "expected": [
+        11955,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 2.220446049250313e-16,
+      "PASS": true
+    },
+    "oof_macro_f1": 0.614135
+  },
+  "text": {
+    "oof": {
+      "tag": "text_oof",
+      "shape": [
+        47817,
+        3
+      ],
+      "expected": [
+        47817,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 2.220446049250313e-16,
+      "PASS": true
+    },
+    "test": {
+      "tag": "text_test",
+      "shape": [
+        11955,
+        3
+      ],
+      "expected": [
+        11955,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 1.1920928955078125e-07,
+      "PASS": true
+    },
+    "oof_macro_f1": 0.524057
+  },
+  "e5_small": {
+    "oof": {
+      "tag": "e5_small_oof",
+      "shape": [
+        47817,
+        3
+      ],
+      "expected": [
+        47817,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 1.2293457984924316e-07,
+      "PASS": true
+    },
+    "test": {
+      "tag": "e5_small_test",
+      "shape": [
+        11955,
+        3
+      ],
+      "expected": [
+        11955,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 1.2526288628578186e-07,
+      "PASS": true
+    },
+    "oof_macro_f1": 0.496241
+  },
+  "e5_base": {
+    "oof": {
+      "tag": "e5_base_oof",
+      "shape": [
+        47817,
+        3
+      ],
+      "expected": [
+        47817,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 1.2665987014770508e-07,
+      "PASS": true
+    },
+    "test": {
+      "tag": "e5_base_test",
+      "shape": [
+        11955,
+        3
+      ],
+      "expected": [
+        11955,
+        3
+      ],
+      "finite": true,
+      "in_0_1": true,
+      "max_rowsum_dev": 1.2852251529693604e-07,
+      "PASS": true
+    },
+    "oof_macro_f1": 0.515829
+  }
+}

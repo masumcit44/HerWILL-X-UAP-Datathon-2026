@@ -1,0 +1,209 @@
+[2026-09-27 19:53:12] EXPERIMENT FAILED -- traceback follows
+[2026-09-27 19:53:12] Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 937, in <module>
+    sys.exit(main())
+    ^^^
+NameError: name 'sys' is not defined. Did you forget to import 'sys'?
+
+[2026-09-27 19:53:12] Completed fold artifacts on disk will be reused on the next run (resume).
+[2026-09-27 19:53:48] ========================================================================
+[2026-09-27 19:53:48] EXPERIMENT small_tfidf_lr -- compact TF-IDF + LogisticRegression -- start
+[2026-09-27 19:53:48] resources: cpus=8 ram_total=14.98GB ram_free=3.06GB n_jobs=4 gpu_used=False
+[2026-09-27 19:53:48] loaded train=(47817, 3) test=(11955, 2) sample=(11955, 2)
+[2026-09-27 19:53:48] train/test id overlap=0 sample.order==test.order:True
+[2026-09-27 19:53:59] groups: n=47147 dup_groups=486 rows_in_dup_groups=1156 (2.42%) max_group_size=18
+[2026-09-27 19:53:59] fold[0]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:53:59] fold[1]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:53:59] fold[2]: n_val=15939 class_counts=(7918,6055,1966)
+[2026-09-27 19:54:00] wrote data_checks\fold_assignments_3fold.csv rows=47817
+[2026-09-27 19:54:11] vectorizers fitted on 59772 documents: word_features=60,000 (2.6s (0.04 min)), char_features=60,000 (9.0s (0.15 min))
+[2026-09-27 19:54:21] matrix[train_word]: shape=(47817, 60000) nnz=629,869 dtype=float32 est~0.005GB
+[2026-09-27 19:54:21] matrix[train_char]: shape=(47817, 60000) nnz=5,082,197 dtype=float32 est~0.041GB
+[2026-09-27 19:54:21] matrix[train_word+char]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:54:21] built train matrix in 7.1s (0.12 min)
+[2026-09-27 19:54:22] matrix[test_word]: shape=(11955, 60000) nnz=154,936 dtype=float32 est~0.001GB
+[2026-09-27 19:54:22] matrix[test_char]: shape=(11955, 60000) nnz=1,256,809 dtype=float32 est~0.01GB
+[2026-09-27 19:54:22] matrix[test_word+char]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:54:22] built test matrix in 1.7s (0.03 min)
+[2026-09-27 19:54:22] matrix[train_combined]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:54:22] matrix[test_combined]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:54:22] feature stage done in 22.8s (0.38 min); X_train=(47817, 120000) X_test=(11955, 120000)
+[2026-09-27 19:54:22] fold[0]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.61GB)
+[2026-09-27 19:54:22] EXPERIMENT FAILED -- traceback follows
+[2026-09-27 19:54:22] Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 938, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 829, in main
+    proba_va, proba_te, meta = train_fold(
+                               ~~~~~~~~~~^
+        k, X_train[tr_idx], y[tr_idx], X_train[va_idx], train_ids[va_idx],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        X_test, test_ids)
+        ^^^^^^^^^^^^^^^^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 452, in train_fold
+    clf.fit(X_tr, y_tr)
+    ~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\DREAMER\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "C:\Users\DREAMER\AppData\Local\Programs\Python\Python314\Lib\site-packages\sklearn\linear_model\_logistic.py", line 1488, in fit
+    raise ValueError(
+    ...<4 lines>...
+    )
+ValueError: The 'liblinear' solver does not support multiclass classification (n_classes >= 3). Either use another solver or wrap the estimator in a OneVsRestClassifier to keep applying a one-versus-rest scheme.
+
+[2026-09-27 19:54:22] Completed fold artifacts on disk will be reused on the next run (resume).
+[2026-09-27 19:57:11] ========================================================================
+[2026-09-27 19:57:11] EXPERIMENT small_tfidf_lr -- compact TF-IDF + LogisticRegression -- start
+[2026-09-27 19:57:11] resources: cpus=8 ram_total=14.98GB ram_free=2.85GB n_jobs=2 gpu_used=False
+[2026-09-27 19:57:11] loaded train=(47817, 3) test=(11955, 2) sample=(11955, 2)
+[2026-09-27 19:57:11] train/test id overlap=0 sample.order==test.order:True
+[2026-09-27 19:57:23] groups: n=47147 dup_groups=486 rows_in_dup_groups=1156 (2.42%) max_group_size=18
+[2026-09-27 19:57:23] fold[0]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:57:23] fold[1]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:57:23] fold[2]: n_val=15939 class_counts=(7918,6055,1966)
+[2026-09-27 19:57:24] wrote data_checks\fold_assignments_3fold.csv rows=47817
+[2026-09-27 19:57:25] reloaded saved vectorizers: word_features=60,000 char_features=60,000
+[2026-09-27 19:57:33] matrix[train_word]: shape=(47817, 60000) nnz=629,869 dtype=float32 est~0.005GB
+[2026-09-27 19:57:33] matrix[train_char]: shape=(47817, 60000) nnz=5,082,197 dtype=float32 est~0.041GB
+[2026-09-27 19:57:33] matrix[train_word+char]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:57:33] built train matrix in 8.4s (0.14 min)
+[2026-09-27 19:57:35] matrix[test_word]: shape=(11955, 60000) nnz=154,936 dtype=float32 est~0.001GB
+[2026-09-27 19:57:35] matrix[test_char]: shape=(11955, 60000) nnz=1,256,809 dtype=float32 est~0.01GB
+[2026-09-27 19:57:35] matrix[test_word+char]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:57:35] built test matrix in 2.0s (0.03 min)
+[2026-09-27 19:57:35] matrix[train_combined]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:57:35] matrix[test_combined]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:57:35] feature stage done in 11.6s (0.19 min); X_train=(47817, 120000) X_test=(11955, 120000)
+[2026-09-27 19:57:35] fold[0]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.7GB)
+[2026-09-27 19:57:42] fold[0]: fit in 7.0s (0.12 min); saved _fold0_val_probs_small_tfidf_lr.csv, lr_fold_0.joblib, _fold0_test_probs_small_tfidf_lr.csv; free_ram=2.78GB
+[2026-09-27 19:57:42] fold[0]: macro_f1=0.523044 accuracy=0.562896 f1=(0.643900, 0.508378, 0.416853) resumed=False
+[2026-09-27 19:57:43] fold[1]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.79GB)
+[2026-09-27 19:57:49] fold[1]: fit in 6.1s (0.10 min); saved _fold1_val_probs_small_tfidf_lr.csv, lr_fold_1.joblib, _fold1_test_probs_small_tfidf_lr.csv; free_ram=2.84GB
+[2026-09-27 19:57:49] fold[1]: macro_f1=0.521321 accuracy=0.560198 f1=(0.643712, 0.501635, 0.418616) resumed=False
+[2026-09-27 19:57:49] fold[2]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.85GB)
+[2026-09-27 19:57:56] fold[2]: fit in 7.3s (0.12 min); saved _fold2_val_probs_small_tfidf_lr.csv, lr_fold_2.joblib, _fold2_test_probs_small_tfidf_lr.csv; free_ram=2.74GB
+[2026-09-27 19:57:56] fold[2]: macro_f1=0.517509 accuracy=0.559634 f1=(0.644747, 0.498527, 0.409253) resumed=False
+[2026-09-27 19:57:57] wrote predictions\oof\oof_small_tfidf_lr.csv rows=47817
+[2026-09-27 19:57:57] wrote predictions\test\test_small_tfidf_lr.csv rows=11955 (unweighted mean of 3 fold-model probability matrices)
+[2026-09-27 19:57:57] CHECK PASS: oof_columns_exact :: got=['id', 'y_true', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'fold', 'model_name']
+[2026-09-27 19:57:57] CHECK PASS: test_probs_columns_exact :: got=['id', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'model_name']
+[2026-09-27 19:57:57] CHECK PASS: oof_rows_equals_train :: oof=47817 train=47817 expected=47817
+[2026-09-27 19:57:57] CHECK PASS: test_prob_rows_equals_test :: test_probs=11955 test=11955 expected=11955
+[2026-09-27 19:57:57] CHECK PASS: oof_ids_unique :: nunique=47817
+[2026-09-27 19:57:57] CHECK PASS: oof_ids_match_train :: symmetric set equality
+[2026-09-27 19:57:57] CHECK PASS: test_ids_preserve_test_csv_order :: row order compared against test.csv
+[2026-09-27 19:57:57] CHECK PASS: test_ids_also_preserve_sample_order :: row order compared against sample_submission.csv
+[2026-09-27 19:57:57] CHECK PASS: oof_no_missing :: n_missing=0
+[2026-09-27 19:57:57] CHECK PASS: test_probs_no_missing :: n_missing=0
+[2026-09-27 19:57:57] CHECK PASS: oof_probs_finite :: non_finite=0
+[2026-09-27 19:57:57] CHECK PASS: oof_probs_in_0_1 :: min=6.36868e-05 max=0.997612
+[2026-09-27 19:57:57] CHECK PASS: oof_probs_sum_to_1 :: max_abs_deviation=2.22e-16
+[2026-09-27 19:57:57] CHECK PASS: oof_labels_only_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 19:57:57] CHECK PASS: oof_labels_are_argmax :: mismatch=0
+[2026-09-27 19:57:57] CHECK PASS: test_probs_probs_finite :: non_finite=0
+[2026-09-27 19:57:57] CHECK PASS: test_probs_probs_in_0_1 :: min=1.86933e-05 max=0.997069
+[2026-09-27 19:57:57] CHECK PASS: test_probs_probs_sum_to_1 :: max_abs_deviation=2.22e-16
+[2026-09-27 19:57:57] CHECK PASS: test_probs_labels_only_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 19:57:57] CHECK PASS: test_probs_labels_are_argmax :: mismatch=0
+[2026-09-27 19:57:57] CHECK PASS: oof_y_true_matches_train_labels :: mismatch=0
+[2026-09-27 19:57:57] CHECK PASS: duplicate_groups_never_cross_folds :: groups_spanning_multiple_folds=0 (n_groups=47147, n_dup_groups=486)
+[2026-09-27 19:57:57] CHECK PASS: fold_ids_cover_all_rows :: folds=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 19:57:57] CHECK PASS: protected_inputs_unmodified :: train.csv/test.csv/sample_submission.csv opened read-only
+[2026-09-27 19:57:57] wrote reports\small_tfidf_fold_scores.csv and reports\small_tfidf_metrics.json
+[2026-09-27 19:57:57] wrote reports\small_tfidf_summary.md
+[2026-09-27 19:57:57] EXPERIMENT FAILED -- traceback follows
+[2026-09-27 19:57:57] Traceback (most recent call last):
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 968, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 873, in main
+    return _finish(train, test, sample, y, train_ids, test_ids, fold_ids, fold_info,
+                   word_info, char_info, matrix_info, fold_rows, val_parts, test_parts,
+                   feat_seconds, fold_seconds, t_start)
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 920, in _finish
+    _print_final_block(metrics)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\Desktop\UAP\src\experiment_small_tfidf.py", line 935, in _print_final_block
+    f"(word={m['features']['word_tfidf']['n_features']} + "
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'n_features'
+
+[2026-09-27 19:57:57] Completed fold artifacts on disk will be reused on the next run (resume).
+[2026-09-27 19:58:21] ========================================================================
+[2026-09-27 19:58:21] EXPERIMENT small_tfidf_lr -- compact TF-IDF + LogisticRegression -- start
+[2026-09-27 19:58:21] resources: cpus=8 ram_total=14.98GB ram_free=2.84GB n_jobs=2 gpu_used=False
+[2026-09-27 19:58:21] loaded train=(47817, 3) test=(11955, 2) sample=(11955, 2)
+[2026-09-27 19:58:21] train/test id overlap=0 sample.order==test.order:True
+[2026-09-27 19:58:33] groups: n=47147 dup_groups=486 rows_in_dup_groups=1156 (2.42%) max_group_size=18
+[2026-09-27 19:58:33] fold[0]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:58:33] fold[1]: n_val=15939 class_counts=(7919,6054,1966)
+[2026-09-27 19:58:33] fold[2]: n_val=15939 class_counts=(7918,6055,1966)
+[2026-09-27 19:58:34] wrote data_checks\fold_assignments_3fold.csv rows=47817
+[2026-09-27 19:58:35] reloaded saved vectorizers: word_features=60,000 char_features=60,000
+[2026-09-27 19:58:42] matrix[train_word]: shape=(47817, 60000) nnz=629,869 dtype=float32 est~0.005GB
+[2026-09-27 19:58:42] matrix[train_char]: shape=(47817, 60000) nnz=5,082,197 dtype=float32 est~0.041GB
+[2026-09-27 19:58:42] matrix[train_word+char]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:58:42] built train matrix in 7.2s (0.12 min)
+[2026-09-27 19:58:44] matrix[test_word]: shape=(11955, 60000) nnz=154,936 dtype=float32 est~0.001GB
+[2026-09-27 19:58:44] matrix[test_char]: shape=(11955, 60000) nnz=1,256,809 dtype=float32 est~0.01GB
+[2026-09-27 19:58:44] matrix[test_word+char]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:58:44] built test matrix in 1.7s (0.03 min)
+[2026-09-27 19:58:44] matrix[train_combined]: shape=(47817, 120000) nnz=5,712,066 dtype=float32 est~0.046GB
+[2026-09-27 19:58:44] matrix[test_combined]: shape=(11955, 120000) nnz=1,411,745 dtype=float32 est~0.011GB
+[2026-09-27 19:58:44] feature stage done in 9.9s (0.17 min); X_train=(47817, 120000) X_test=(11955, 120000)
+[2026-09-27 19:58:44] fold[0]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.88GB)
+[2026-09-27 19:58:50] fold[0]: fit in 6.2s (0.10 min); saved _fold0_val_probs_small_tfidf_lr.csv, lr_fold_0.joblib, _fold0_test_probs_small_tfidf_lr.csv; free_ram=2.99GB
+[2026-09-27 19:58:50] fold[0]: macro_f1=0.523044 accuracy=0.562896 f1=(0.643900, 0.508378, 0.416853) resumed=False
+[2026-09-27 19:58:50] fold[1]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.99GB)
+[2026-09-27 19:58:57] fold[1]: fit in 6.8s (0.11 min); saved _fold1_val_probs_small_tfidf_lr.csv, lr_fold_1.joblib, _fold1_test_probs_small_tfidf_lr.csv; free_ram=2.96GB
+[2026-09-27 19:58:57] fold[1]: macro_f1=0.521321 accuracy=0.560198 f1=(0.643712, 0.501635, 0.418616) resumed=False
+[2026-09-27 19:58:57] fold[2]: training LogisticRegression on 31,878 rows x 120,000 features (free_ram=2.97GB)
+[2026-09-27 19:59:04] fold[2]: fit in 6.9s (0.11 min); saved _fold2_val_probs_small_tfidf_lr.csv, lr_fold_2.joblib, _fold2_test_probs_small_tfidf_lr.csv; free_ram=2.7GB
+[2026-09-27 19:59:04] fold[2]: macro_f1=0.517509 accuracy=0.559634 f1=(0.644747, 0.498527, 0.409253) resumed=False
+[2026-09-27 19:59:05] wrote predictions\oof\oof_small_tfidf_lr.csv rows=47817
+[2026-09-27 19:59:05] wrote predictions\test\test_small_tfidf_lr.csv rows=11955 (unweighted mean of 3 fold-model probability matrices)
+[2026-09-27 19:59:05] CHECK PASS: oof_columns_exact :: got=['id', 'y_true', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'fold', 'model_name']
+[2026-09-27 19:59:05] CHECK PASS: test_probs_columns_exact :: got=['id', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'model_name']
+[2026-09-27 19:59:05] CHECK PASS: oof_rows_equals_train :: oof=47817 train=47817 expected=47817
+[2026-09-27 19:59:05] CHECK PASS: test_prob_rows_equals_test :: test_probs=11955 test=11955 expected=11955
+[2026-09-27 19:59:05] CHECK PASS: oof_ids_unique :: nunique=47817
+[2026-09-27 19:59:05] CHECK PASS: oof_ids_match_train :: symmetric set equality
+[2026-09-27 19:59:05] CHECK PASS: test_ids_preserve_test_csv_order :: row order compared against test.csv
+[2026-09-27 19:59:05] CHECK PASS: test_ids_also_preserve_sample_order :: row order compared against sample_submission.csv
+[2026-09-27 19:59:05] CHECK PASS: oof_no_missing :: n_missing=0
+[2026-09-27 19:59:05] CHECK PASS: test_probs_no_missing :: n_missing=0
+[2026-09-27 19:59:05] CHECK PASS: oof_probs_finite :: non_finite=0
+[2026-09-27 19:59:05] CHECK PASS: oof_probs_in_0_1 :: min=6.36868e-05 max=0.997612
+[2026-09-27 19:59:05] CHECK PASS: oof_probs_sum_to_1 :: max_abs_deviation=2.22e-16
+[2026-09-27 19:59:05] CHECK PASS: oof_labels_only_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 19:59:05] CHECK PASS: oof_labels_are_argmax :: mismatch=0
+[2026-09-27 19:59:05] CHECK PASS: test_probs_probs_finite :: non_finite=0
+[2026-09-27 19:59:05] CHECK PASS: test_probs_probs_in_0_1 :: min=1.86933e-05 max=0.997069
+[2026-09-27 19:59:05] CHECK PASS: test_probs_probs_sum_to_1 :: max_abs_deviation=2.22e-16
+[2026-09-27 19:59:05] CHECK PASS: test_probs_labels_only_012 :: unique=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 19:59:05] CHECK PASS: test_probs_labels_are_argmax :: mismatch=0
+[2026-09-27 19:59:05] CHECK PASS: oof_y_true_matches_train_labels :: mismatch=0
+[2026-09-27 19:59:05] CHECK PASS: duplicate_groups_never_cross_folds :: groups_spanning_multiple_folds=0 (n_groups=47147, n_dup_groups=486)
+[2026-09-27 19:59:05] CHECK PASS: fold_ids_cover_all_rows :: folds=[np.int64(0), np.int64(1), np.int64(2)]
+[2026-09-27 19:59:05] CHECK PASS: protected_inputs_unmodified :: train.csv/test.csv/sample_submission.csv opened read-only
+[2026-09-27 19:59:05] wrote reports\small_tfidf_fold_scores.csv and reports\small_tfidf_metrics.json
+[2026-09-27 19:59:05] wrote reports\small_tfidf_summary.md
+[2026-09-27 19:59:05] 
+[2026-09-27 19:59:05] ================ SMALL-TFIDF EXPERIMENT -- VERIFIED RESULTS ================
+[2026-09-27 19:59:05] 1. Feature matrix dimensions: train=[47817, 120000] test=[11955, 120000] (word=60000 + char=60000 features)
+[2026-09-27 19:59:05] 2. Fold Macro F1: fold0=0.523044, fold1=0.521321, fold2=0.517509
+[2026-09-27 19:59:05] 3. Overall OOF Macro F1: 0.520652
+[2026-09-27 19:59:05] 4. Per-class F1: classclass0=0.644122, classclass1=0.502857, classclass2=0.414976
+[2026-09-27 19:59:05] 5. Fold std (ddof=0): 0.002313 (mean 0.520625, min 0.517509)
+[2026-09-27 19:59:05] 6. Confusion matrix (rows=true, cols=pred) order [0,1,2]:
+[2026-09-27 19:59:05]    [15076, 7152, 1528]
+[2026-09-27 19:59:05]    [6781, 9240, 2142]
+[2026-09-27 19:59:05]    [1198, 2195, 2505]
+[2026-09-27 19:59:05] 7. Prediction distribution: OOF={0: 23055, 1: 18587, 2: 6175} TEST={0: 5955, 1: 4589, 2: 1411} train_truth={0: 23756, 1: 18163, 2: 5898}
+[2026-09-27 19:59:05] 8. Saved: predictions\oof\oof_small_tfidf_lr.csv | predictions\test\test_small_tfidf_lr.csv
+[2026-09-27 19:59:05] 9. Comparison: robust 0.525448 -> delta -0.004796; research 0.525574 -> delta -0.004922
+[2026-09-27 19:59:05] 10. Verdict: USEFUL DIVERSITY ONLY -- OOF Macro F1 is 0.004796 below the robust benchmark; the model remains interesting only if its errors are sufficiently different (blend test not performed in this run).
+[2026-09-27 19:59:05]     Integrity checks: 24/24 passed
+[2026-09-27 19:59:05] ===========================================================================
+[2026-09-27 19:59:05] EXPERIMENT finished in 43.6s (0.73 min); failed_checks=none

@@ -1,0 +1,40 @@
+
+==============================================================================
+EXP 0 -- baseline anchor: reproduce OOF Macro F1 = 0.639579
+==============================================================================
+input checksums: {'train.csv': {'sha1': '66c6b109c8fd187f4c2c474a09159905d25978cd', 'bytes': 5357729}, 'test.csv': {'sha1': '9caf35ded5a6fe4b2765cdc3340f192d0994d072', 'bytes': 1290735}, 'sample_submission.csv': {'sha1': '73345c6143ad4e155bac35de1bf8d5d81ed1d039', 'bytes': 105398}}
+train (47817, 4) | test (11955, 3) | sample (11955, 2)
+class counts: {0: 23756, 1: 18163, 2: 5898}
+groups: 47157 | duplicate groups: 480 | rows in duplicate groups: 1140 | groups spanning >1 fold: 0
+fold0: val&pool=0 max|prod-ind|=0.00e+00 mean_neighbours=20.0
+fold1: val&pool=0 max|prod-ind|=0.00e+00 mean_neighbours=20.0
+fold2: val&pool=0 max|prod-ind|=0.00e+00 mean_neighbours=20.0
+fold3: val&pool=0 max|prod-ind|=0.00e+00 mean_neighbours=20.0
+fold4: val&pool=0 max|prod-ind|=0.00e+00 mean_neighbours=20.0
+ID-prior leak proof: PASS (val&pool = 0 on all folds, prod == independent re-implementation)
+fold0: tfidf from cache Xtr=(38253, 109285) Xva=(9564, 109285)
+fold0: text=0.510089 id=0.617552 blend@0.40=0.642898 override=0.642898
+fold1: tfidf from cache Xtr=(38253, 109278) Xva=(9564, 109278)
+fold1: text=0.503986 id=0.605212 blend@0.40=0.632324 override=0.632324
+fold2: tfidf from cache Xtr=(38254, 109341) Xva=(9563, 109341)
+fold2: text=0.520463 id=0.618944 blend@0.40=0.641935 override=0.641935
+fold3: tfidf from cache Xtr=(38254, 109061) Xva=(9563, 109061)
+fold3: text=0.516183 id=0.614778 blend@0.40=0.639295 override=0.639295
+fold4: tfidf from cache Xtr=(38254, 108970) Xva=(9563, 108970)
+fold4: text=0.513963 id=0.614136 blend@0.40=0.641384 override=0.641384
+ fold  n_train  n_val  macro_f1_text  macro_f1_id  macro_f1_blend_0.40  macro_f1_blend_0.40_override  override_rows  override_conflicting_groups_skipped  seconds
+    0    38253   9564       0.510089     0.617552             0.642898                      0.642898              0                                   44     18.1
+    1    38253   9564       0.503986     0.605212             0.632324                      0.632324              0                                   44     16.7
+    2    38254   9563       0.520463     0.618944             0.641935                      0.641935              0                                   42     15.2
+    3    38254   9563       0.516183     0.614778             0.639295                      0.639295              0                                   40     16.8
+    4    38254   9563       0.513963     0.614136             0.641384                      0.641384              0                                   42     16.5
+
+pooled OOF (grouped, leak-free):
+  text_only      0.512943
+  id_prior_only  0.614135
+  blend_0.40     0.639579
+alpha grid: {'0.00': 0.614135, '0.05': 0.618649, '0.10': 0.622607, '0.15': 0.627322, '0.20': 0.629814, '0.25': 0.632398, '0.30': 0.635078, '0.35': 0.6383, '0.40': 0.639579, '0.45': 0.636749, '0.50': 0.630661, '0.55': 0.62024, '0.60': 0.60657, '0.65': 0.591252, '0.70': 0.575561, '0.75': 0.562276, '0.80': 0.550611, '0.85': 0.539667, '0.90': 0.53038, '0.95': 0.521047, '1.00': 0.512943}
+argmax alpha = 0.40 -> 0.639579
+baseline anchor = 0.639579 | reproduced = 0.639579 | delta = -0.000000 | MATCH
+
+anchor reproduced: True | runtime 124.0s

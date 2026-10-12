@@ -1,0 +1,34 @@
+{
+  "final_weights": [
+    0.10526315789473685,
+    0.4210526315789474,
+    0.2105263157894737,
+    0.2631578947368421
+  ],
+  "source_order": [
+    "text",
+    "sid",
+    "e5_base",
+    "xlmr_idhead"
+  ],
+  "test_class_share": [
+    0.526474278544542,
+    0.3524048515265579,
+    0.12112086992890005
+  ],
+  "train_class_share": [
+    0.4968107576803229,
+    0.3798439885396407,
+    0.12334525378003638
+  ],
+  "drift_pp": [
+    2.9663520864219084,
+    2.743913701308276,
+    0.22243838511363384
+  ],
+  "override_rows_matched": 272,
+  "override_labels_changed": 42,
+  "override_conflicting_groups": 53,
+  "diff_vs_submission_2": 1427,
+  "honest_oof": 0.682311
+}

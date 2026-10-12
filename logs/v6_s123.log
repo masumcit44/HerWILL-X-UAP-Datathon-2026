@@ -1,0 +1,64 @@
+============================================================================
+STEP 1 - ARTIFACT CHECKS
+============================================================================
+zip file SHA256      : c4ea87bdc0a87ab10405c39f3dfe31886e08bbf19dc5349149a866c168aeb060
+fold_ids FILE SHA256 : 5ab5cfe96a72b04c8bd30adc45c1eeeee477707b0c382a19d179d8635295fbbd
+fold_ids INT64 SHA256: cc4fdd169110aeee6d3d5566095234461041b1a9290e2e916ce850c31d27a7ca
+fold sizes           : [9543, 9546, 9571, 9581, 9576] | shape (47817,)
+groups crossing folds: 0 (must be 0)
+train/test SHA1      : match export_meta
+  xlmr_base_idhead     oof(47817, 3) test(11955, 3) standalone 0.648743 (diff 2.36e-07)
+  emb_e5-base          oof(47817, 3) test(11955, 3) standalone 0.521535 (diff 1.55e-07)
+  per-fold stitch max|diff| oof 0.00e+00 | test 0.00e+00
+STEP 1 PASSED
+
+============================================================================
+STEP 2 - TEXT + PLAIN ID ON COLAB FOLDS
+============================================================================
+  fold 0 text/plain done
+  fold 1 text/plain done
+  fold 2 text/plain done
+  fold 3 text/plain done
+  fold 4 text/plain done
+text-only OOF  = 0.516093 (expect 0.5160 +-0.003)
+plain-ID OOF   = 0.613631 (expect 0.613631 +-1e-5, diff 2.48e-07)
+GATE 0: PASS
+
+============================================================================
+STEP 3 - SIMILARITY-WEIGHTED ID PRIOR (reference code verbatim)
+============================================================================
+  sim matrix (47817, 80000)
+  golden query rows [1, 4, 8, 9, 13] ids [32893, 25368, 31917, 27178, 2429]
+  golden computed:
+ [[0.91555  0.08445  0.      ]
+ [0.8236   0.160639 0.01576 ]
+ [0.722563 0.254849 0.022587]
+ [0.850191 0.095785 0.054024]
+ [0.69586  0.278106 0.026034]]
+  max|diff| vs golden = 1.47e-04 (tolerance 1e-4)
+  per-row max diff: [4.295e-05, 3.389e-05, 8.323e-05, 9.498e-05, 0.00014716]
+  NOTE: >1e-4. Diagnosis: the char vocabulary (90,920 terms) is truncated
+        by max_features=80000, so the retained terms depend on
+        document-frequency tie-breaking at the cut, which differs between
+        scikit-learn versions. float32 and float64 give bitwise-identical
+        results here, so this is not precision. Row/id ALIGNMENT is
+        confirmed correct: Xq rows are taken as Xn[ROWS] and q_ids as
+        ids[ROWS] in the same order, and the reference contract is met.
+        Cross-checked below by the pooled sid OOF (GATE 1).
+
+[sid A] {'KW': 120, 'k': 180, 'beta': 10.0, 'gamma': 1.0} -> ID-only OOF 0.627895  (23s)
+   per-class [0.748682, 0.611665, 0.523338]
+   folds     [0.622745, 0.637608, 0.627997, 0.625435, 0.62559]
+
+[sid B] {'KW': 120, 'k': 90, 'beta': 8.0, 'gamma': 0.75} -> ID-only OOF 0.626534  (13s)
+   per-class [0.748665, 0.611749, 0.519188]
+   folds     [0.620946, 0.63655, 0.628718, 0.622306, 0.623938]
+
+[sid C] {'KW': 120, 'k': 120, 'beta': 10.0, 'gamma': 1.0} -> ID-only OOF 0.627606  (16s)
+   per-class [0.747384, 0.611731, 0.523703]
+   folds     [0.622752, 0.636696, 0.628267, 0.625327, 0.624896]
+
+GATE 1 config A: 0.627895 (expect 0.6280 +-0.001) -> PASS
+neighbour rows in own fold (sample 300 queries): 0 (must be 0)
+
+-> cache/v6/step123.npz, reports/v6/step123.json  (266s)

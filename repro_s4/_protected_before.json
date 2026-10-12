@@ -1,0 +1,12 @@
+{
+  "train.csv": "a269ad841f824c6e60930cfda8cb25bdce58a6a1ee01fc1fe663d23b19e34449",
+  "test.csv": "cca36f5416abfb8a41b1c84e5fa83aec18ffbff32fecd277c668a3f73312a38f",
+  "sample_submission.csv": "0f7d405dbd1e88ea285c7138514b7652f7441e995dcaed338bb208a86c2f347d",
+  "uap_submission/reproducible/submission/submission_1.csv": "1b173503d8fdd0e4a3f4dad4e38f743dbca9ae10e0ed460216399740fee40a50",
+  "uap_submission/submission/submission_2.csv": "894ce6c210ccc0f2e956c1e6d32fcb82189f1798a6993ea4646555f93bfae40e",
+  "uap_submission/submission/submission_3.csv": "df637651e087e3d667c8552a37bef9c37b36e2ec9af41a4558b641495196edaa",
+  "uap_submission/reproducible/submission_reproducible_file_1.ipynb": "6366a78d5a4e08e05a496bd563a374f6d168e28c2b5310fd4cb57c6baf780d56",
+  "uap_submission/reproducible/submission_reproducible_file_2.ipynb": "f3b8f60883dfa0e659b86e07d4be7ffda2ce5b1048904891e21ad1bb1efe9597",
+  "uap_submission/reproducible/submission_reproducible_file_3.ipynb": "b7bcc940053c2af623530978e84947a56e1747d98758baf046dea5af505fc65c",
+  "reports/final_claude_handoff.md": "a149a528fec9adac640b43b538ef09773cffe257161208770353ae2cffe6834a"
+}

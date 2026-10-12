@@ -1,0 +1,874 @@
+{
+  "experiment": "text_id_blend",
+  "model_name": "blend_text_id_a0.40",
+  "timestamp": "2026-09-27 20:36:47",
+  "resources": {
+    "cpu_count": 8,
+    "ram_total_gb": 14.98,
+    "ram_free_gb": 6.62,
+    "n_jobs": 4,
+    "gpu_used": false
+  },
+  "validation": {
+    "method": "StratifiedKFold",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "metric": "macro_f1",
+    "fold_rows": [
+      {
+        "fold": 0,
+        "n_train": 38253,
+        "n_val": 9564,
+        "n_val_after_grouping": 9564,
+        "macro_f1_text": 0.518704,
+        "accuracy_text": 0.557926,
+        "macro_f1_id": 0.618244,
+        "accuracy_id": 0.666248,
+        "macro_f1_blend_0.40": 0.642747,
+        "accuracy_blend_0.40": 0.688729,
+        "f1_class0_blend": 0.763171,
+        "f1_class1_blend": 0.626263,
+        "f1_class2_blend": 0.538808,
+        "text_fit_seconds": 0.0,
+        "text_model_resumed": true,
+        "lr_n_iter": "None",
+        "text_model_path": "models\\text_id_blend\\fold0\\lr.joblib",
+        "id_prior_mean_neighbours": 20.0,
+        "id_prior_mean_kth_distance": 15.859,
+        "fold_override_unanimous_texts": 37788,
+        "val_rows_with_text_also_in_train": 174
+      },
+      {
+        "fold": 1,
+        "n_train": 38253,
+        "n_val": 9564,
+        "n_val_after_grouping": 9564,
+        "macro_f1_text": 0.515202,
+        "accuracy_text": 0.557821,
+        "macro_f1_id": 0.608781,
+        "accuracy_id": 0.655583,
+        "macro_f1_blend_0.40": 0.634119,
+        "accuracy_blend_0.40": 0.679005,
+        "f1_class0_blend": 0.7556,
+        "f1_class1_blend": 0.61362,
+        "f1_class2_blend": 0.533136,
+        "text_fit_seconds": 0.0,
+        "text_model_resumed": true,
+        "lr_n_iter": "None",
+        "text_model_path": "models\\text_id_blend\\fold1\\lr.joblib",
+        "id_prior_mean_neighbours": 20.0,
+        "id_prior_mean_kth_distance": 15.899,
+        "fold_override_unanimous_texts": 37779,
+        "val_rows_with_text_also_in_train": 170
+      },
+      {
+        "fold": 2,
+        "n_train": 38254,
+        "n_val": 9563,
+        "n_val_after_grouping": 9563,
+        "macro_f1_text": 0.522421,
+        "accuracy_text": 0.560703,
+        "macro_f1_id": 0.619377,
+        "accuracy_id": 0.659835,
+        "macro_f1_blend_0.40": 0.644688,
+        "accuracy_blend_0.40": 0.687232,
+        "f1_class0_blend": 0.759633,
+        "f1_class1_blend": 0.623402,
+        "f1_class2_blend": 0.551031,
+        "text_fit_seconds": 0.0,
+        "text_model_resumed": true,
+        "lr_n_iter": "None",
+        "text_model_path": "models\\text_id_blend\\fold2\\lr.joblib",
+        "id_prior_mean_neighbours": 20.0,
+        "id_prior_mean_kth_distance": 15.851,
+        "fold_override_unanimous_texts": 37803,
+        "val_rows_with_text_also_in_train": 188
+      },
+      {
+        "fold": 3,
+        "n_train": 38254,
+        "n_val": 9563,
+        "n_val_after_grouping": 9563,
+        "macro_f1_text": 0.524024,
+        "accuracy_text": 0.561853,
+        "macro_f1_id": 0.614708,
+        "accuracy_id": 0.66088,
+        "macro_f1_blend_0.40": 0.643815,
+        "accuracy_blend_0.40": 0.684409,
+        "f1_class0_blend": 0.755511,
+        "f1_class1_blend": 0.619983,
+        "f1_class2_blend": 0.555949,
+        "text_fit_seconds": 0.0,
+        "text_model_resumed": true,
+        "lr_n_iter": "None",
+        "text_model_path": "models\\text_id_blend\\fold3\\lr.joblib",
+        "id_prior_mean_neighbours": 20.0,
+        "id_prior_mean_kth_distance": 15.87,
+        "fold_override_unanimous_texts": 37803,
+        "val_rows_with_text_also_in_train": 185
+      },
+      {
+        "fold": 4,
+        "n_train": 38254,
+        "n_val": 9563,
+        "n_val_after_grouping": 9563,
+        "macro_f1_text": 0.524123,
+        "accuracy_text": 0.563317,
+        "macro_f1_id": 0.614113,
+        "accuracy_id": 0.662031,
+        "macro_f1_blend_0.40": 0.645667,
+        "accuracy_blend_0.40": 0.689533,
+        "f1_class0_blend": 0.764883,
+        "f1_class1_blend": 0.623536,
+        "f1_class2_blend": 0.548583,
+        "text_fit_seconds": 0.0,
+        "text_model_resumed": true,
+        "lr_n_iter": "None",
+        "text_model_path": "models\\text_id_blend\\fold4\\lr.joblib",
+        "id_prior_mean_neighbours": 20.0,
+        "id_prior_mean_kth_distance": 15.857,
+        "fold_override_unanimous_texts": 37790,
+        "val_rows_with_text_also_in_train": 175
+      }
+    ],
+    "fold_assignment_rows": [
+      {
+        "fold": 0,
+        "n_train": 38253,
+        "n_val": 9564,
+        "train_val_id_overlap": 0,
+        "val_rows_with_text_also_in_train": 174,
+        "val_dup_text_share_pct": 1.819,
+        "train_c0": 19004,
+        "val_c0": 4752,
+        "train_c1": 14531,
+        "val_c1": 3632,
+        "train_c2": 4718,
+        "val_c2": 1180
+      },
+      {
+        "fold": 1,
+        "n_train": 38253,
+        "n_val": 9564,
+        "train_val_id_overlap": 0,
+        "val_rows_with_text_also_in_train": 170,
+        "val_dup_text_share_pct": 1.777,
+        "train_c0": 19005,
+        "val_c0": 4751,
+        "train_c1": 14530,
+        "val_c1": 3633,
+        "train_c2": 4718,
+        "val_c2": 1180
+      },
+      {
+        "fold": 2,
+        "n_train": 38254,
+        "n_val": 9563,
+        "train_val_id_overlap": 0,
+        "val_rows_with_text_also_in_train": 188,
+        "val_dup_text_share_pct": 1.966,
+        "train_c0": 19005,
+        "val_c0": 4751,
+        "train_c1": 14530,
+        "val_c1": 3633,
+        "train_c2": 4719,
+        "val_c2": 1179
+      },
+      {
+        "fold": 3,
+        "n_train": 38254,
+        "n_val": 9563,
+        "train_val_id_overlap": 0,
+        "val_rows_with_text_also_in_train": 185,
+        "val_dup_text_share_pct": 1.935,
+        "train_c0": 19005,
+        "val_c0": 4751,
+        "train_c1": 14530,
+        "val_c1": 3633,
+        "train_c2": 4719,
+        "val_c2": 1179
+      },
+      {
+        "fold": 4,
+        "n_train": 38254,
+        "n_val": 9563,
+        "train_val_id_overlap": 0,
+        "val_rows_with_text_also_in_train": 175,
+        "val_dup_text_share_pct": 1.83,
+        "train_c0": 19005,
+        "val_c0": 4751,
+        "train_c1": 14531,
+        "val_c1": 3632,
+        "train_c2": 4718,
+        "val_c2": 1180
+      }
+    ],
+    "duplicate_text_note": "Plain stratified folds are used as specified. Duplicate-text rows can therefore straddle folds; the per-fold duplicate-share column quantifies that optimism and is reported, not hidden."
+  },
+  "id_prior": {
+    "k": 20,
+    "weights": "1/(distance+1e-6)",
+    "labels": "training ids/labels only (never validation or test labels)",
+    "diagnostics": [
+      {
+        "tag": "fold0_val",
+        "n_queries": 9564,
+        "n_pool": 38253,
+        "k": 20,
+        "weights": "1/(distance+1e-6)",
+        "self_matches_excluded": 0,
+        "queries_with_fewer_than_k": 0,
+        "queries_with_no_neighbour": 0,
+        "mean_neighbours_used": 20.0,
+        "mean_kth_distance": 15.859,
+        "pool_ids_disjoint_from_queries": true,
+        "labels_are_train_only": true
+      },
+      {
+        "tag": "fold1_val",
+        "n_queries": 9564,
+        "n_pool": 38253,
+        "k": 20,
+        "weights": "1/(distance+1e-6)",
+        "self_matches_excluded": 0,
+        "queries_with_fewer_than_k": 0,
+        "queries_with_no_neighbour": 0,
+        "mean_neighbours_used": 20.0,
+        "mean_kth_distance": 15.899,
+        "pool_ids_disjoint_from_queries": true,
+        "labels_are_train_only": true
+      },
+      {
+        "tag": "fold2_val",
+        "n_queries": 9563,
+        "n_pool": 38254,
+        "k": 20,
+        "weights": "1/(distance+1e-6)",
+        "self_matches_excluded": 0,
+        "queries_with_fewer_than_k": 0,
+        "queries_with_no_neighbour": 0,
+        "mean_neighbours_used": 20.0,
+        "mean_kth_distance": 15.851,
+        "pool_ids_disjoint_from_queries": true,
+        "labels_are_train_only": true
+      },
+      {
+        "tag": "fold3_val",
+        "n_queries": 9563,
+        "n_pool": 38254,
+        "k": 20,
+        "weights": "1/(distance+1e-6)",
+        "self_matches_excluded": 0,
+        "queries_with_fewer_than_k": 0,
+        "queries_with_no_neighbour": 0,
+        "mean_neighbours_used": 20.0,
+        "mean_kth_distance": 15.87,
+        "pool_ids_disjoint_from_queries": true,
+        "labels_are_train_only": true
+      },
+      {
+        "tag": "fold4_val",
+        "n_queries": 9563,
+        "n_pool": 38254,
+        "k": 20,
+        "weights": "1/(distance+1e-6)",
+        "self_matches_excluded": 0,
+        "queries_with_fewer_than_k": 0,
+        "queries_with_no_neighbour": 0,
+        "mean_neighbours_used": 20.0,
+        "mean_kth_distance": 15.857,
+        "pool_ids_disjoint_from_queries": true,
+        "labels_are_train_only": true
+      },
+      {
+        "tag": "full_test",
+        "n_queries": 11955,
+        "n_pool": 47817,
+        "k": 20,
+        "weights": "1/(distance+1e-6)",
+        "self_matches_excluded": 0,
+        "queries_with_fewer_than_k": 0,
+        "queries_with_no_neighbour": 0,
+        "mean_neighbours_used": 20.0,
+        "mean_kth_distance": 12.752,
+        "pool_ids_disjoint_from_queries": true,
+        "labels_are_train_only": true
+      }
+    ],
+    "final_test_prior": {
+      "tag": "full_test",
+      "n_queries": 11955,
+      "n_pool": 47817,
+      "k": 20,
+      "weights": "1/(distance+1e-6)",
+      "self_matches_excluded": 0,
+      "queries_with_fewer_than_k": 0,
+      "queries_with_no_neighbour": 0,
+      "mean_neighbours_used": 20.0,
+      "mean_kth_distance": 12.752,
+      "pool_ids_disjoint_from_queries": true,
+      "labels_are_train_only": true
+    }
+  },
+  "text_model": {
+    "features": "word(1-2) + char_wb(3-5) TF-IDF, 60k each, min_df=2, sublinear_tf, float32, hstacked with scipy.sparse.hstack",
+    "clean_text": "URL -> ' URL ', @mention -> ' USER ', whitespace collapsed; no lowercasing, no stemming, Bangla script + emoji preserved",
+    "lr": {
+      "solver": "lbfgs",
+      "max_iter": "2000",
+      "class_weight": "balanced",
+      "C": "4.0",
+      "random_state": 42
+    },
+    "full_fit": {
+      "n_features_word": 59971,
+      "n_features_char": 60000,
+      "matrix_shape": [
+        47817,
+        119971
+      ],
+      "matrix_nnz": 5722940,
+      "fit_seconds": 39.15,
+      "lr_n_iter": [
+        187
+      ]
+    }
+  },
+  "chosen_alpha": 0.4,
+  "alpha_grid": [
+    {
+      "alpha_text_weight": 0.0,
+      "alpha_id_weight": 1.0,
+      "macro_f1": 0.61504,
+      "accuracy": 0.660916,
+      "f1_class0": 0.734201,
+      "f1_class1": 0.600826,
+      "f1_class2": 0.510091
+    },
+    {
+      "alpha_text_weight": 0.05,
+      "alpha_id_weight": 0.95,
+      "macro_f1": 0.618784,
+      "accuracy": 0.664826,
+      "f1_class0": 0.737601,
+      "f1_class1": 0.605154,
+      "f1_class2": 0.513598
+    },
+    {
+      "alpha_text_weight": 0.1,
+      "alpha_id_weight": 0.9,
+      "macro_f1": 0.622679,
+      "accuracy": 0.668674,
+      "f1_class0": 0.741237,
+      "f1_class1": 0.608664,
+      "f1_class2": 0.518135
+    },
+    {
+      "alpha_text_weight": 0.15,
+      "alpha_id_weight": 0.85,
+      "macro_f1": 0.627198,
+      "accuracy": 0.673568,
+      "f1_class0": 0.746177,
+      "f1_class1": 0.613268,
+      "f1_class2": 0.522148
+    },
+    {
+      "alpha_text_weight": 0.2,
+      "alpha_id_weight": 0.8,
+      "macro_f1": 0.631799,
+      "accuracy": 0.677897,
+      "f1_class0": 0.750354,
+      "f1_class1": 0.617141,
+      "f1_class2": 0.527903
+    },
+    {
+      "alpha_text_weight": 0.25,
+      "alpha_id_weight": 0.75,
+      "macro_f1": 0.63422,
+      "accuracy": 0.680448,
+      "f1_class0": 0.753609,
+      "f1_class1": 0.618703,
+      "f1_class2": 0.530348
+    },
+    {
+      "alpha_text_weight": 0.3,
+      "alpha_id_weight": 0.7,
+      "macro_f1": 0.637013,
+      "accuracy": 0.682728,
+      "f1_class0": 0.755924,
+      "f1_class1": 0.620209,
+      "f1_class2": 0.534908
+    },
+    {
+      "alpha_text_weight": 0.35,
+      "alpha_id_weight": 0.65,
+      "macro_f1": 0.640412,
+      "accuracy": 0.68507,
+      "f1_class0": 0.758484,
+      "f1_class1": 0.621738,
+      "f1_class2": 0.541014
+    },
+    {
+      "alpha_text_weight": 0.4,
+      "alpha_id_weight": 0.6,
+      "macro_f1": 0.642185,
+      "accuracy": 0.685781,
+      "f1_class0": 0.759759,
+      "f1_class1": 0.621358,
+      "f1_class2": 0.545436
+    },
+    {
+      "alpha_text_weight": 0.45,
+      "alpha_id_weight": 0.55,
+      "macro_f1": 0.640962,
+      "accuracy": 0.683502,
+      "f1_class0": 0.758333,
+      "f1_class1": 0.618024,
+      "f1_class2": 0.546529
+    },
+    {
+      "alpha_text_weight": 0.5,
+      "alpha_id_weight": 0.5,
+      "macro_f1": 0.635707,
+      "accuracy": 0.678524,
+      "f1_class0": 0.754882,
+      "f1_class1": 0.612597,
+      "f1_class2": 0.539643
+    },
+    {
+      "alpha_text_weight": 0.55,
+      "alpha_id_weight": 0.45,
+      "macro_f1": 0.624063,
+      "accuracy": 0.667629,
+      "f1_class0": 0.746528,
+      "f1_class1": 0.600667,
+      "f1_class2": 0.524993
+    },
+    {
+      "alpha_text_weight": 0.6,
+      "alpha_id_weight": 0.4,
+      "macro_f1": 0.609488,
+      "accuracy": 0.654182,
+      "f1_class0": 0.735784,
+      "f1_class1": 0.587127,
+      "f1_class2": 0.505553
+    },
+    {
+      "alpha_text_weight": 0.65,
+      "alpha_id_weight": 0.35,
+      "macro_f1": 0.593651,
+      "accuracy": 0.639124,
+      "f1_class0": 0.722805,
+      "f1_class1": 0.573051,
+      "f1_class2": 0.485096
+    },
+    {
+      "alpha_text_weight": 0.7,
+      "alpha_id_weight": 0.3,
+      "macro_f1": 0.57977,
+      "accuracy": 0.624987,
+      "f1_class0": 0.709812,
+      "f1_class1": 0.559951,
+      "f1_class2": 0.469547
+    },
+    {
+      "alpha_text_weight": 0.75,
+      "alpha_id_weight": 0.25,
+      "macro_f1": 0.567941,
+      "accuracy": 0.611916,
+      "f1_class0": 0.696934,
+      "f1_class1": 0.547881,
+      "f1_class2": 0.459008
+    },
+    {
+      "alpha_text_weight": 0.8,
+      "alpha_id_weight": 0.2,
+      "macro_f1": 0.557097,
+      "accuracy": 0.600393,
+      "f1_class0": 0.685936,
+      "f1_class1": 0.537396,
+      "f1_class2": 0.447959
+    },
+    {
+      "alpha_text_weight": 0.85,
+      "alpha_id_weight": 0.15,
+      "macro_f1": 0.546231,
+      "accuracy": 0.588598,
+      "f1_class0": 0.674548,
+      "f1_class1": 0.526034,
+      "f1_class2": 0.438111
+    },
+    {
+      "alpha_text_weight": 0.9,
+      "alpha_id_weight": 0.1,
+      "macro_f1": 0.537054,
+      "accuracy": 0.578811,
+      "f1_class0": 0.664785,
+      "f1_class1": 0.517522,
+      "f1_class2": 0.428853
+    },
+    {
+      "alpha_text_weight": 0.95,
+      "alpha_id_weight": 0.05,
+      "macro_f1": 0.529094,
+      "accuracy": 0.569567,
+      "f1_class0": 0.655068,
+      "f1_class1": 0.50894,
+      "f1_class2": 0.423274
+    },
+    {
+      "alpha_text_weight": 1.0,
+      "alpha_id_weight": 0.0,
+      "macro_f1": 0.520908,
+      "accuracy": 0.560324,
+      "f1_class0": 0.645499,
+      "f1_class1": 0.500657,
+      "f1_class2": 0.416567
+    }
+  ],
+  "fold_macro_f1_stats": {
+    "text_only": {
+      "mean": 0.520895,
+      "std": 0.003457,
+      "min": 0.515202,
+      "max": 0.524123
+    },
+    "id_prior": {
+      "mean": 0.615045,
+      "std": 0.003721,
+      "min": 0.608781,
+      "max": 0.619377
+    },
+    "blend_0.40": {
+      "mean": 0.642207,
+      "std": 0.004157,
+      "min": 0.634119,
+      "max": 0.645667
+    }
+  },
+  "fold_min": {
+    "text_only": 0.515202,
+    "id_prior": 0.608781,
+    "blend_0.40": 0.634119
+  },
+  "oof_overall": {
+    "text_only": {
+      "macro_f1": 0.520908,
+      "accuracy": 0.560324,
+      "f1_class0": 0.645499,
+      "f1_class1": 0.500657,
+      "f1_class2": 0.416567
+    },
+    "id_prior_only": {
+      "macro_f1": 0.61504,
+      "accuracy": 0.660916,
+      "f1_class0": 0.734201,
+      "f1_class1": 0.600826,
+      "f1_class2": 0.510091
+    },
+    "blend_0.40": {
+      "macro_f1": 0.642185,
+      "accuracy": 0.685781,
+      "f1_class0": 0.759759,
+      "f1_class1": 0.621358,
+      "f1_class2": 0.545436
+    },
+    "blend_best": {
+      "macro_f1": 0.642185,
+      "accuracy": 0.685781,
+      "f1_class0": 0.759759,
+      "f1_class1": 0.621358,
+      "f1_class2": 0.545436
+    }
+  },
+  "oof_confusion_matrix": {
+    "labels": [
+      "0_explicitly_toxic",
+      "1_subtly_toxic",
+      "2_non_toxic"
+    ],
+    "matrix": [
+      [
+        18986,
+        4339,
+        431
+      ],
+      [
+        6159,
+        11090,
+        914
+      ],
+      [
+        1078,
+        2104,
+        2716
+      ]
+    ]
+  },
+  "oof_pred_class_distribution": {
+    "0": 26223,
+    "1": 17533,
+    "2": 4061
+  },
+  "test_pred_class_distribution_pre_override": {
+    "0": 6572,
+    "1": 4346,
+    "2": 1037
+  },
+  "submission_pred_class_distribution": {
+    "0": 6554,
+    "1": 4361,
+    "2": 1040
+  },
+  "override": {
+    "lookup_stats": {
+      "n_distinct_texts": 47195,
+      "n_unanimous_groups": 47142,
+      "n_conflicting_groups_skipped": 53,
+      "rows_in_unanimous_groups": 47685,
+      "rows_in_conflicting_groups": 132
+    },
+    "n_test_overridden": 272,
+    "n_test_rows": 11955,
+    "test_override_share_pct": 2.2752,
+    "test_labels_changed_by_override": 39,
+    "oof_rows_overridden": 858,
+    "oof_macro_f1_before_override": 0.642185,
+    "oof_macro_f1_after_override": 0.643056,
+    "oof_macro_f1_delta": 0.000871,
+    "oof_method": "per-fold lookup built only from that fold's training split (leak-free)"
+  },
+  "bias_check": {
+    "train_share_pct": {
+      "0": 49.68,
+      "1": 37.98,
+      "2": 12.33
+    },
+    "pred_share_pct": {
+      "0": 54.82,
+      "1": 36.48,
+      "2": 8.7
+    },
+    "drift_pp": {
+      "0": 5.14,
+      "1": -1.51,
+      "2": -3.64
+    },
+    "warnings": [],
+    "threshold_pp": 10.0,
+    "passed": true
+  },
+  "invariants": [
+    {
+      "check": "oof_columns_exact",
+      "status": "PASS",
+      "detail": "got=['id', 'y_true', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'fold', 'model_name']"
+    },
+    {
+      "check": "oof_rows_equal_train_rows",
+      "status": "PASS",
+      "detail": "oof=47817 train=47817"
+    },
+    {
+      "check": "oof_ids_unique",
+      "status": "PASS",
+      "detail": "nunique=47817"
+    },
+    {
+      "check": "oof_ids_match_train",
+      "status": "PASS",
+      "detail": "symmetric set equality"
+    },
+    {
+      "check": "oof_labels_subset_of_012",
+      "status": "PASS",
+      "detail": "unique=[np.int64(0), np.int64(1), np.int64(2)]"
+    },
+    {
+      "check": "oof_y_true_matches_train",
+      "status": "PASS",
+      "detail": "mismatch=0"
+    },
+    {
+      "check": "oof_probs_finite",
+      "status": "PASS",
+      "detail": "non_finite=0"
+    },
+    {
+      "check": "oof_probs_in_0_1",
+      "status": "PASS",
+      "detail": "min=9.36979e-07 max=0.999936"
+    },
+    {
+      "check": "oof_probs_rows_sum_to_1",
+      "status": "PASS",
+      "detail": "max_abs_dev=3.33e-16 tol=1e-06"
+    },
+    {
+      "check": "oof_pred_in_012",
+      "status": "PASS",
+      "detail": "unique=[np.int64(0), np.int64(1), np.int64(2)]"
+    },
+    {
+      "check": "oof_pred_equals_argmax",
+      "status": "PASS",
+      "detail": "mismatch=0"
+    },
+    {
+      "check": "oof_no_missing",
+      "status": "PASS",
+      "detail": "n_missing=0"
+    },
+    {
+      "check": "fold_sizes_sum_to_train_rows",
+      "status": "PASS",
+      "detail": "sum(n_val)=47817 fold sizes=[9564, 9564, 9563, 9563, 9563]"
+    },
+    {
+      "check": "fold_ids_cover_all_rows",
+      "status": "PASS",
+      "detail": "folds=[np.int64(0), np.int64(1), np.int64(2), np.int64(3), np.int64(4)]"
+    },
+    {
+      "check": "train_val_id_overlap_zero_in_every_fold",
+      "status": "PASS",
+      "detail": "fold0=0; fold1=0; fold2=0; fold3=0; fold4=0"
+    },
+    {
+      "check": "id_prior_labels_train_only",
+      "status": "PASS",
+      "detail": "prior built exclusively from each fold's training ids/labels"
+    },
+    {
+      "check": "oof_pred_class_distribution_logged",
+      "status": "PASS",
+      "detail": "{0: 26223, 1: 17533, 2: 4061}"
+    },
+    {
+      "check": "test_prob_columns_exact",
+      "status": "PASS",
+      "detail": "got=['id', 'prob_0', 'prob_1', 'prob_2', 'y_pred', 'model_name']"
+    },
+    {
+      "check": "test_prob_rows_equal_test_rows",
+      "status": "PASS",
+      "detail": "probs=11955 test=11955"
+    },
+    {
+      "check": "test_prob_id_order_equals_test_csv",
+      "status": "PASS",
+      "detail": "row order comparison"
+    },
+    {
+      "check": "test_prob_probs_finite",
+      "status": "PASS",
+      "detail": "non_finite=0"
+    },
+    {
+      "check": "test_prob_probs_in_0_1",
+      "status": "PASS",
+      "detail": "min=3.4045e-07 max=0.999815"
+    },
+    {
+      "check": "test_prob_probs_rows_sum_to_1",
+      "status": "PASS",
+      "detail": "max_abs_dev=2.22e-16 tol=1e-06"
+    },
+    {
+      "check": "test_prob_pred_in_012",
+      "status": "PASS",
+      "detail": "unique=[np.int64(0), np.int64(1), np.int64(2)]"
+    },
+    {
+      "check": "test_prob_pred_equals_argmax",
+      "status": "PASS",
+      "detail": "mismatch=0"
+    },
+    {
+      "check": "test_prob_no_missing",
+      "status": "PASS",
+      "detail": "n_missing=0"
+    },
+    {
+      "check": "submission_columns_exact",
+      "status": "PASS",
+      "detail": "got=['id', 'y_pred']"
+    },
+    {
+      "check": "submission_rows_equal_sample",
+      "status": "PASS",
+      "detail": "sub=11955 sample=11955"
+    },
+    {
+      "check": "submission_id_order_equals_sample",
+      "status": "PASS",
+      "detail": "row order comparison"
+    },
+    {
+      "check": "submission_id_set_equals_sample",
+      "status": "PASS",
+      "detail": "symmetric set equality"
+    },
+    {
+      "check": "submission_ids_unique",
+      "status": "PASS",
+      "detail": "nunique=11955"
+    },
+    {
+      "check": "submission_no_nulls",
+      "status": "PASS",
+      "detail": "n_missing=0"
+    },
+    {
+      "check": "submission_values_in_012",
+      "status": "PASS",
+      "detail": "unique=[np.int64(0), np.int64(1), np.int64(2)]"
+    },
+    {
+      "check": "submission_values_integer",
+      "status": "PASS",
+      "detail": "dtype=int64"
+    },
+    {
+      "check": "submission_pred_class_distribution_logged",
+      "status": "PASS",
+      "detail": "{0: 6554, 1: 4361, 2: 1040}"
+    },
+    {
+      "check": "submission_re_read_from_disk_is_valid",
+      "status": "PASS",
+      "detail": "rows=11955 cols=['id', 'y_pred']"
+    }
+  ],
+  "invariants_all_passed": true,
+  "submission_rows": 11955,
+  "submission_written": true,
+  "runtime": {
+    "total_seconds": 51.81,
+    "fold_seconds": 5.55,
+    "final_fit_seconds": 43.97,
+    "folds_reused_from_disk": 5
+  },
+  "outputs": {
+    "submission": "submissions\\submission_text_id_blend.csv",
+    "oof_blend": "predictions\\oof\\oof_text_id_blend.csv",
+    "oof_text": "predictions\\oof\\oof_text_only_lbfgs.csv",
+    "oof_id": "predictions\\oof\\oof_id_prior_only.csv",
+    "test_blend": "predictions\\test\\test_text_id_blend.csv",
+    "test_text": "predictions\\test\\test_text_only_lbfgs.csv",
+    "test_id": "predictions\\test\\test_id_prior_only.csv",
+    "fold_scores": "reports\\text_id_blend_fold_scores.csv",
+    "metrics": "reports\\text_id_blend_metrics.json",
+    "summary": "reports\\text_id_blend_summary.md",
+    "fold_assignments": "data_checks\\text_id_blend_fold_assignments.csv",
+    "models_dir": "models\\text_id_blend"
+  },
+  "scope_notes": [
+    "The id-locality signal is dataset-specific (contiguous non-overlapping train/test ids from one scrape order); do not reuse it as a generic feature elsewhere.",
+    "The prior never sees validation/test labels: the neighbour pool is each fold's training split only and the function signature excludes any query labels.",
+    "Plain StratifiedKFold is used as specified, so duplicate texts may straddle folds; val_rows_with_text_also_in_train per fold quantifies that optimism.",
+    "test_text_id_blend.csv keeps y_pred = argmax(blended probs) (pure model); the duplicate-text override is applied only in the submission file.",
+    "Submission validated before writing and re-read from disk afterwards; alpha was selected on pooled OOF only, never on leaderboard information."
+  ]
+}

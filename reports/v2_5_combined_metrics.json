@@ -1,0 +1,924 @@
+{
+  "experiment": "v2_5_combined",
+  "timestamp": "2026-09-28 01:03:31",
+  "python": "3.14.3",
+  "seed": 42,
+  "validation": {
+    "method": "StratifiedGroupKFold",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "group_key": "clean_text.lower().strip()",
+    "metric": "pooled OOF macro F1"
+  },
+  "baseline_oof_f1": 0.639579,
+  "baseline_per_fold_std": 0.003809082558382626,
+  "gate": {
+    "per_experiment": {
+      "v2_1_text_ensemble": {
+        "honest_config": "equal-weight text ensemble, alpha re-gridded to 0.45 on pooled OOF",
+        "oof_macro_f1": 0.6343227617255814,
+        "tuned_on_scored_oof": true,
+        "cross_fitted_delta": -0.005256238274418568,
+        "beats_baseline": false,
+        "delta_exceeds_fold_noise": true
+      },
+      "v2_2_hand_features": {
+        "honest_config": "hand features, best scale 0.1, alpha fixed at 0.40 (alpha NOT tuned on the scored OOF)",
+        "oof_macro_f1": 0.6387465436089533,
+        "tuned_on_scored_oof": false,
+        "cross_fitted_delta": -0.0008324563910466765,
+        "beats_baseline": false,
+        "delta_exceeds_fold_noise": false
+      },
+      "v2_3_per_class_alpha": {
+        "honest_config": "per-class blend weights, cross-fitted (w tuned on 4 folds, scored on the 5th)",
+        "oof_macro_f1": 0.6398117212546764,
+        "tuned_on_scored_oof": false,
+        "cross_fitted_delta": 0.0002327212546764379,
+        "beats_baseline": true,
+        "delta_exceeds_fold_noise": false
+      },
+      "v2_4_meta_stacker": {
+        "honest_config": "meta-LR on [text_probs, id_probs, hand features], cross-fitted",
+        "oof_macro_f1": 0.6257623786698496,
+        "tuned_on_scored_oof": false,
+        "cross_fitted_delta": -0.01381662133015038,
+        "beats_baseline": false,
+        "delta_exceeds_fold_noise": true
+      }
+    },
+    "survivors": [],
+    "any_single_experiment_beat_baseline": false,
+    "note": "survivors exceeding both tests: none; gate NOT passed -> the combination below is reported for completeness only and does not qualify as beating the baseline"
+  },
+  "cross_fitted_combinations": [
+    {
+      "tag": "EXP3 survivor: per-class w on LR text + id prior",
+      "pooled_oof_macro_f1": 0.6398117212546764,
+      "delta_vs_baseline": 0.0002327212546764379,
+      "per_class_f1": {
+        "f1_class0": 0.756979,
+        "f1_class1": 0.620588,
+        "f1_class2": 0.541869
+      },
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.642898,
+          "f1_per_class_crossfitted": 0.643956,
+          "w": [
+            0.417,
+            0.3648,
+            0.4198
+          ]
+        },
+        {
+          "fold": 1,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.632324,
+          "f1_per_class_crossfitted": 0.63203,
+          "w": [
+            0.3617,
+            0.3275,
+            0.4063
+          ]
+        },
+        {
+          "fold": 2,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.641935,
+          "f1_per_class_crossfitted": 0.640954,
+          "w": [
+            0.4697,
+            0.3521,
+            0.3872
+          ]
+        },
+        {
+          "fold": 3,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.639295,
+          "f1_per_class_crossfitted": 0.64123,
+          "w": [
+            0.4216,
+            0.3235,
+            0.4055
+          ]
+        },
+        {
+          "fold": 4,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.641384,
+          "f1_per_class_crossfitted": 0.640831,
+          "w": [
+            0.4187,
+            0.3569,
+            0.4178
+          ]
+        }
+      ],
+      "w_per_fold": {
+        "0": [
+          0.417,
+          0.3648,
+          0.4198
+        ],
+        "1": [
+          0.3617,
+          0.3275,
+          0.4063
+        ],
+        "2": [
+          0.4697,
+          0.3521,
+          0.3872
+        ],
+        "3": [
+          0.4216,
+          0.3235,
+          0.4055
+        ],
+        "4": [
+          0.4187,
+          0.3569,
+          0.4178
+        ]
+      },
+      "fold_macro_f1_std": 0.004051785107825934,
+      "fold_macro_f1_std_fixed_alpha": 0.003808923911027886,
+      "fixed_alpha_0.40_same_protocol": 0.6395787805967664
+    },
+    {
+      "tag": "EXP2 text (hand scale 0.1) + per-class w + id prior",
+      "pooled_oof_macro_f1": 0.639475810037596,
+      "delta_vs_baseline": -0.00010318996240399336,
+      "per_class_f1": {
+        "f1_class0": 0.756945,
+        "f1_class1": 0.620106,
+        "f1_class2": 0.541376
+      },
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.642678,
+          "f1_per_class_crossfitted": 0.64319,
+          "w": [
+            0.4372,
+            0.3624,
+            0.4113
+          ]
+        },
+        {
+          "fold": 1,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.632004,
+          "f1_per_class_crossfitted": 0.63036,
+          "w": [
+            0.4755,
+            0.244,
+            0.3727
+          ]
+        },
+        {
+          "fold": 2,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.640407,
+          "f1_per_class_crossfitted": 0.640442,
+          "w": [
+            0.4554,
+            0.3271,
+            0.3943
+          ]
+        },
+        {
+          "fold": 3,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.638411,
+          "f1_per_class_crossfitted": 0.640648,
+          "w": [
+            0.4024,
+            0.2916,
+            0.4408
+          ]
+        },
+        {
+          "fold": 4,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.640204,
+          "f1_per_class_crossfitted": 0.642682,
+          "w": [
+            0.4673,
+            0.339,
+            0.386
+          ]
+        }
+      ],
+      "w_per_fold": {
+        "0": [
+          0.4372,
+          0.3624,
+          0.4113
+        ],
+        "1": [
+          0.4755,
+          0.244,
+          0.3727
+        ],
+        "2": [
+          0.4554,
+          0.3271,
+          0.3943
+        ],
+        "3": [
+          0.4024,
+          0.2916,
+          0.4408
+        ],
+        "4": [
+          0.4673,
+          0.339,
+          0.386
+        ]
+      },
+      "fold_macro_f1_std": 0.004679310957822732,
+      "fold_macro_f1_std_fixed_alpha": 0.0036307564721418453,
+      "fixed_alpha_0.40_same_protocol": 0.6387465436089533
+    },
+    {
+      "tag": "COMBO: mean(LR, hand) text + per-class w + id prior",
+      "pooled_oof_macro_f1": 0.6392988616437297,
+      "delta_vs_baseline": -0.0002801383562702764,
+      "per_class_f1": {
+        "f1_class0": 0.756619,
+        "f1_class1": 0.619775,
+        "f1_class2": 0.541502
+      },
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.643608,
+          "f1_per_class_crossfitted": 0.643212,
+          "w": [
+            0.4656,
+            0.3513,
+            0.3975
+          ]
+        },
+        {
+          "fold": 1,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.632173,
+          "f1_per_class_crossfitted": 0.632144,
+          "w": [
+            0.4216,
+            0.3241,
+            0.4093
+          ]
+        },
+        {
+          "fold": 2,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.641145,
+          "f1_per_class_crossfitted": 0.640141,
+          "w": [
+            0.4419,
+            0.3282,
+            0.3964
+          ]
+        },
+        {
+          "fold": 3,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.638854,
+          "f1_per_class_crossfitted": 0.640864,
+          "w": [
+            0.4292,
+            0.365,
+            0.4101
+          ]
+        },
+        {
+          "fold": 4,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.640323,
+          "f1_per_class_crossfitted": 0.640077,
+          "w": [
+            0.407,
+            0.3236,
+            0.4365
+          ]
+        }
+      ],
+      "w_per_fold": {
+        "0": [
+          0.4656,
+          0.3513,
+          0.3975
+        ],
+        "1": [
+          0.4216,
+          0.3241,
+          0.4093
+        ],
+        "2": [
+          0.4419,
+          0.3282,
+          0.3964
+        ],
+        "3": [
+          0.4292,
+          0.365,
+          0.4101
+        ],
+        "4": [
+          0.407,
+          0.3236,
+          0.4365
+        ]
+      },
+      "fold_macro_f1_std": 0.0037488242743558783,
+      "fold_macro_f1_std_fixed_alpha": 0.0038463213906276637,
+      "fixed_alpha_0.40_same_protocol": 0.6392297692024255
+    },
+    {
+      "tag": "COMBO: mean(LR, ensemble) text + per-class w + id prior",
+      "pooled_oof_macro_f1": 0.6364862470537673,
+      "delta_vs_baseline": -0.0030927529462326797,
+      "per_class_f1": {
+        "f1_class0": 0.756389,
+        "f1_class1": 0.620237,
+        "f1_class2": 0.532833
+      },
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.640653,
+          "f1_per_class_crossfitted": 0.640791,
+          "w": [
+            0.4196,
+            0.3852,
+            0.4344
+          ]
+        },
+        {
+          "fold": 1,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.629602,
+          "f1_per_class_crossfitted": 0.627885,
+          "w": [
+            0.4612,
+            0.31,
+            0.4106
+          ]
+        },
+        {
+          "fold": 2,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.641062,
+          "f1_per_class_crossfitted": 0.638639,
+          "w": [
+            0.5364,
+            0.4115,
+            0.2975
+          ]
+        },
+        {
+          "fold": 3,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.635382,
+          "f1_per_class_crossfitted": 0.635092,
+          "w": [
+            0.5389,
+            0.3909,
+            0.304
+          ]
+        },
+        {
+          "fold": 4,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.639632,
+          "f1_per_class_crossfitted": 0.639972,
+          "w": [
+            0.4371,
+            0.3515,
+            0.4174
+          ]
+        }
+      ],
+      "w_per_fold": {
+        "0": [
+          0.4196,
+          0.3852,
+          0.4344
+        ],
+        "1": [
+          0.4612,
+          0.31,
+          0.4106
+        ],
+        "2": [
+          0.5364,
+          0.4115,
+          0.2975
+        ],
+        "3": [
+          0.5389,
+          0.3909,
+          0.304
+        ],
+        "4": [
+          0.4371,
+          0.3515,
+          0.4174
+        ]
+      },
+      "fold_macro_f1_std": 0.004716790154331636,
+      "fold_macro_f1_std_fixed_alpha": 0.004330489413449716,
+      "fixed_alpha_0.40_same_protocol": 0.6372726525236135
+    },
+    {
+      "tag": "COMBO: mean(LR, hand, ensemble) text + per-class w + id prior",
+      "pooled_oof_macro_f1": 0.6375251307391799,
+      "delta_vs_baseline": -0.0020538692608200737,
+      "per_class_f1": {
+        "f1_class0": 0.756697,
+        "f1_class1": 0.619656,
+        "f1_class2": 0.536223
+      },
+      "per_fold": [
+        {
+          "fold": 0,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.64223,
+          "f1_per_class_crossfitted": 0.641531,
+          "w": [
+            0.4067,
+            0.316,
+            0.5068
+          ]
+        },
+        {
+          "fold": 1,
+          "n_val": 9564,
+          "f1_fixed_alpha_0.40": 0.628257,
+          "f1_per_class_crossfitted": 0.629101,
+          "w": [
+            0.4256,
+            0.4101,
+            0.393
+          ]
+        },
+        {
+          "fold": 2,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.642884,
+          "f1_per_class_crossfitted": 0.640923,
+          "w": [
+            0.4602,
+            0.4098,
+            0.3902
+          ]
+        },
+        {
+          "fold": 3,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.638014,
+          "f1_per_class_crossfitted": 0.637674,
+          "w": [
+            0.3988,
+            0.3757,
+            0.4258
+          ]
+        },
+        {
+          "fold": 4,
+          "n_val": 9563,
+          "f1_fixed_alpha_0.40": 0.64014,
+          "f1_per_class_crossfitted": 0.638327,
+          "w": [
+            0.4023,
+            0.4351,
+            0.4119
+          ]
+        }
+      ],
+      "w_per_fold": {
+        "0": [
+          0.4067,
+          0.316,
+          0.5068
+        ],
+        "1": [
+          0.4256,
+          0.4101,
+          0.393
+        ],
+        "2": [
+          0.4602,
+          0.4098,
+          0.3902
+        ],
+        "3": [
+          0.3988,
+          0.3757,
+          0.4258
+        ],
+        "4": [
+          0.4023,
+          0.4351,
+          0.4119
+        ]
+      },
+      "fold_macro_f1_std": 0.004454720390776495,
+      "fold_macro_f1_std_fixed_alpha": 0.005306356113191065,
+      "fixed_alpha_0.40_same_protocol": 0.6383199799511082
+    }
+  ],
+  "fixed_alpha_combinations": [
+    {
+      "tag": "fixed alpha 0.40 | LR text (baseline)",
+      "pooled_oof_macro_f1": 0.6395787805967664,
+      "delta_vs_baseline": -2.1940323358116132e-07,
+      "fold_macro_f1_std": 0.003809082558382626,
+      "per_fold_macro_f1": [
+        0.642898,
+        0.632324,
+        0.641935,
+        0.639295,
+        0.641384
+      ],
+      "per_class_f1": {
+        "f1_class0": 0.75727,
+        "f1_class1": 0.620188,
+        "f1_class2": 0.541279
+      }
+    },
+    {
+      "tag": "fixed alpha 0.40 | hand scale 0.1 text",
+      "pooled_oof_macro_f1": 0.6387465436089533,
+      "delta_vs_baseline": -0.0008324563910466765,
+      "fold_macro_f1_std": 0.003630687375538028,
+      "per_fold_macro_f1": [
+        0.642678,
+        0.632004,
+        0.640407,
+        0.638411,
+        0.640204
+      ],
+      "per_class_f1": {
+        "f1_class0": 0.756719,
+        "f1_class1": 0.619013,
+        "f1_class2": 0.540508
+      }
+    },
+    {
+      "tag": "fixed alpha 0.40 | mean(LR, hand)",
+      "pooled_oof_macro_f1": 0.6392297692024255,
+      "delta_vs_baseline": -0.0003492307975745401,
+      "fold_macro_f1_std": 0.0038462550758913716,
+      "per_fold_macro_f1": [
+        0.643608,
+        0.632173,
+        0.641145,
+        0.638854,
+        0.640323
+      ],
+      "per_class_f1": {
+        "f1_class0": 0.756876,
+        "f1_class1": 0.619606,
+        "f1_class2": 0.541207
+      }
+    },
+    {
+      "tag": "fixed alpha 0.40 | mean(LR, ens)",
+      "pooled_oof_macro_f1": 0.6372726525236135,
+      "delta_vs_baseline": -0.002306347476386472,
+      "fold_macro_f1_std": 0.004330566763816478,
+      "per_fold_macro_f1": [
+        0.640653,
+        0.629602,
+        0.641062,
+        0.635382,
+        0.639632
+      ],
+      "per_class_f1": {
+        "f1_class0": 0.757578,
+        "f1_class1": 0.620196,
+        "f1_class2": 0.534043
+      }
+    },
+    {
+      "tag": "fixed alpha 0.40 | mean(LR, hand, ens)",
+      "pooled_oof_macro_f1": 0.6383199799511082,
+      "delta_vs_baseline": -0.001259020048891779,
+      "fold_macro_f1_std": 0.005306118286182088,
+      "per_fold_macro_f1": [
+        0.64223,
+        0.628257,
+        0.642884,
+        0.638014,
+        0.64014
+      ],
+      "per_class_f1": {
+        "f1_class0": 0.757046,
+        "f1_class1": 0.619882,
+        "f1_class2": 0.538032
+      }
+    }
+  ],
+  "best": {
+    "tag": "EXP3 survivor: per-class w on LR text + id prior",
+    "pooled_oof_macro_f1": 0.6398117212546764,
+    "delta_vs_baseline": 0.0002327212546764379,
+    "per_class_f1": {
+      "f1_class0": 0.756979,
+      "f1_class1": 0.620588,
+      "f1_class2": 0.541869
+    },
+    "per_fold": [
+      {
+        "fold": 0,
+        "n_val": 9564,
+        "f1_fixed_alpha_0.40": 0.642898,
+        "f1_per_class_crossfitted": 0.643956,
+        "w": [
+          0.417,
+          0.3648,
+          0.4198
+        ]
+      },
+      {
+        "fold": 1,
+        "n_val": 9564,
+        "f1_fixed_alpha_0.40": 0.632324,
+        "f1_per_class_crossfitted": 0.63203,
+        "w": [
+          0.3617,
+          0.3275,
+          0.4063
+        ]
+      },
+      {
+        "fold": 2,
+        "n_val": 9563,
+        "f1_fixed_alpha_0.40": 0.641935,
+        "f1_per_class_crossfitted": 0.640954,
+        "w": [
+          0.4697,
+          0.3521,
+          0.3872
+        ]
+      },
+      {
+        "fold": 3,
+        "n_val": 9563,
+        "f1_fixed_alpha_0.40": 0.639295,
+        "f1_per_class_crossfitted": 0.64123,
+        "w": [
+          0.4216,
+          0.3235,
+          0.4055
+        ]
+      },
+      {
+        "fold": 4,
+        "n_val": 9563,
+        "f1_fixed_alpha_0.40": 0.641384,
+        "f1_per_class_crossfitted": 0.640831,
+        "w": [
+          0.4187,
+          0.3569,
+          0.4178
+        ]
+      }
+    ],
+    "w_per_fold": {
+      "0": [
+        0.417,
+        0.3648,
+        0.4198
+      ],
+      "1": [
+        0.3617,
+        0.3275,
+        0.4063
+      ],
+      "2": [
+        0.4697,
+        0.3521,
+        0.3872
+      ],
+      "3": [
+        0.4216,
+        0.3235,
+        0.4055
+      ],
+      "4": [
+        0.4187,
+        0.3569,
+        0.4178
+      ]
+    },
+    "fold_macro_f1_std": 0.004051785107825934,
+    "fold_macro_f1_std_fixed_alpha": 0.003808923911027886,
+    "fixed_alpha_0.40_same_protocol": 0.6395787805967664
+  },
+  "best_cross_fitted": {
+    "tag": "EXP3 survivor: per-class w on LR text + id prior",
+    "pooled_oof_macro_f1": 0.6398117212546764,
+    "delta_vs_baseline": 0.0002327212546764379,
+    "per_class_f1": {
+      "f1_class0": 0.756979,
+      "f1_class1": 0.620588,
+      "f1_class2": 0.541869
+    },
+    "per_fold": [
+      {
+        "fold": 0,
+        "n_val": 9564,
+        "f1_fixed_alpha_0.40": 0.642898,
+        "f1_per_class_crossfitted": 0.643956,
+        "w": [
+          0.417,
+          0.3648,
+          0.4198
+        ]
+      },
+      {
+        "fold": 1,
+        "n_val": 9564,
+        "f1_fixed_alpha_0.40": 0.632324,
+        "f1_per_class_crossfitted": 0.63203,
+        "w": [
+          0.3617,
+          0.3275,
+          0.4063
+        ]
+      },
+      {
+        "fold": 2,
+        "n_val": 9563,
+        "f1_fixed_alpha_0.40": 0.641935,
+        "f1_per_class_crossfitted": 0.640954,
+        "w": [
+          0.4697,
+          0.3521,
+          0.3872
+        ]
+      },
+      {
+        "fold": 3,
+        "n_val": 9563,
+        "f1_fixed_alpha_0.40": 0.639295,
+        "f1_per_class_crossfitted": 0.64123,
+        "w": [
+          0.4216,
+          0.3235,
+          0.4055
+        ]
+      },
+      {
+        "fold": 4,
+        "n_val": 9563,
+        "f1_fixed_alpha_0.40": 0.641384,
+        "f1_per_class_crossfitted": 0.640831,
+        "w": [
+          0.4187,
+          0.3569,
+          0.4178
+        ]
+      }
+    ],
+    "w_per_fold": {
+      "0": [
+        0.417,
+        0.3648,
+        0.4198
+      ],
+      "1": [
+        0.3617,
+        0.3275,
+        0.4063
+      ],
+      "2": [
+        0.4697,
+        0.3521,
+        0.3872
+      ],
+      "3": [
+        0.4216,
+        0.3235,
+        0.4055
+      ],
+      "4": [
+        0.4187,
+        0.3569,
+        0.4178
+      ]
+    },
+    "fold_macro_f1_std": 0.004051785107825934,
+    "fold_macro_f1_std_fixed_alpha": 0.003808923911027886,
+    "fixed_alpha_0.40_same_protocol": 0.6395787805967664
+  },
+  "stop_conditions": {
+    "per_fold_std_within_tolerance": true,
+    "tolerance": 0.005,
+    "best_std": 0.004051785107825934,
+    "baseline_std": 0.003809082558382626,
+    "per_fold_delta_vs_fixed_alpha": [
+      0.001058,
+      -0.000294,
+      -0.000981,
+      0.001935,
+      -0.000553
+    ],
+    "max_abs_per_fold_swing": 0.001935,
+    "id_prior_leak_proof": "re-verified (val ids disjoint from pool on all 5 folds; prod == independent re-implementation)"
+  },
+  "best_config": {
+    "name": "EXP3 survivor: per-class w on LR text + id prior",
+    "oof_macro_f1": 0.639812,
+    "delta_vs_baseline": 0.000233,
+    "per_class_f1": {
+      "f1_class0": 0.756979,
+      "f1_class1": 0.620588,
+      "f1_class2": 0.541869
+    },
+    "per_fold_std": 0.004052,
+    "text_model": {
+      "type": "LogisticRegression",
+      "solver": "lbfgs",
+      "C": 4.0,
+      "class_weight": "balanced",
+      "max_iter": 2000,
+      "random_state": 42,
+      "features": "word TfidfVectorizer(analyzer=word, ngram_range=(1,2), min_df=2, max_features=60000, sublinear_tf=True) + char TfidfVectorizer(analyzer=char_wb, ngram_range=(3,5), min_df=2, max_features=60000, sublinear_tf=True), hstacked",
+      "cleaning": "URL -> ' URL ', @mention -> ' USER ', whitespace collapsed; no lowercasing, no stemming",
+      "source": "see name"
+    },
+    "id_prior": {
+      "k": 20,
+      "weights": "1/(distance+1e-6)",
+      "pool": "training-fold ids/labels only (leak-free, asserted per fold)",
+      "note": "self-matches excluded; queries disjoint from the pool"
+    },
+    "blend": {
+      "form": "P(c) = a * text_probs_c + (1 - a) * id_probs_c",
+      "alpha": null,
+      "cross_fitted_w_per_fold": {
+        "0": [
+          0.417,
+          0.3648,
+          0.4198
+        ],
+        "1": [
+          0.3617,
+          0.3275,
+          0.4063
+        ],
+        "2": [
+          0.4697,
+          0.3521,
+          0.3872
+        ],
+        "3": [
+          0.4216,
+          0.3235,
+          0.4055
+        ],
+        "4": [
+          0.4187,
+          0.3569,
+          0.4178
+        ]
+      },
+      "tuned_parameters": "one 3-vector per fold"
+    },
+    "duplicate_override": "unanimous cleaned-text lookup, conflicting groups skipped",
+    "protocol": {
+      "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+      "group_key": "clean_text.lower().strip()",
+      "metric": "pooled leak-free OOF Macro F1",
+      "seed": 42
+    },
+    "per_fold_macro_f1": [
+      0.643956,
+      0.63203,
+      0.640954,
+      0.64123,
+      0.640831
+    ],
+    "status": "best validated config found by experiment_v2_*; NOT submitted (submission_2 requires an explicit request)"
+  },
+  "submission_written": false,
+  "runtime_seconds": 92.2,
+  "_oof_arrays": {
+    "oof_best": "[[0.44915478 0.47618499 0.07466024]\n [0.78387407 0.17682213 0.0393038 ]\n [0.59651592 0.35115912 0.05232496]\n ...\n [0.86411912 0.10841311 0.02746777]\n [0.11030831 0.70919767 0.18049401]\n [0.68635349 0.12691908 0.18672743]]",
+    "fold_ids": "[2 4 1 ... 0 4 2]"
+  }
+}

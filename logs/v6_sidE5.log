@@ -1,0 +1,8 @@
+E5 train (47817, 768) test (11955, 768) (label-free, row order = train.csv / test.csv)
+  beta=4.0   k=90   ID-only OOF 0.620971  (16s)
+  beta=4.0   k=180  ID-only OOF 0.619046  (28s)
+  beta=8.0   k=90   ID-only OOF 0.625129  (16s)
+  beta=8.0   k=180  ID-only OOF 0.623832  (31s)
+  beta=12.0  k=90   ID-only OOF 0.628452  (13s)
+  beta=12.0  k=180  ID-only OOF 0.628273  (29s)
+-> reports/v6/sid_e5.json, cache/v6/sidE5_*_oof.npy

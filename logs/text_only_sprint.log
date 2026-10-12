@@ -1,0 +1,60 @@
+PHASE 1 - ARTIFACT INVENTORY  [t=0.0s]
+fold set A sizes [9564, 9564, 9563, 9563, 9563]
+fold FILE sha256  2bd8cfdedb32342931d17cc27ca0a1be99d8a567bb8128e32955ec18cd91880d
+fold INT64 sha256 925065f4d4a0c6a533fad774f4875b039ea526eb915bee8c8c8b819c88760f56
+  text_base  OOF_ONLY (oof only)
+  text_all3  OOF_ONLY (oof only)
+  text       FOUND_AND_ALIGNED
+  e5_small   FOUND_AND_ALIGNED
+  e5_base    FOUND_AND_ALIGNED
+  fold-set-B text sources (NOT mixed): ['e5_base', 'plain_xlmr_base', 'text', 'xlmr_idhead']
+PHASE 1 done [t=0.1s]
+
+PHASE 2 - VERIFY TEXT SOURCES  [t=0.1s]
+  text_base  pooled 0.512943 acc 0.553799 std 0.005594 folds [0.510089, 0.503986, 0.520463, 0.516183, 0.513963]
+  text_all3  pooled 0.518947 acc 0.556037 std 0.001630 folds [0.51901, 0.516184, 0.520964, 0.518371, 0.520065]
+  text       pooled 0.524057 acc 0.563063 std 0.003187 folds [0.524827, 0.51777, 0.525849, 0.526533, 0.525212]
+  e5_small   pooled 0.496241 acc 0.525441 std 0.004426 folds [0.50058, 0.489827, 0.498099, 0.500451, 0.49214]
+  e5_base    pooled 0.515829 acc 0.545873 std 0.001140 folds [0.514027, 0.51734, 0.515611, 0.516707, 0.515442]
+  disagree text_base  vs text_all3  0.2103
+  disagree text_base  vs text       0.1074
+  disagree text_base  vs e5_small   0.4458
+  disagree text_base  vs e5_base    0.4345
+  disagree text_all3  vs text       0.1046
+  disagree text_all3  vs e5_small   0.4455
+  disagree text_all3  vs e5_base    0.4362
+  disagree text       vs e5_small   0.4396
+  disagree text       vs e5_base    0.4285
+  disagree e5_small   vs e5_base    0.2969
+PHASE 2 done [t=0.4s]
+
+PHASE 3 - HONEST CROSS-FITTED BLEND  [t=0.4s]
+  blend set (4): ['e5_base', 'e5_small', 'text', 'text_all3']
+  test-capable set (3): ['e5_base', 'e5_small', 'text']
+  simplex candidates (step 0.10): 286
+  BEST HONEST TEXT-ONLY OOF = 0.552649
+  per-class [0.67219, 0.508706, 0.477051] acc 0.583976
+  folds [0.548013, 0.549827, 0.555974, 0.557231, 0.552224] std 0.003512
+  OPTIMISTIC_DIAGNOSTIC_ONLY = 0.553788  w=[np.float64(0.4), np.float64(0.2), np.float64(0.3), np.float64(0.1)]
+  delta from best single (text 0.524057) = +0.028592
+  median final weights: {'e5_base': 0.4, 'e5_small': 0.2, 'text': 0.3, 'text_all3': 0.1}
+PHASE 3 done [t=17.9s]
+
+PHASE 4 - CLASS-LOGIT OFFSET TEST  [t=17.9s]
+   off -0.10,-0.10 honest 0.551697 gain -0.000952 nbet 2 worstdrop 0.016237 -> drop
+   off -0.10,+0.00 honest 0.545975 gain -0.006675 nbet 0 worstdrop 0.027314 -> drop
+   off -0.10,+0.10 honest 0.539722 gain -0.012927 nbet 0 worstdrop 0.032637 -> drop
+   off +0.00,-0.10 honest 0.559094 gain +0.006445 nbet 5 worstdrop -0.001682 -> KEEP
+   off +0.00,+0.00 honest 0.552649 gain +0.000000 nbet 5 worstdrop 0.000000 -> drop
+   off +0.00,+0.10 honest 0.546863 gain -0.005786 nbet 0 worstdrop 0.010061 -> drop
+   off +0.10,-0.10 honest 0.559129 gain +0.006480 nbet 5 worstdrop 0.015101 -> drop
+   off +0.10,+0.00 honest 0.555277 gain +0.002628 nbet 4 worstdrop 0.016903 -> drop
+   off +0.10,+0.10 honest 0.550116 gain -0.002533 nbet 1 worstdrop 0.017724 -> drop
+  ADOPTED offsets (0.0, -0.1)
+PHASE 4 done [t=212.1s]
+
+PHASE 5 - SAVE RESEARCH ARTIFACTS  [t=212.1s]
+  test-capable blend ['e5_base', 'e5_small', 'text'] -> honest 0.553638
+  test-capable median weights: {'e5_base': 0.4, 'e5_small': 0.2, 'text': 0.4}
+  saved OOF e19953f3c892c6a4
+  saved TEST e1c9079fb6bbe246

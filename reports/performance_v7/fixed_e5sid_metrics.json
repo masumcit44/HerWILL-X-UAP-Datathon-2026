@@ -1,0 +1,148 @@
+{
+  "experiment": "perf_v7_fixed_e5sid_k180",
+  "fold_set": "B (recovered Colab)",
+  "fold_int64_sha256": "cc4fdd169110aeee6d3d5566095234461041b1a9290e2e916ce850c31d27a7ca",
+  "fold_sizes": [
+    9543,
+    9546,
+    9571,
+    9581,
+    9576
+  ],
+  "fixed_e5sid_config": {
+    "KW": 120,
+    "k": 180,
+    "beta": 12.0,
+    "gamma": 1.0
+  },
+  "fixed_e5sid_standalone_oof": 0.628273,
+  "sid_aligned_and_consistent": true,
+  "reference": {
+    "honest_oof": 0.682311,
+    "per_class_f1": [
+      0.782202,
+      0.640594,
+      0.624137
+    ],
+    "fold_scores": [
+      0.682243,
+      0.685245,
+      0.680023,
+      0.680668,
+      0.683172
+    ],
+    "fold_std": 0.001859,
+    "worst_fold": 0.680023,
+    "order": [
+      "text",
+      "sid",
+      "e5",
+      "xlmr"
+    ],
+    "same_oof_OPTIMISTIC": 0.684918
+  },
+  "challenger": {
+    "honest_oof": 0.684811,
+    "per_class_f1": [
+      0.783668,
+      0.642736,
+      0.628029
+    ],
+    "accuracy": 0.713554,
+    "fold_scores": [
+      0.687264,
+      0.690604,
+      0.683387,
+      0.67575,
+      0.686805
+    ],
+    "fold_std": 0.005053,
+    "worst_fold": 0.67575,
+    "order": [
+      "text",
+      "sid",
+      "e5",
+      "xlmr"
+    ],
+    "fold_weights": {
+      "0": [
+        0.1,
+        0.45,
+        0.25,
+        0.2
+      ],
+      "1": [
+        0.1,
+        0.45,
+        0.25,
+        0.2
+      ],
+      "2": [
+        0.1,
+        0.45,
+        0.25,
+        0.2
+      ],
+      "3": [
+        0.05,
+        0.5,
+        0.25,
+        0.2
+      ],
+      "4": [
+        0.1,
+        0.45,
+        0.25,
+        0.2
+      ]
+    },
+    "zero_weight_folds": {
+      "text": 0,
+      "sid": 0,
+      "e5": 0,
+      "xlmr": 0
+    },
+    "same_oof_OPTIMISTIC": 0.685434,
+    "confusion": [
+      [
+        19299,
+        3904,
+        553
+      ],
+      [
+        5525,
+        11218,
+        1420
+      ],
+      [
+        673,
+        1622,
+        3603
+      ]
+    ]
+  },
+  "delta_vs_submission_3": 0.0025,
+  "gates": {
+    "G1_delta_ge_0_0015": true,
+    "G2_4folds_not_worse": true,
+    "G3_no_class_drop_gt_0_005": true,
+    "G4_std_le_1_5x": false,
+    "G5_worst_fold": false,
+    "G6_test_integrity": true,
+    "G7_test_share_within_6pp": true
+  },
+  "all_gates_pass": false,
+  "status": "REJECTED - G4 and G5 failed (fold stability) despite +0.0025 pooled gain",
+  "p1_created": false,
+  "p2_created": false,
+  "submission_generated": false,
+  "protected_files_unchanged": true,
+  "source_hashes": {
+    "step123_npz": "8f289f4cb1163e24521373619339d8f510bc2b96bd820de20b71d91fdc05621f",
+    "sidE5_k180_oof": "783f777eaba4b3105623636740dcd4e57589e78a74f502a7fb65f0ec58b0ad01",
+    "emb_e5_base_final": "bca3e9ec8fa9b28804ff1323ac6de9d53ff257d9fe13a5ebde73465e1adde1ce",
+    "xlmr_idhead_final": "8cc027296059e14849ec862b192f54293ed6551c5b487dbb7e532c9fdb1ff177",
+    "e5base_train": "f68324c052b74448eb6190dd63a7a2f571a2d3193fb28a91f7a1539d52efc544",
+    "e5base_test": "23ae71c52f28b57ace5942efd27e4f4a8f74c55b223c7b33d9a90d5ec3d850ad"
+  }
+}

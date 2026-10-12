@@ -1,0 +1,4 @@
+fold,n_train,n_val,macro_f1,accuracy,f1_class0,f1_class1,f1_class2,train_seconds,resumed,model_path,model_name
+0,31878,15939,0.523044,0.562896,0.6439,0.508378,0.416853,6.21,False,models\small_tfidf\lr_fold_0.joblib,lr_small_tfidf
+1,31878,15939,0.521321,0.560198,0.643712,0.501635,0.418616,6.81,False,models\small_tfidf\lr_fold_1.joblib,lr_small_tfidf
+2,31878,15939,0.517509,0.559634,0.644747,0.498527,0.409253,6.89,False,models\small_tfidf\lr_fold_2.joblib,lr_small_tfidf

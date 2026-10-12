@@ -1,0 +1,40 @@
+{
+  "text_members": [
+    "LogisticRegression(C=4.0, class_weight=balanced) on word+char",
+    "CalibratedClassifierCV(LinearSVC(class_weight=balanced), method=sigmoid, cv=5) on word+char",
+    "ComplementNB() on word TF-IDF only"
+  ],
+  "combination": "equal-weight average of predicted probabilities",
+  "linear_svc": {
+    "class_weight": "balanced",
+    "C": 1.0,
+    "max_iter": 5000,
+    "random_state": 42
+  },
+  "calibration": {
+    "method": "sigmoid",
+    "cv": 5
+  },
+  "id_prior": {
+    "k": 20,
+    "weights": "1/(distance+1e-6)"
+  },
+  "alpha": 0.45,
+  "member_weights": [
+    0.7,
+    0.0,
+    0.3
+  ],
+  "validation": "StratifiedGroupKFold(5, shuffle=True, random_state=42)",
+  "group_key": "clean_text.lower().strip()",
+  "metric": "pooled leak-free OOF Macro F1",
+  "baseline_oof_macro_f1": 0.639579,
+  "evaluation_note": "OPTIMISTIC: member weights selected on the same pooled OOF",
+  "per_fold_macro_f1": [
+    0.643397,
+    0.630735,
+    0.642533,
+    0.639376,
+    0.640994
+  ]
+}

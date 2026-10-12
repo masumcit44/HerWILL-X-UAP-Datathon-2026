@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "D:\Desktop\UAP\scripts\perf_v7_sprint.py", line 280, in <module>
+    "order": CH_ORDER, "fold_weights": ch_w, "zero_weight_folds": zero,
+                                                                  ^^^^
+NameError: name 'zero' is not defined
